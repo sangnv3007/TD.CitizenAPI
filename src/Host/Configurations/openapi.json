@@ -1,0 +1,14 @@
+{
+  "SwaggerSettings": {
+    "Enable": true,
+    "Title": ".NET 6.0 WebAPI - TD.CongDanHD",
+    "Version": "v1",
+    "Description": "TD.CongDanHD Documents",
+    "ContactName": "Tung Lam",
+    "ContactEmail": "tunglamnguyen91@gmail.com",
+    "ContactUrl": "https://tandan.com.vn",
+    "License": true,
+    "LicenseName": "MIT License",
+    "LicenseUrl": "https://tandan.com.vn/LICENSE"
+  }
+}
