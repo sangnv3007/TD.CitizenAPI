@@ -1,14 +1,14 @@
-using FSH.WebApi.Application.Multitenancy;
-using FSH.WebApi.Infrastructure.Persistence;
-using FSH.WebApi.Shared.Authorization;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Application.Multitenancy;
+using TD.CitizenAPI.Infrastructure.Persistence;
+using TD.CitizenAPI.Shared.Authorization;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 
-namespace FSH.WebApi.Infrastructure.Multitenancy;
+namespace TD.CitizenAPI.Infrastructure.Multitenancy;
 
 internal static class Startup
 {

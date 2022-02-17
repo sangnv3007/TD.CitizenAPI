@@ -1,12 +1,12 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using FSH.WebApi.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FSH.WebApi.Infrastructure.Auth.Jwt;
+namespace TD.CitizenAPI.Infrastructure.Auth.Jwt;
 
 internal static class Startup
 {

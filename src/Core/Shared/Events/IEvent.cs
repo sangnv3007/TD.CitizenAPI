@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Shared.Events;
+﻿namespace TD.CitizenAPI.Shared.Events;
 
 public interface IEvent
 {

@@ -1,13 +1,14 @@
 using FluentValidation.AspNetCore;
-using FSH.WebApi.Application;
-using FSH.WebApi.Host.Configurations;
-using FSH.WebApi.Host.Controllers;
-using FSH.WebApi.Infrastructure;
-using FSH.WebApi.Infrastructure.Common.Extensions;
+using TD.CitizenAPI.Application;
+using TD.CitizenAPI.Host.Configurations;
+using TD.CitizenAPI.Host.Controllers;
+using TD.CitizenAPI.Infrastructure;
+using TD.CitizenAPI.Infrastructure.Common.Extensions;
 using Serilog;
 
 [assembly: ApiConventionType(typeof(FSHApiConventions))]
 
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
 Log.Logger.Refresh();
 Log.Information("Server Booting Up...");
 try

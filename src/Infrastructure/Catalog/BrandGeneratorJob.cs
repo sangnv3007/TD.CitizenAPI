@@ -1,9 +1,9 @@
 ﻿using Ardalis.Specification;
-using FSH.WebApi.Application.Catalog.Brands;
-using FSH.WebApi.Application.Common.Interfaces;
-using FSH.WebApi.Application.Common.Persistence;
-using FSH.WebApi.Domain.Catalog;
-using FSH.WebApi.Shared.Notifications;
+using TD.CitizenAPI.Application.Catalog.Brands;
+using TD.CitizenAPI.Application.Common.Interfaces;
+using TD.CitizenAPI.Application.Common.Persistence;
+using TD.CitizenAPI.Domain.Catalog;
+using TD.CitizenAPI.Shared.Notifications;
 using Hangfire;
 using Hangfire.Console.Extensions;
 using Hangfire.Console.Progress;
@@ -11,7 +11,7 @@ using Hangfire.Server;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.WebApi.Infrastructure.Catalog;
+namespace TD.CitizenAPI.Infrastructure.Catalog;
 
 public class BrandGeneratorJob : IBrandGeneratorJob
 {

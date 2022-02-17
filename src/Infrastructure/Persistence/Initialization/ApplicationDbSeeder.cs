@@ -1,13 +1,13 @@
-﻿using FSH.WebApi.Infrastructure.Identity;
-using FSH.WebApi.Infrastructure.Multitenancy;
-using FSH.WebApi.Infrastructure.Persistence.Context;
-using FSH.WebApi.Shared.Authorization;
-using FSH.WebApi.Shared.Multitenancy;
+﻿using TD.CitizenAPI.Infrastructure.Identity;
+using TD.CitizenAPI.Infrastructure.Multitenancy;
+using TD.CitizenAPI.Infrastructure.Persistence.Context;
+using TD.CitizenAPI.Shared.Authorization;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.WebApi.Infrastructure.Persistence.Initialization;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Initialization;
 
 internal class ApplicationDbSeeder
 {
@@ -96,6 +96,7 @@ internal class ApplicationDbSeeder
             string adminUserName = $"{_currentTenant.Id.Trim()}.{FSHRoles.Admin}".ToLowerInvariant();
             adminUser = new ApplicationUser
             {
+                FullName = FSHRoles.Admin,
                 FirstName = _currentTenant.Id.Trim().ToLowerInvariant(),
                 LastName = FSHRoles.Admin,
                 Email = _currentTenant.AdminEmail,

@@ -1,12 +1,12 @@
-﻿using FSH.WebApi.Application.Common.Persistence;
-using FSH.WebApi.Infrastructure.Common;
+﻿using TD.CitizenAPI.Application.Common.Persistence;
+using TD.CitizenAPI.Infrastructure.Common;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MySqlConnector;
 using Npgsql;
 using System.Data.SqlClient;
 
-namespace FSH.WebApi.Infrastructure.Persistence.ConnectionString;
+namespace TD.CitizenAPI.Infrastructure.Persistence.ConnectionString;
 
 internal class ConnectionStringValidator : IConnectionStringValidator
 {

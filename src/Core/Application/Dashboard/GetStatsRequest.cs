@@ -1,7 +1,7 @@
-﻿using FSH.WebApi.Application.Identity.Roles;
-using FSH.WebApi.Application.Identity.Users;
+﻿using TD.CitizenAPI.Application.Identity.Roles;
+using TD.CitizenAPI.Application.Identity.Users;
 
-namespace FSH.WebApi.Application.Dashboard;
+namespace TD.CitizenAPI.Application.Dashboard;
 
 public class GetStatsRequest : IRequest<StatsDto>
 {

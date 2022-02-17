@@ -1,26 +1,26 @@
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Finbuckle.MultiTenant;
-using FSH.WebApi.Application.Common.Caching;
-using FSH.WebApi.Application.Common.Events;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Common.FileStorage;
-using FSH.WebApi.Application.Common.Interfaces;
-using FSH.WebApi.Application.Common.Mailing;
-using FSH.WebApi.Application.Common.Models;
-using FSH.WebApi.Application.Common.Specification;
-using FSH.WebApi.Application.Identity.Users;
-using FSH.WebApi.Domain.Identity;
-using FSH.WebApi.Infrastructure.Mailing;
-using FSH.WebApi.Infrastructure.Persistence.Context;
-using FSH.WebApi.Shared.Authorization;
+using TD.CitizenAPI.Application.Common.Caching;
+using TD.CitizenAPI.Application.Common.Events;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Common.FileStorage;
+using TD.CitizenAPI.Application.Common.Interfaces;
+using TD.CitizenAPI.Application.Common.Mailing;
+using TD.CitizenAPI.Application.Common.Models;
+using TD.CitizenAPI.Application.Common.Specification;
+using TD.CitizenAPI.Application.Identity.Users;
+using TD.CitizenAPI.Domain.Identity;
+using TD.CitizenAPI.Infrastructure.Mailing;
+using TD.CitizenAPI.Infrastructure.Persistence.Context;
+using TD.CitizenAPI.Shared.Authorization;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService : IUserService
 {

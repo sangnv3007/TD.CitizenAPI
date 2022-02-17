@@ -1,6 +1,6 @@
-using FSH.WebApi.Shared.Events;
+using TD.CitizenAPI.Shared.Events;
 
-namespace FSH.WebApi.Application.Common.Events;
+namespace TD.CitizenAPI.Application.Common.Events;
 
 public interface IEventPublisher : ITransientService
 {

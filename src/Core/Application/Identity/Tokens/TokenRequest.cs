@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Identity.Tokens;
+namespace TD.CitizenAPI.Application.Identity.Tokens;
 
 public record TokenRequest(string Email, string Password);
 

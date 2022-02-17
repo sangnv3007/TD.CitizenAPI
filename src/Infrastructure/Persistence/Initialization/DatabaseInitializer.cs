@@ -1,12 +1,12 @@
 ﻿using Finbuckle.MultiTenant;
-using FSH.WebApi.Infrastructure.Multitenancy;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Infrastructure.Multitenancy;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace FSH.WebApi.Infrastructure.Persistence.Initialization;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Initialization;
 
 internal class DatabaseInitializer : IDatabaseInitializer
 {

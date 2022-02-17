@@ -1,10 +1,10 @@
-﻿using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Common.Mailing;
-using FSH.WebApi.Application.Identity;
-using FSH.WebApi.Application.Identity.Users.Password;
+﻿using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Common.Mailing;
+using TD.CitizenAPI.Application.Identity;
+using TD.CitizenAPI.Application.Identity.Users.Password;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService
 {

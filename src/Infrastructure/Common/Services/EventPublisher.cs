@@ -1,9 +1,9 @@
-using FSH.WebApi.Application.Common.Events;
-using FSH.WebApi.Shared.Events;
+using TD.CitizenAPI.Application.Common.Events;
+using TD.CitizenAPI.Shared.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.WebApi.Infrastructure.Common.Services;
+namespace TD.CitizenAPI.Infrastructure.Common.Services;
 
 public class EventPublisher : IEventPublisher
 {

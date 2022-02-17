@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Infrastructure.Common;
+﻿namespace TD.CitizenAPI.Infrastructure.Common;
 
 public static class QueryStringKeys
 {

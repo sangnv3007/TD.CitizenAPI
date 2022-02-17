@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 public class RegisterUserEmailModel
 {

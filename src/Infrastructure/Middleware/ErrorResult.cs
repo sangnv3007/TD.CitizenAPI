@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Infrastructure.Middleware;
+﻿namespace TD.CitizenAPI.Infrastructure.Middleware;
 
 public class ErrorResult
 {

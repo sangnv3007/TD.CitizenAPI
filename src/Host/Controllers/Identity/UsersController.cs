@@ -1,7 +1,7 @@
-using FSH.WebApi.Application.Identity.Users;
-using FSH.WebApi.Application.Identity.Users.Password;
+using TD.CitizenAPI.Application.Identity.Users;
+using TD.CitizenAPI.Application.Identity.Users.Password;
 
-namespace FSH.WebApi.Host.Controllers.Identity;
+namespace TD.CitizenAPI.Host.Controllers.Identity;
 
 public class UsersController : VersionNeutralApiController
 {

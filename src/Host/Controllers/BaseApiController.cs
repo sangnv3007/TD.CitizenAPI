@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace FSH.WebApi.Host.Controllers;
+namespace TD.CitizenAPI.Host.Controllers;
 
 [ApiController]
 public class BaseApiController : ControllerBase

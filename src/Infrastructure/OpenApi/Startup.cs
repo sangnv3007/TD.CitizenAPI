@@ -8,7 +8,7 @@ using NSwag.AspNetCore;
 using NSwag.Generation.Processors.Security;
 using ZymLabs.NSwag.FluentValidation;
 
-namespace FSH.WebApi.Infrastructure.OpenApi;
+namespace TD.CitizenAPI.Infrastructure.OpenApi;
 
 internal static class Startup
 {

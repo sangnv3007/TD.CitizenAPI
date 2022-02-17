@@ -1,8 +1,8 @@
-﻿using FSH.WebApi.Application.Common.Caching;
+﻿using TD.CitizenAPI.Application.Common.Caching;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.WebApi.Infrastructure.Caching;
+namespace TD.CitizenAPI.Infrastructure.Caching;
 
 internal static class Startup
 {

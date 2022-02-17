@@ -1,16 +1,16 @@
 ﻿using System.Security.Claims;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Common.Mailing;
-using FSH.WebApi.Application.Identity;
-using FSH.WebApi.Application.Identity.Users;
-using FSH.WebApi.Domain.Common;
-using FSH.WebApi.Domain.Identity;
-using FSH.WebApi.Shared.Authorization;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Common.Mailing;
+using TD.CitizenAPI.Application.Identity;
+using TD.CitizenAPI.Application.Identity.Users;
+using TD.CitizenAPI.Domain.Common;
+using TD.CitizenAPI.Domain.Identity;
+using TD.CitizenAPI.Shared.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService
 {

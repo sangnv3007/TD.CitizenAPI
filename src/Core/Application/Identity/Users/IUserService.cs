@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using FSH.WebApi.Application.Identity.Users.Password;
+using TD.CitizenAPI.Application.Identity.Users.Password;
 
-namespace FSH.WebApi.Application.Identity.Users;
+namespace TD.CitizenAPI.Application.Identity.Users;
 
 public interface IUserService : ITransientService
 {

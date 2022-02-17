@@ -1,11 +1,11 @@
 using System.Text;
-using FSH.WebApi.Application.Identity;
-using FSH.WebApi.Infrastructure.Common;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Application.Identity;
+using TD.CitizenAPI.Infrastructure.Common;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService
 {

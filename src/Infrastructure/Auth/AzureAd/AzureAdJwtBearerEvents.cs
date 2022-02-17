@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using Finbuckle.MultiTenant;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Identity.Users;
-using FSH.WebApi.Infrastructure.Multitenancy;
-using FSH.WebApi.Shared.Authorization;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Identity.Users;
+using TD.CitizenAPI.Infrastructure.Multitenancy;
+using TD.CitizenAPI.Shared.Authorization;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
 using Serilog;
 
-namespace FSH.WebApi.Infrastructure.Auth.AzureAd;
+namespace TD.CitizenAPI.Infrastructure.Auth.AzureAd;
 
 internal class AzureAdJwtBearerEvents : JwtBearerEvents
 {

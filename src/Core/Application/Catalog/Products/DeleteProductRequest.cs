@@ -1,6 +1,6 @@
-﻿using FSH.WebApi.Domain.Common.Events;
+﻿using TD.CitizenAPI.Domain.Common.Events;
 
-namespace FSH.WebApi.Application.Catalog.Products;
+namespace TD.CitizenAPI.Application.Catalog.Products;
 
 public class DeleteProductRequest : IRequest<Guid>
 {

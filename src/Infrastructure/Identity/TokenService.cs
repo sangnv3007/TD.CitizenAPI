@@ -2,19 +2,19 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Identity.Tokens;
-using FSH.WebApi.Infrastructure.Auth.Jwt;
-using FSH.WebApi.Infrastructure.Mailing;
-using FSH.WebApi.Infrastructure.Multitenancy;
-using FSH.WebApi.Shared.Authorization;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Identity.Tokens;
+using TD.CitizenAPI.Infrastructure.Auth.Jwt;
+using TD.CitizenAPI.Infrastructure.Mailing;
+using TD.CitizenAPI.Infrastructure.Multitenancy;
+using TD.CitizenAPI.Shared.Authorization;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal class TokenService : ITokenService
 {
@@ -118,15 +118,14 @@ internal class TokenService : ITokenService
     private IEnumerable<Claim> GetClaims(ApplicationUser user, string ipAddress) =>
         new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, user.Id),
-            new(ClaimTypes.Email, user.Email),
-            new(FSHClaims.Fullname, $"{user.FirstName} {user.LastName}"),
-            new(ClaimTypes.Name, user.FirstName ?? string.Empty),
-            new(ClaimTypes.Surname, user.LastName ?? string.Empty),
+            new(FSHClaims.NameIdentifier, user.Id),
+            new(FSHClaims.Sub, user.UserName ?? string.Empty),
+            new(FSHClaims.Email, user.Email),
+            new(FSHClaims.Fullname, $"{user.FullName}"),
             new(FSHClaims.IpAddress, ipAddress),
             new(FSHClaims.Tenant, _currentTenant!.Id),
-            new(FSHClaims.ImageUrl, user.ImageUrl ?? string.Empty),
-            new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
+            //new(FSHClaims.ImageUrl, user.ImageUrl ?? string.Empty),
+            //new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty)
         };
 
     private string GenerateRefreshToken()

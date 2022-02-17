@@ -1,10 +1,12 @@
+using Microsoft.AspNetCore.Http;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using FSH.WebApi.Application.Common.FileStorage;
-using FSH.WebApi.Domain.Common;
-using FSH.WebApi.Infrastructure.Common.Extensions;
+using TD.CitizenAPI.Application.Catalog.Attachments;
+using TD.CitizenAPI.Application.Common.FileStorage;
+using TD.CitizenAPI.Domain.Common;
+using TD.CitizenAPI.Infrastructure.Common.Extensions;
 
-namespace FSH.WebApi.Infrastructure.FileStorage;
+namespace TD.CitizenAPI.Infrastructure.FileStorage;
 
 public class LocalFileStorageService : IFileStorageService
 {
@@ -60,6 +62,82 @@ public class LocalFileStorageService : IFileStorageService
         {
             return string.Empty;
         }
+    }
+
+    public async Task<List<AttachmentDto>> UploadFilesAsync<T>(List<IFormFile>? files, CancellationToken cancellationToken = default)
+    where T : class
+    {
+        List<AttachmentDto> listFile = new List<AttachmentDto>();
+#pragma warning disable CS8604 // Possible null reference argument.
+        long size = files.Sum(f => f.Length);
+#pragma warning restore CS8604 // Possible null reference argument.
+
+        if (files.Any(f => f.Length == 0))
+        {
+            throw new InvalidOperationException("File Not Found.");
+        }
+
+
+        string folder = typeof(T).Name;
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            folder = folder.Replace(@"\", "/");
+        }
+
+        string folderName = Path.Combine("Files", "Others", folder);
+
+        string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        bool exists = Directory.Exists(pathToSave);
+        if (!exists)
+        {
+            Directory.CreateDirectory(pathToSave);
+        }
+
+        foreach (var formFile in files)
+        {
+            if (formFile.Length > 0)
+            {
+                string? fileName = formFile.FileName.Trim('"');
+                fileName = RemoveSpecialCharacters(fileName);
+                fileName = fileName.ReplaceWhitespace("-");
+
+                Guid dir_UUID = Guid.NewGuid();
+                string dir_UUID_String = dir_UUID.ToString();
+
+
+                string? target = Path.Combine(pathToSave, dir_UUID_String);
+                if (!Directory.Exists(target))
+                {
+                    Directory.CreateDirectory(target);
+                }
+
+                string? fullPath = Path.Combine(target, fileName);
+                string? dbPath = Path.Combine(folderName, dir_UUID_String, fileName);
+
+                if (File.Exists(dbPath))
+                {
+                    dbPath = NextAvailableFilename(dbPath);
+                    fullPath = NextAvailableFilename(fullPath);
+                }
+
+                using var stream = new FileStream(fullPath, FileMode.Create);
+                await formFile.CopyToAsync(stream, cancellationToken);
+
+                //formFile.CopyTo(stream);
+                dbPath = dbPath.Replace("\\", "/");
+
+
+                var attachment = new AttachmentDto();
+                attachment.Name = fileName;
+                attachment.Type = Path.GetExtension(formFile.FileName);
+                attachment.Url = dbPath;
+
+                listFile.Add(attachment);
+
+            }
+        }
+
+        return await Task.FromResult(listFile);
     }
 
     public static string RemoveSpecialCharacters(string str)

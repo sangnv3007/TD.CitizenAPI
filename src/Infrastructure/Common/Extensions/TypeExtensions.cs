@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace FSH.WebApi.Infrastructure.Common.Extensions;
+namespace TD.CitizenAPI.Infrastructure.Common.Extensions;
 
 public static class TypeExtensions
 {

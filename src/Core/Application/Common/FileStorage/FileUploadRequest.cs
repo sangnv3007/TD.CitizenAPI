@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Common.FileStorage;
+namespace TD.CitizenAPI.Application.Common.FileStorage;
 
 public class FileUploadRequest
 {

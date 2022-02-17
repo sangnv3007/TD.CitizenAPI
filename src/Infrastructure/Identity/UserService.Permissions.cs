@@ -1,9 +1,9 @@
-﻿using FSH.WebApi.Application.Common.Caching;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Shared.Authorization;
+﻿using TD.CitizenAPI.Application.Common.Caching;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Shared.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService
 {

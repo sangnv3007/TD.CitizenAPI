@@ -1,7 +1,7 @@
 ﻿using Finbuckle.MultiTenant;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Shared.Multitenancy;
 
-namespace FSH.WebApi.Infrastructure.Multitenancy;
+namespace TD.CitizenAPI.Infrastructure.Multitenancy;
 
 #pragma warning disable CS8767
 public class FSHTenantInfo : ITenantInfo

@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Application.Catalog.Brands;
+﻿namespace TD.CitizenAPI.Application.Catalog.Brands;
 
 public class BrandByNameSpec : Specification<Brand>, ISingleResultSpecification
 {

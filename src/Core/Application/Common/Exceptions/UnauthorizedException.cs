@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace FSH.WebApi.Application.Common.Exceptions;
+namespace TD.CitizenAPI.Application.Common.Exceptions;
 
 public class UnauthorizedException : CustomException
 {

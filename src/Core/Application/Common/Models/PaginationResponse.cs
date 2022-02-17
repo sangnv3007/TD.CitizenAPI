@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Application.Common.Models;
+﻿namespace TD.CitizenAPI.Application.Common.Models;
 
 public class PaginationResponse<T>
 {

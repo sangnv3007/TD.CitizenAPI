@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Common.Caching;
+namespace TD.CitizenAPI.Application.Common.Caching;
 
 public static class CacheServiceExtensions
 {

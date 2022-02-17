@@ -1,6 +1,6 @@
-﻿using FSH.WebApi.Application.Catalog.Brands;
+﻿using TD.CitizenAPI.Application.Catalog.Brands;
 
-namespace FSH.WebApi.Host.Controllers.Catalog;
+namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
 public class BrandsController : VersionedApiController
 {
@@ -12,10 +12,27 @@ public class BrandsController : VersionedApiController
         return Mediator.Send(request);
     }
 
+    /*    [HttpGet("{id:guid}")]
+        [MustHavePermission(FSHAction.View, FSHResource.Brands)]
+        [OpenApiOperation("Get brand details.", "")]
+        public Task<BrandDto> GetAsync(Guid id)
+        {
+            return Mediator.Send(new GetBrandRequest(id));
+        }*/
+
+    /*[HttpGet("{id:guid}")]
+    [MustHavePermission(FSHAction.View, FSHResource.Brands)]
+    [OpenApiOperation("Get brand details.", "")]
+    public async Task<IActionResult> GetAsync(Guid id)
+    {
+        var item = await Mediator.Send(new GetBrandRequest(id));
+        return Ok(item);
+    }*/
+
     [HttpGet("{id:guid}")]
     [MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get brand details.", "")]
-    public Task<BrandDto> GetAsync(Guid id)
+    public Task<Result<BrandDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetBrandRequest(id));
     }

@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Infrastructure.Mailing;
+namespace TD.CitizenAPI.Infrastructure.Mailing;
 
 public class MailSettings
 {

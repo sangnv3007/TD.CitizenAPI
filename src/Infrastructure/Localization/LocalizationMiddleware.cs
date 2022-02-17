@@ -1,7 +1,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 
-namespace FSH.WebApi.Infrastructure.Localization;
+namespace TD.CitizenAPI.Infrastructure.Localization;
 
 public class LocalizationMiddleware : IMiddleware
 {

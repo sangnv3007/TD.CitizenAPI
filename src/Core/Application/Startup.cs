@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.WebApi.Application;
+namespace TD.CitizenAPI.Application;
 
 public static class Startup
 {

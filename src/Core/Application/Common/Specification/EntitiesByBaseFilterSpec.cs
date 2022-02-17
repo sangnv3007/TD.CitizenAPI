@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Application.Common.Specification;
+﻿namespace TD.CitizenAPI.Application.Common.Specification;
 
 public class EntitiesByBaseFilterSpec<T, TResult> : Specification<T, TResult>
 {

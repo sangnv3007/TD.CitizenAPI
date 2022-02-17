@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace FSH.WebApi.Infrastructure.Auth;
+namespace TD.CitizenAPI.Infrastructure.Auth;
 
 public interface ICurrentUserInitializer
 {

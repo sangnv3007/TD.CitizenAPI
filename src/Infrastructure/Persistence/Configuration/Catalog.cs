@@ -1,9 +1,9 @@
 ﻿using Finbuckle.MultiTenant.EntityFrameworkCore;
-using FSH.WebApi.Domain.Catalog;
+using TD.CitizenAPI.Domain.Catalog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FSH.WebApi.Infrastructure.Persistence.Configuration;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Configuration;
 
 public class BrandConfig : IEntityTypeConfiguration<Brand>
 {
@@ -30,5 +30,23 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
         builder
             .Property(p => p.ImagePath)
                 .HasMaxLength(2048);
+    }
+}
+
+
+public class AttachmentConfig : IEntityTypeConfiguration<Attachment>
+{
+    public void Configure(EntityTypeBuilder<Attachment> builder)
+    {
+        builder.IsMultiTenant();
+        builder
+            .Property(b => b.Name)
+                .HasMaxLength(256);
+        builder
+            .Property(b => b.Type)
+                .HasMaxLength(256);
+        builder
+            .Property(b => b.Url)
+                .HasMaxLength(256);
     }
 }

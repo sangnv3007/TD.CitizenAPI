@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Multitenancy;
+namespace TD.CitizenAPI.Application.Multitenancy;
 
 public class TenantDto
 {

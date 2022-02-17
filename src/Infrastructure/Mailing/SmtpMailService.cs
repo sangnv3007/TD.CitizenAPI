@@ -1,11 +1,11 @@
-using FSH.WebApi.Application.Common.Mailing;
+using TD.CitizenAPI.Application.Common.Mailing;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace FSH.WebApi.Infrastructure.Mailing;
+namespace TD.CitizenAPI.Infrastructure.Mailing;
 
 public class SmtpMailService : IMailService
 {

@@ -1,6 +1,6 @@
-using FSH.WebApi.Domain.Common.Events;
+using TD.CitizenAPI.Domain.Common.Events;
 
-namespace FSH.WebApi.Application.Catalog.Products.EventHandlers;
+namespace TD.CitizenAPI.Application.Catalog.Products.EventHandlers;
 
 public class ProductCreatedEventHandler : EventNotificationHandler<EntityCreatedEvent<Product>>
 {

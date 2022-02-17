@@ -1,17 +1,17 @@
-using FSH.WebApi.Application.Common.Persistence;
-using FSH.WebApi.Domain.Common.Contracts;
-using FSH.WebApi.Infrastructure.Common;
-using FSH.WebApi.Infrastructure.Persistence.ConnectionString;
-using FSH.WebApi.Infrastructure.Persistence.Context;
-using FSH.WebApi.Infrastructure.Persistence.Initialization;
-using FSH.WebApi.Infrastructure.Persistence.Repository;
+using TD.CitizenAPI.Application.Common.Persistence;
+using TD.CitizenAPI.Domain.Common.Contracts;
+using TD.CitizenAPI.Infrastructure.Common;
+using TD.CitizenAPI.Infrastructure.Persistence.ConnectionString;
+using TD.CitizenAPI.Infrastructure.Persistence.Context;
+using TD.CitizenAPI.Infrastructure.Persistence.Initialization;
+using TD.CitizenAPI.Infrastructure.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Serilog;
 
-namespace FSH.WebApi.Infrastructure.Persistence;
+namespace TD.CitizenAPI.Infrastructure.Persistence;
 
 internal static class Startup
 {

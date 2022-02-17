@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Infrastructure.Persistence.Initialization;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Initialization;
 
 public interface ICustomSeeder
 {

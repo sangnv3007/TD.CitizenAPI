@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Infrastructure.Persistence.Configuration;
+﻿namespace TD.CitizenAPI.Infrastructure.Persistence.Configuration;
 
 internal static class SchemaNames
 {

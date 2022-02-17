@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Infrastructure.SecurityHeaders;
+﻿namespace TD.CitizenAPI.Infrastructure.SecurityHeaders;
 
 internal class HeaderNames
 {

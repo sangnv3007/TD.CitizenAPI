@@ -1,7 +1,7 @@
-using FSH.WebApi.Shared.Authorization;
+using TD.CitizenAPI.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 
-namespace FSH.WebApi.Infrastructure.Auth.Permissions;
+namespace TD.CitizenAPI.Infrastructure.Auth.Permissions;
 
 public class MustHavePermissionAttribute : AuthorizeAttribute
 {

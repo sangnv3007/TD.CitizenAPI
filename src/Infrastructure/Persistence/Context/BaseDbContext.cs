@@ -1,16 +1,16 @@
 using System.Data;
 using Finbuckle.MultiTenant;
-using FSH.WebApi.Application.Common.Events;
-using FSH.WebApi.Application.Common.Interfaces;
-using FSH.WebApi.Domain.Common.Contracts;
-using FSH.WebApi.Infrastructure.Auditing;
-using FSH.WebApi.Infrastructure.Identity;
+using TD.CitizenAPI.Application.Common.Events;
+using TD.CitizenAPI.Application.Common.Interfaces;
+using TD.CitizenAPI.Domain.Common.Contracts;
+using TD.CitizenAPI.Infrastructure.Auditing;
+using TD.CitizenAPI.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Options;
 
-namespace FSH.WebApi.Infrastructure.Persistence.Context;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Context;
 
 public abstract class BaseDbContext : MultiTenantIdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, ApplicationRoleClaim, IdentityUserToken<string>>
 {
@@ -64,7 +64,7 @@ public abstract class BaseDbContext : MultiTenantIdentityDbContext<ApplicationUs
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
-        var auditEntries = HandleAuditingBeforeSaveChanges(_currentUser.GetUserId());
+        var auditEntries = HandleAuditingBeforeSaveChanges(_currentUser.GetUserName());
 
         int result = await base.SaveChangesAsync(cancellationToken);
 
@@ -75,7 +75,7 @@ public abstract class BaseDbContext : MultiTenantIdentityDbContext<ApplicationUs
         return result;
     }
 
-    private List<AuditTrail> HandleAuditingBeforeSaveChanges(Guid userId)
+    private List<AuditTrail> HandleAuditingBeforeSaveChanges(in string? userId)
     {
         foreach (var entry in ChangeTracker.Entries<IAuditableEntity>().ToList())
         {

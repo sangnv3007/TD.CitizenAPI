@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Infrastructure.Auth.Jwt;
+namespace TD.CitizenAPI.Infrastructure.Auth.Jwt;
 
 public class JwtSettings
 {

@@ -1,4 +1,4 @@
-﻿namespace FSH.WebApi.Infrastructure.Mapping;
+﻿namespace TD.CitizenAPI.Infrastructure.Mapping;
 
 public class MapsterSettings
 {

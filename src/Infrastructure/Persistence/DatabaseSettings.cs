@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Infrastructure.Persistence;
+namespace TD.CitizenAPI.Infrastructure.Persistence;
 
 public class DatabaseSettings
 {

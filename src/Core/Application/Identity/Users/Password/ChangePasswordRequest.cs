@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Identity.Users.Password;
+namespace TD.CitizenAPI.Application.Identity.Users.Password;
 
 public class ChangePasswordRequest
 {

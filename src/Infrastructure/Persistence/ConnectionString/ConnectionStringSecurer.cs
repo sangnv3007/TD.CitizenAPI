@@ -1,12 +1,12 @@
 using System.Data.SqlClient;
-using FSH.WebApi.Application.Common.Persistence;
-using FSH.WebApi.Infrastructure.Common;
+using TD.CitizenAPI.Application.Common.Persistence;
+using TD.CitizenAPI.Infrastructure.Common;
 using Microsoft.Extensions.Options;
 using MySqlConnector;
 using Npgsql;
 using Oracle.ManagedDataAccess.Client;
 
-namespace FSH.WebApi.Infrastructure.Persistence.ConnectionString;
+namespace TD.CitizenAPI.Infrastructure.Persistence.ConnectionString;
 
 public class ConnectionStringSecurer : IConnectionStringSecurer
 {

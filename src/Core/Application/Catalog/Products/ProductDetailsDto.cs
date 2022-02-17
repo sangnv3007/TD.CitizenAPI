@@ -1,6 +1,6 @@
-using FSH.WebApi.Application.Catalog.Brands;
+using TD.CitizenAPI.Application.Catalog.Brands;
 
-namespace FSH.WebApi.Application.Catalog.Products;
+namespace TD.CitizenAPI.Application.Catalog.Products;
 
 public class ProductDetailsDto : IDto
 {

@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace FSH.WebApi.Shared.Authorization;
+namespace TD.CitizenAPI.Shared.Authorization;
 
 #pragma warning disable CA2211
 public static class FSHRoles

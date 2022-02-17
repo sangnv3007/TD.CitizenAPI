@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace FSH.WebApi.Application.Common.Specification;
+namespace TD.CitizenAPI.Application.Common.Specification;
 
 // See https://github.com/ardalis/Specification/issues/53
 public static class SpecificationBuilderExtensions

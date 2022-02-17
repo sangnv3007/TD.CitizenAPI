@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Shared.Notifications;
+namespace TD.CitizenAPI.Shared.Notifications;
 
 public class StatsChangedNotification : INotificationMessage
 {

@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Identity.Roles;
+namespace TD.CitizenAPI.Application.Identity.Roles;
 
 public interface IRoleService : ITransientService
 {

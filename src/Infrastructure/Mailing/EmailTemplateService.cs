@@ -1,8 +1,8 @@
 using System.Text;
-using FSH.WebApi.Application.Common.Mailing;
+using TD.CitizenAPI.Application.Common.Mailing;
 using RazorEngineCore;
 
-namespace FSH.WebApi.Infrastructure.Mailing;
+namespace TD.CitizenAPI.Infrastructure.Mailing;
 
 public class EmailTemplateService : IEmailTemplateService
 {

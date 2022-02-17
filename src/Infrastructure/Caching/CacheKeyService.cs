@@ -1,7 +1,7 @@
 ﻿using Finbuckle.MultiTenant;
-using FSH.WebApi.Application.Common.Caching;
+using TD.CitizenAPI.Application.Common.Caching;
 
-namespace FSH.WebApi.Infrastructure.Caching;
+namespace TD.CitizenAPI.Infrastructure.Caching;
 
 public class CacheKeyService : ICacheKeyService
 {

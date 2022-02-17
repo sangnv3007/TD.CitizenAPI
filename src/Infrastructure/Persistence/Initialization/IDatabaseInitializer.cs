@@ -1,6 +1,6 @@
-﻿using FSH.WebApi.Infrastructure.Multitenancy;
+﻿using TD.CitizenAPI.Infrastructure.Multitenancy;
 
-namespace FSH.WebApi.Infrastructure.Persistence.Initialization;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Initialization;
 
 internal interface IDatabaseInitializer
 {

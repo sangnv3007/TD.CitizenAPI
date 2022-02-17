@@ -1,12 +1,12 @@
 using System.Net;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Common.Interfaces;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using Serilog;
 using Serilog.Context;
 
-namespace FSH.WebApi.Infrastructure.Middleware;
+namespace TD.CitizenAPI.Infrastructure.Middleware;
 
 internal class ExceptionMiddleware : IMiddleware
 {

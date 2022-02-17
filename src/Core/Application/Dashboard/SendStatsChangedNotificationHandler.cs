@@ -1,8 +1,8 @@
-using FSH.WebApi.Domain.Common.Events;
-using FSH.WebApi.Domain.Identity;
-using FSH.WebApi.Shared.Events;
+using TD.CitizenAPI.Domain.Common.Events;
+using TD.CitizenAPI.Domain.Identity;
+using TD.CitizenAPI.Shared.Events;
 
-namespace FSH.WebApi.Application.Dashboard;
+namespace TD.CitizenAPI.Application.Dashboard;
 
 public class SendStatsChangedNotificationHandler :
     IEventNotificationHandler<EntityCreatedEvent<Brand>>,

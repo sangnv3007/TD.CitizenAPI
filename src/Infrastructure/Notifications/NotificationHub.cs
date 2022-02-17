@@ -1,11 +1,11 @@
 ﻿using Finbuckle.MultiTenant;
-using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Common.Interfaces;
+using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.WebApi.Infrastructure.Notifications;
+namespace TD.CitizenAPI.Infrastructure.Notifications;
 
 [Authorize]
 public class NotificationHub : Hub, ITransientService

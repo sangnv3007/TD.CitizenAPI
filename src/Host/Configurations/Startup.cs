@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Host.Configurations;
+namespace TD.CitizenAPI.Host.Configurations;
 
 internal static class Startup
 {

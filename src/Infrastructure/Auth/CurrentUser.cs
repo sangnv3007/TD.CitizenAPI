@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using FSH.WebApi.Application.Common.Interfaces;
+using TD.CitizenAPI.Application.Common.Interfaces;
 
-namespace FSH.WebApi.Infrastructure.Auth;
+namespace TD.CitizenAPI.Infrastructure.Auth;
 
 public class CurrentUser : ICurrentUser, ICurrentUserInitializer
 {
@@ -11,10 +11,15 @@ public class CurrentUser : ICurrentUser, ICurrentUserInitializer
 
     private Guid _userId = Guid.Empty;
 
+    private string _userName = string.Empty;
+
     public Guid GetUserId() =>
         IsAuthenticated()
             ? Guid.Parse(_user?.GetUserId() ?? Guid.Empty.ToString())
             : _userId;
+
+    public string GetUserName() =>
+        IsAuthenticated() ? (_user?.GetUserName() ?? string.Empty) : _userName;
 
     public string? GetUserEmail() =>
         IsAuthenticated()
@@ -31,7 +36,7 @@ public class CurrentUser : ICurrentUser, ICurrentUserInitializer
         _user?.Claims;
 
     public string? GetTenant() =>
-        IsAuthenticated() ? _user?.GetTenant() : string.Empty;
+        IsAuthenticated() ? _user?.GetTenant() : "root";
 
     public void SetCurrentUser(ClaimsPrincipal user)
     {

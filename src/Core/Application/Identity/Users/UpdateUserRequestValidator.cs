@@ -1,4 +1,4 @@
-namespace FSH.WebApi.Application.Identity.Users;
+namespace TD.CitizenAPI.Application.Identity.Users;
 
 public class UpdateUserRequestValidator : CustomValidator<UpdateUserRequest>
 {

@@ -1,9 +1,9 @@
-using FSH.WebApi.Application.Auditing;
-using FSH.WebApi.Infrastructure.Persistence.Context;
+using TD.CitizenAPI.Application.Auditing;
+using TD.CitizenAPI.Infrastructure.Persistence.Context;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.WebApi.Infrastructure.Auditing;
+namespace TD.CitizenAPI.Infrastructure.Auditing;
 
 public class AuditService : IAuditService
 {
@@ -11,7 +11,7 @@ public class AuditService : IAuditService
 
     public AuditService(ApplicationDbContext context) => _context = context;
 
-    public async Task<List<AuditDto>> GetUserTrailsAsync(Guid userId)
+    public async Task<List<AuditDto>> GetUserTrailsAsync(string? userId)
     {
         var trails = await _context.AuditTrails
             .Where(a => a.UserId == userId)

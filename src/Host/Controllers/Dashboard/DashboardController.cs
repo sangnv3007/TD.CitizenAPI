@@ -1,6 +1,6 @@
-using FSH.WebApi.Application.Dashboard;
+using TD.CitizenAPI.Application.Dashboard;
 
-namespace FSH.WebApi.Host.Controllers.Dashboard;
+namespace TD.CitizenAPI.Host.Controllers.Dashboard;
 
 public class DashboardController : VersionedApiController
 {

@@ -1,8 +1,8 @@
 using System.Security.Claims;
-using FSH.WebApi.Application.Identity.Users;
+using TD.CitizenAPI.Application.Identity.Users;
 using Microsoft.AspNetCore.Authorization;
 
-namespace FSH.WebApi.Infrastructure.Auth.Permissions;
+namespace TD.CitizenAPI.Infrastructure.Auth.Permissions;
 
 internal class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {

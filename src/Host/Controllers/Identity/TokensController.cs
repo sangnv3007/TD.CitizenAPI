@@ -1,6 +1,6 @@
-using FSH.WebApi.Application.Identity.Tokens;
+using TD.CitizenAPI.Application.Identity.Tokens;
 
-namespace FSH.WebApi.Host.Controllers.Identity;
+namespace TD.CitizenAPI.Host.Controllers.Identity;
 
 public sealed class TokensController : VersionNeutralApiController
 {

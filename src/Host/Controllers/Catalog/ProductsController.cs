@@ -1,6 +1,6 @@
-﻿using FSH.WebApi.Application.Catalog.Products;
+﻿using TD.CitizenAPI.Application.Catalog.Products;
 
-namespace FSH.WebApi.Host.Controllers.Catalog;
+namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
 public class ProductsController : VersionedApiController
 {

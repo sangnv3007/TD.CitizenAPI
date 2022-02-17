@@ -1,6 +1,6 @@
-using FSH.WebApi.Shared.Events;
+using TD.CitizenAPI.Shared.Events;
 
-namespace FSH.WebApi.Domain.Common.Contracts;
+namespace TD.CitizenAPI.Domain.Common.Contracts;
 
 public abstract class DomainEvent : IEvent
 {

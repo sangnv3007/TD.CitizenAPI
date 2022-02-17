@@ -1,9 +1,9 @@
 ﻿using Ardalis.Specification;
-using FSH.WebApi.Application.Common.Persistence;
-using FSH.WebApi.Domain.Common.Contracts;
-using FSH.WebApi.Domain.Common.Events;
+using TD.CitizenAPI.Application.Common.Persistence;
+using TD.CitizenAPI.Domain.Common.Contracts;
+using TD.CitizenAPI.Domain.Common.Events;
 
-namespace FSH.WebApi.Infrastructure.Persistence.Repository;
+namespace TD.CitizenAPI.Infrastructure.Persistence.Repository;
 
 /// <summary>
 /// The repository that implements IRepositoryWithEvents.

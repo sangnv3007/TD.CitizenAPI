@@ -1,11 +1,11 @@
-﻿using FSH.WebApi.Application.Common.Exceptions;
-using FSH.WebApi.Application.Identity.Users;
-using FSH.WebApi.Domain.Identity;
-using FSH.WebApi.Shared.Authorization;
-using FSH.WebApi.Shared.Multitenancy;
+﻿using TD.CitizenAPI.Application.Common.Exceptions;
+using TD.CitizenAPI.Application.Identity.Users;
+using TD.CitizenAPI.Domain.Identity;
+using TD.CitizenAPI.Shared.Authorization;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.WebApi.Infrastructure.Identity;
+namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService
 {

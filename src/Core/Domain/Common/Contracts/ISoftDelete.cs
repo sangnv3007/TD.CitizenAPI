@@ -1,7 +1,7 @@
-namespace FSH.WebApi.Domain.Common.Contracts;
+namespace TD.CitizenAPI.Domain.Common.Contracts;
 
 public interface ISoftDelete
 {
     DateTime? DeletedOn { get; set; }
-    Guid? DeletedBy { get; set; }
+    string? DeletedBy { get; set; }
 }

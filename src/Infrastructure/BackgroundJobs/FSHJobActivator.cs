@@ -1,13 +1,13 @@
 ﻿using Finbuckle.MultiTenant;
-using FSH.WebApi.Infrastructure.Auth;
-using FSH.WebApi.Infrastructure.Common;
-using FSH.WebApi.Infrastructure.Multitenancy;
-using FSH.WebApi.Shared.Multitenancy;
+using TD.CitizenAPI.Infrastructure.Auth;
+using TD.CitizenAPI.Infrastructure.Common;
+using TD.CitizenAPI.Infrastructure.Multitenancy;
+using TD.CitizenAPI.Shared.Multitenancy;
 using Hangfire;
 using Hangfire.Server;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.WebApi.Infrastructure.BackgroundJobs;
+namespace TD.CitizenAPI.Infrastructure.BackgroundJobs;
 
 public class FSHJobActivator : JobActivator
 {

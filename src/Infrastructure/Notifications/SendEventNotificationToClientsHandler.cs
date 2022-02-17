@@ -1,9 +1,9 @@
-﻿using FSH.WebApi.Application.Common.Events;
-using FSH.WebApi.Application.Common.Interfaces;
-using FSH.WebApi.Shared.Notifications;
+﻿using TD.CitizenAPI.Application.Common.Events;
+using TD.CitizenAPI.Application.Common.Interfaces;
+using TD.CitizenAPI.Shared.Notifications;
 using MediatR;
 
-namespace FSH.WebApi.Infrastructure.Notifications;
+namespace TD.CitizenAPI.Infrastructure.Notifications;
 
 // Sends all events that are also an INotificationMessage to all clients
 // Note: for this to work, the Event/NotificationMessage class needs to be in the

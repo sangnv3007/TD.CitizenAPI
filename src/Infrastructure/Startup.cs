@@ -1,20 +1,20 @@
 using System.Reflection;
-using FSH.WebApi.Infrastructure.Auth;
-using FSH.WebApi.Infrastructure.BackgroundJobs;
-using FSH.WebApi.Infrastructure.Caching;
-using FSH.WebApi.Infrastructure.Common;
-using FSH.WebApi.Infrastructure.Cors;
-using FSH.WebApi.Infrastructure.FileStorage;
-using FSH.WebApi.Infrastructure.Localization;
-using FSH.WebApi.Infrastructure.Mailing;
-using FSH.WebApi.Infrastructure.Mapping;
-using FSH.WebApi.Infrastructure.Middleware;
-using FSH.WebApi.Infrastructure.Multitenancy;
-using FSH.WebApi.Infrastructure.Notifications;
-using FSH.WebApi.Infrastructure.OpenApi;
-using FSH.WebApi.Infrastructure.Persistence;
-using FSH.WebApi.Infrastructure.Persistence.Initialization;
-using FSH.WebApi.Infrastructure.SecurityHeaders;
+using TD.CitizenAPI.Infrastructure.Auth;
+using TD.CitizenAPI.Infrastructure.BackgroundJobs;
+using TD.CitizenAPI.Infrastructure.Caching;
+using TD.CitizenAPI.Infrastructure.Common;
+using TD.CitizenAPI.Infrastructure.Cors;
+using TD.CitizenAPI.Infrastructure.FileStorage;
+using TD.CitizenAPI.Infrastructure.Localization;
+using TD.CitizenAPI.Infrastructure.Mailing;
+using TD.CitizenAPI.Infrastructure.Mapping;
+using TD.CitizenAPI.Infrastructure.Middleware;
+using TD.CitizenAPI.Infrastructure.Multitenancy;
+using TD.CitizenAPI.Infrastructure.Notifications;
+using TD.CitizenAPI.Infrastructure.OpenApi;
+using TD.CitizenAPI.Infrastructure.Persistence;
+using TD.CitizenAPI.Infrastructure.Persistence.Initialization;
+using TD.CitizenAPI.Infrastructure.SecurityHeaders;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.WebApi.Infrastructure;
+namespace TD.CitizenAPI.Infrastructure;
 
 public static class Startup
 {

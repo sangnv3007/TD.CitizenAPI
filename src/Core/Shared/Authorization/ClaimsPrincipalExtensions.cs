@@ -1,9 +1,14 @@
-using FSH.WebApi.Shared.Authorization;
+using TD.CitizenAPI.Shared.Authorization;
 
 namespace System.Security.Claims;
 
 public static class ClaimsPrincipalExtensions
 {
+    public static string? GetPermissions(this ClaimsPrincipal principal) =>
+      principal.FindFirstValue(FSHClaims.Permissions);
+    public static string? GetUserName(this ClaimsPrincipal principal) =>
+        principal.FindFirstValue(ClaimTypes.NameIdentifier);
+
     public static string? GetEmail(this ClaimsPrincipal principal)
         => principal.FindFirstValue(ClaimTypes.Email);
 
@@ -23,7 +28,7 @@ public static class ClaimsPrincipalExtensions
         => principal.FindFirstValue(ClaimTypes.MobilePhone);
 
     public static string? GetUserId(this ClaimsPrincipal principal)
-       => principal.FindFirstValue(ClaimTypes.NameIdentifier);
+       => principal.FindFirstValue(FSHClaims.NameIdentifier);
 
     public static string? GetImageUrl(this ClaimsPrincipal principal)
        => principal.FindFirstValue(FSHClaims.ImageUrl);
