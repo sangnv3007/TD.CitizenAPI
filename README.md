@@ -1,20 +1,4 @@
-[![GitHub](https://img.shields.io/github/license/fullstackhero/dotnet-webapi-boilerplate?color=2da44e)](https://github.com/fullstackhero/dotnet-webapi-boilerplate/blob/master/LICENSE)
-[![Discord](https://img.shields.io/discord/878181478972928011?color=%237289da&label=Discord&logo=discord&logoColor=%237289da)](https://discord.gg/yQWpShsKrf)
-[![FullStackHero.WebAPI.Boilerplate on NuGet](https://img.shields.io/nuget/v/FullStackHero.WebAPI.Boilerplate?label=FullStackHero.WebAPI.Boilerplate)](https://www.nuget.org/packages/FullStackHero.WebAPI.Boilerplate/)
-[![Nuget downloads](https://img.shields.io/nuget/dt/FullStackHero.WebAPI.Boilerplate?color=2da44e&label=nuget%20downloads&logo=nuget)](https://www.nuget.org/packages/FullStackHero.WebAPI.Boilerplate/)
-
-<a href="https://twitter.com/intent/follow?screen_name=iammukeshm">
-    <img src="https://img.shields.io/twitter/follow/iammukeshm.svg?label=Follow%20@iammukeshm" alt="Follow @iammukeshm" />
-</a> &nbsp; <a href="https://twitter.com/intent/follow?screen_name=codewithmukesh">
-    <img src="https://img.shields.io/twitter/follow/codewithmukesh.svg?label=Follow%20@codewithmukesh" alt="Follow @codewithmukesh" />
-</a>
-
 <p>
-
-<p align="center">
-    <img src="https://codewithmukesh.com/wp-content/uploads/2022/02/fullstackhero-dotnet-webapi-banner.png" alt="fullstackhero">
-</p>
-
 ## What's fullstackhero's .NET Web API Boilerplate?
 
 fullstackhero's .NET Web API Boilerplate is a starting point for your next `.NET 6 Clean Architecture Project` that incorporates the most essential packages and features your projects will ever need including out of the box Multi-Tenancy support. This project can save well over `200+ hours` of development time for your team.
@@ -127,17 +111,13 @@ Join our Discord - [fullstackhero @ Discord](https://discord.gg/gdgHRt4mMw)
 
 ## Community
 
-- Discord [@fullstackhero](https://discord.gg/gdgHRt4mMw)
-- Facebook Page [@codewithmukesh](https://facebook.com/codewithmukesh)
-- Youtube Channel [@codewithmukesh](https://youtube.com/c/codewithmukesh)
+- Discord [@tunglamnguyen91](https://discord.gg/gdgHRt4mzz)
 
 ## Contributors
 
 Submit your PR and join the elite list!
 
-<a href="https://github.com/fullstackhero/dotnet-webapi-boilerplate/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=fullstackhero/dotnet-webapi-boilerplate" />
-</a>
+
 
 ## License
 
@@ -151,7 +131,7 @@ Here are a few ways by which you can support.
 -   Leave a star! :star:
 -   Recommend this awesome project to your colleagues. 🥇
 -   Do consider endorsing me on LinkedIn for ASP.NET Core - [Connect via LinkedIn](https://codewithmukesh.com/linkedin) 🦸
--   Or, If you want to support this project in the long run, [consider buying me a coffee](https://www.buymeacoffee.com/codewithmukesh)! ☕
+-   Or, If you want to support this project in the long run, [consider buying me a coffee](https://www.buymeacoffee.com/tunglamnguyen91)! ☕
 
 <br>
 
