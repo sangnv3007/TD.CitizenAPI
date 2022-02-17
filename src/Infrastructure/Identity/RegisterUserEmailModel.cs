@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TD.CitizenAPI.Infrastructure.Identity;
+﻿namespace TD.CitizenAPI.Infrastructure.Identity;
 
 public class RegisterUserEmailModel
 {

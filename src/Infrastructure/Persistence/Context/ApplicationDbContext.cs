@@ -18,6 +18,10 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Brand> Brands => Set<Brand>();
     public DbSet<Attachment> Attachments => Set<Attachment>();
+    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<PlaceType> PlaceTypes => Set<PlaceType>();
+    public DbSet<Area> Areas => Set<Area>();
+    public DbSet<Place> Places => Set<Place>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

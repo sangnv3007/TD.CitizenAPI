@@ -3,13 +3,12 @@ using TD.CitizenAPI.Application;
 using TD.CitizenAPI.Host.Configurations;
 using TD.CitizenAPI.Host.Controllers;
 using TD.CitizenAPI.Infrastructure;
-using TD.CitizenAPI.Infrastructure.Common.Extensions;
+using TD.CitizenAPI.Infrastructure.Common;
 using Serilog;
 
 [assembly: ApiConventionType(typeof(FSHApiConventions))]
 
-Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
-Log.Logger.Refresh();
+StaticLogger.EnsureInitialized();
 Log.Information("Server Booting Up...");
 try
 {
@@ -36,12 +35,12 @@ try
 }
 catch (Exception ex) when (!ex.GetType().Name.Equals("StopTheHostException", StringComparison.Ordinal))
 {
-    Log.Logger.Refresh();
+    StaticLogger.EnsureInitialized();
     Log.Fatal(ex, "Unhandled exception");
 }
 finally
 {
-    Log.Logger.Refresh();
+    StaticLogger.EnsureInitialized();
     Log.Information("Server Shutting down...");
     Log.CloseAndFlush();
 }

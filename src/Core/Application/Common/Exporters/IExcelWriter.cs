@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace TD.CitizenAPI.Application.Common.Exporters;
+﻿namespace TD.CitizenAPI.Application.Common.Exporters;
 
 public interface IExcelWriter : ITransientService
 {
