@@ -2,7 +2,7 @@ using Mapster;
 
 namespace TD.CitizenAPI.Application.Catalog.Categories;
 
-public class CreateCategoryRequest : IRequest<Result<Guid>>
+public partial class CreateCategoryRequest : IRequest<Result<Guid>>
 {
     public string Name { get; set; } = default!;
     public string Code { get; set; } = default!;
@@ -31,7 +31,9 @@ public class CreateCategoryRequestHandler : IRequestHandler<CreateCategoryReques
 
     public async Task<Result<Guid>> Handle(CreateCategoryRequest request, CancellationToken cancellationToken)
     {
-        var item = request.Adapt<Category>();
+        //var item = request.Adapt<Category>();
+        var item = new Category(request.Name, request.Code, request.Icon, request.Image, request.CoverImage, request.Description);
+
 
         await _repository.AddAsync(item, cancellationToken);
 

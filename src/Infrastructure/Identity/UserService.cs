@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using TD.CitizenAPI.Infrastructure.Auth;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 
@@ -32,6 +33,7 @@ internal partial class UserService : IUserService
     private readonly IJobService _jobService;
     private readonly IMailService _mailService;
     private readonly MailSettings _mailSettings;
+    private readonly SecuritySettings _securitySettings;
     private readonly IEmailTemplateService _templateService;
     private readonly IFileStorageService _fileStorage;
     private readonly IEventPublisher _events;
@@ -53,7 +55,8 @@ internal partial class UserService : IUserService
         IEventPublisher events,
         ICacheService cache,
         ICacheKeyService cacheKeys,
-        ITenantInfo currentTenant)
+        ITenantInfo currentTenant,
+        IOptions<SecuritySettings> securitySettings)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -69,6 +72,7 @@ internal partial class UserService : IUserService
         _cache = cache;
         _cacheKeys = cacheKeys;
         _currentTenant = currentTenant;
+        _securitySettings = securitySettings.Value;
     }
 
     public async Task<PaginationResponse<UserDetailsDto>> SearchAsync(UserListFilter filter, CancellationToken cancellationToken)

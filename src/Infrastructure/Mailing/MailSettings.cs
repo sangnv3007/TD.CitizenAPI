@@ -14,5 +14,4 @@ public class MailSettings
 
     public string? DisplayName { get; set; }
 
-    public bool EnableVerification { get; set; }
 }

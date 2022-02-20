@@ -80,3 +80,4 @@ public class BrandsController : VersionedApiController
         return Mediator.Send(new DeleteRandomBrandRequest());
     }
 }
+

@@ -13,7 +13,6 @@
     <ItemGroup>
       <Folder Include="Catalog\Company\" />
       <Folder Include="Catalog\Ecommerce\" />
-      <Folder Include="Catalog\Market\" />
       <Folder Include="Catalog\User\" />
       <Folder Include="Catalog\Traffic\" />
     </ItemGroup>

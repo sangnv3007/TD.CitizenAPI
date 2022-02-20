@@ -27,6 +27,16 @@ public class Area : AuditableEntity, IAggregateRoot
         Description = description;
     }
 
+    public Area(string name, string code, string? parentCode, string? type, int level, string? description)
+    {
+        Name = name;
+        Code = code;
+        ParentCode = parentCode;
+        Type = type;
+        Level = level;
+        Description = description;
+    }
+
     public Area Update(string? name, string? code, string? parentCode, string? slug, string? type, int? level, string? nameWithType, string? path, string? pathWithType, string? description)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;

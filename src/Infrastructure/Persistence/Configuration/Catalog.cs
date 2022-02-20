@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TD.CitizenAPI.Infrastructure.Persistence.Configuration;
 
+
+#region Other
 public class BrandConfig : IEntityTypeConfiguration<Brand>
 {
     public void Configure(EntityTypeBuilder<Brand> builder)
@@ -51,6 +53,45 @@ public class CategoryConfig : IEntityTypeConfiguration<Category>
         builder.Property(b => b.Description).HasMaxLength(1024);
     }
 }
+
+public class FeedbackConfig : IEntityTypeConfiguration<Feedback>
+{
+    public void Configure(EntityTypeBuilder<Feedback> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+        builder.Property(b => b.Content).HasMaxLength(1024);
+    }
+}
+public class NotificationConfig : IEntityTypeConfiguration<Notification>
+{
+    public void Configure(EntityTypeBuilder<Notification> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(256);
+        builder.Property(b => b.Body).HasMaxLength(2048);
+        builder.Property(b => b.Title).HasMaxLength(1024);
+        builder.Property(b => b.Data).HasMaxLength(1024);
+        builder.Property(b => b.AppType).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.AreaCode).HasMaxLength(256);
+    }
+}
+public class HomepageInforConfig : IEntityTypeConfiguration<HomePageInfor>
+{
+    public void Configure(EntityTypeBuilder<HomePageInfor> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.ImagePad).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(256);
+        builder.Property(b => b.Url).HasMaxLength(512);
+        builder.Property(b => b.Title).HasMaxLength(256);
+    }
+}
+#endregion Other
+
+#region Place
 public class PlaceTypeConfig : IEntityTypeConfiguration<PlaceType>
 {
     public void Configure(EntityTypeBuilder<PlaceType> builder)
@@ -101,3 +142,95 @@ public class PlaceConfig : IEntityTypeConfiguration<Place>
         builder.Property(b => b.Image).HasMaxLength(1024);
     }
 }
+
+public class AreaInforConfig : IEntityTypeConfiguration<AreaInfor>
+{
+    public void Configure(EntityTypeBuilder<AreaInfor> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.AreaCode).HasMaxLength(256);
+        builder.Property(b => b.Acreage).HasMaxLength(256);
+        builder.Property(b => b.Population).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Images).HasMaxLength(2048);
+    }
+}
+
+public class AreaInforValueConfig : IEntityTypeConfiguration<AreaInforValue>
+{
+    public void Configure(EntityTypeBuilder<AreaInforValue> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Key).HasMaxLength(1024);
+       
+    }
+}
+
+#endregion Place
+
+#region Market
+public class MarketCategoryConfig : IEntityTypeConfiguration<MarketCategory>
+{
+    public void Configure(EntityTypeBuilder<MarketCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+
+public class MarketProductConfig : IEntityTypeConfiguration<MarketProduct>
+{
+    public void Configure(EntityTypeBuilder<MarketProduct> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Packaging).HasMaxLength(256);
+        builder.Property(b => b.Brand).HasMaxLength(256);
+        builder.Property(b => b.Unit).HasMaxLength(256);
+        builder.Property(b => b.Origin).HasMaxLength(256);
+        builder.Property(b => b.DisplayUnit).HasMaxLength(256);
+        builder.Property(b => b.DisplayFactor).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Description).HasMaxLength(2048);
+    }
+}
+
+#endregion Market
+
+#region Hotline
+public class HotlineCategoryConfig : IEntityTypeConfiguration<HotlineCategory>
+{
+    public void Configure(EntityTypeBuilder<HotlineCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.CoverImage).HasMaxLength(1024);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+
+public class HotlineConfig : IEntityTypeConfiguration<Hotline>
+{
+    public void Configure(EntityTypeBuilder<Hotline> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Address).HasMaxLength(1024);
+        builder.Property(b => b.Detail).HasMaxLength(1024);
+        builder.Property(b => b.OtherDetail).HasMaxLength(1024);
+        builder.Property(b => b.Phone).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(256);
+        builder.Property(x => x.Latitude).HasColumnType("Decimal(8,6)");
+        builder.Property(x => x.Longitude).HasColumnType("Decimal(9,6)");
+    }
+}
+
+#endregion Hotline

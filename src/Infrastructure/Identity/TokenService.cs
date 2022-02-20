@@ -5,7 +5,6 @@ using System.Text;
 using TD.CitizenAPI.Application.Common.Exceptions;
 using TD.CitizenAPI.Application.Identity.Tokens;
 using TD.CitizenAPI.Infrastructure.Auth.Jwt;
-using TD.CitizenAPI.Infrastructure.Mailing;
 using TD.CitizenAPI.Infrastructure.Multitenancy;
 using TD.CitizenAPI.Shared.Authorization;
 using TD.CitizenAPI.Shared.Multitenancy;
@@ -13,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TD.CitizenAPI.Infrastructure.Auth;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 
@@ -20,7 +20,7 @@ internal class TokenService : ITokenService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IStringLocalizer<TokenService> _localizer;
-    private readonly MailSettings _mailSettings;
+    private readonly SecuritySettings _securitySettings;
     private readonly JwtSettings _jwtSettings;
     private readonly FSHTenantInfo? _currentTenant;
 
@@ -28,12 +28,12 @@ internal class TokenService : ITokenService
         UserManager<ApplicationUser> userManager,
         IOptions<JwtSettings> jwtSettings,
         IStringLocalizer<TokenService> localizer,
-        IOptions<MailSettings> mailSettings,
+        IOptions<SecuritySettings> securitySettings,
         FSHTenantInfo? currentTenant)
     {
         _userManager = userManager;
         _localizer = localizer;
-        _mailSettings = mailSettings.Value;
+        _securitySettings = securitySettings.Value;
         _jwtSettings = jwtSettings.Value;
         _currentTenant = currentTenant;
     }
@@ -56,7 +56,7 @@ internal class TokenService : ITokenService
             throw new UnauthorizedException(_localizer["identity.usernotactive"]);
         }
 
-        if (_mailSettings.EnableVerification && !user.EmailConfirmed)
+        if (_securitySettings.RequireConfirmedAccount && !user.EmailConfirmed)
         {
             throw new UnauthorizedException(_localizer["identity.emailnotconfirmed"]);
         }

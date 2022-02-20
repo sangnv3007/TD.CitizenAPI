@@ -15,14 +15,35 @@ public class ApplicationDbContext : BaseDbContext
     {
     }
 
+    #region Other
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Brand> Brands => Set<Brand>();
     public DbSet<Attachment> Attachments => Set<Attachment>();
     public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Notification> Notifications => Set<Notification>();
+    public DbSet<Feedback> Feedbacks => Set<Feedback>();
+    public DbSet<HomePageInfor> HomePageInfors => Set<HomePageInfor>();
+
+    #endregion Other
+
+    #region Place
     public DbSet<PlaceType> PlaceTypes => Set<PlaceType>();
     public DbSet<Area> Areas => Set<Area>();
     public DbSet<Place> Places => Set<Place>();
+    public DbSet<AreaInfor> AreaInfors => Set<AreaInfor>();
+    public DbSet<AreaInforValue> AreaInforValues => Set<AreaInforValue>();
 
+    #endregion Place
+
+    #region Market
+    public DbSet<MarketCategory> MarketCategories => Set<MarketCategory>();
+    public DbSet<MarketProduct> MarketProducts => Set<MarketProduct>();
+    #endregion Market
+
+    #region Hotline
+    public DbSet<HotlineCategory> HotlineCategories => Set<HotlineCategory>();
+    public DbSet<Hotline> Hotlines => Set<Hotline>();
+    #endregion Hotline
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
