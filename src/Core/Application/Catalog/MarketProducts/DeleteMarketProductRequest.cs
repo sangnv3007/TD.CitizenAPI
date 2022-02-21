@@ -20,7 +20,7 @@ public class DeleteMarketProductRequestHandler : IRequestHandler<DeleteMarketPro
     {
         var item = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        _ = item ?? throw new NotFoundException(_localizer["place.notfound"]);
+        _ = item ?? throw new NotFoundException(_localizer["marketproduct.notfound"]);
 
         await _repository.DeleteAsync(item, cancellationToken);
 

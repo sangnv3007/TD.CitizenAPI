@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TD.CitizenAPI.Infrastructure.Persistence.Context;
 
@@ -11,9 +12,10 @@ using TD.CitizenAPI.Infrastructure.Persistence.Context;
 namespace Migrators.MSSQL.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220221033823_Update_6_Traffic")]
+    partial class Update_6_Traffic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -429,24 +431,6 @@ namespace Migrators.MSSQL.Migrations.Application
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ArrivalCommuneId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ArrivalDistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double?>("ArrivalLatitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ArrivalLongitude")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ArrivalPlaceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ArrivalProvinceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -459,31 +443,14 @@ namespace Migrators.MSSQL.Migrations.Application
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("DepartureCommuneId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("DepartureDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DepartureDistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double?>("DepartureLatitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("DepartureLongitude")
-                        .HasColumnType("float");
-
-                    b.Property<string>("DeparturePlaceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("DepartureProvinceId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<TimeSpan?>("DepartureTime")
                         .HasColumnType("time");
 
                     b.Property<string>("DepartureTimeText")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -505,10 +472,17 @@ namespace Migrators.MSSQL.Migrations.Application
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<Guid?>("PlaceArrivalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PlaceDepartureId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -533,17 +507,9 @@ namespace Migrators.MSSQL.Migrations.Application
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArrivalCommuneId");
+                    b.HasIndex("PlaceArrivalId");
 
-                    b.HasIndex("ArrivalDistrictId");
-
-                    b.HasIndex("ArrivalProvinceId");
-
-                    b.HasIndex("DepartureCommuneId");
-
-                    b.HasIndex("DepartureDistrictId");
-
-                    b.HasIndex("DepartureProvinceId");
+                    b.HasIndex("PlaceDepartureId");
 
                     b.HasIndex("VehicleTypeId");
 
@@ -1686,45 +1652,21 @@ namespace Migrators.MSSQL.Migrations.Application
 
             modelBuilder.Entity("TD.CitizenAPI.Domain.Catalog.Carpool", b =>
                 {
-                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Area", "ArrivalCommune")
+                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Place", "PlaceArrival")
                         .WithMany()
-                        .HasForeignKey("ArrivalCommuneId");
+                        .HasForeignKey("PlaceArrivalId");
 
-                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Area", "ArrivalDistrict")
+                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Place", "PlaceDeparture")
                         .WithMany()
-                        .HasForeignKey("ArrivalDistrictId");
-
-                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Area", "ArrivalProvince")
-                        .WithMany()
-                        .HasForeignKey("ArrivalProvinceId");
-
-                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Area", "DepartureCommune")
-                        .WithMany()
-                        .HasForeignKey("DepartureCommuneId");
-
-                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Area", "DepartureDistrict")
-                        .WithMany()
-                        .HasForeignKey("DepartureDistrictId");
-
-                    b.HasOne("TD.CitizenAPI.Domain.Catalog.Area", "DepartureProvince")
-                        .WithMany()
-                        .HasForeignKey("DepartureProvinceId");
+                        .HasForeignKey("PlaceDepartureId");
 
                     b.HasOne("TD.CitizenAPI.Domain.Catalog.VehicleType", "VehicleType")
                         .WithMany()
                         .HasForeignKey("VehicleTypeId");
 
-                    b.Navigation("ArrivalCommune");
+                    b.Navigation("PlaceArrival");
 
-                    b.Navigation("ArrivalDistrict");
-
-                    b.Navigation("ArrivalProvince");
-
-                    b.Navigation("DepartureCommune");
-
-                    b.Navigation("DepartureDistrict");
-
-                    b.Navigation("DepartureProvince");
+                    b.Navigation("PlaceDeparture");
 
                     b.Navigation("VehicleType");
                 });
