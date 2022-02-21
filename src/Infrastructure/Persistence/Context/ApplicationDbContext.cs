@@ -44,6 +44,13 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<HotlineCategory> HotlineCategories => Set<HotlineCategory>();
     public DbSet<Hotline> Hotlines => Set<Hotline>();
     #endregion Hotline
+
+    #region Traffic
+    public DbSet<VehicleType> VehicleTypes => Set<VehicleType>();
+    public DbSet<Carpool> Carpools => Set<Carpool>();
+
+
+    #endregion Traffic
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -233,3 +233,29 @@ public class HotlineConfig : IEntityTypeConfiguration<Hotline>
 }
 
 #endregion Hotline
+
+#region Traffic
+public class VehicleTypeConfig : IEntityTypeConfiguration<VehicleType>
+{
+    public void Configure(EntityTypeBuilder<VehicleType> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+    }
+}
+
+public class CarpoolConfig : IEntityTypeConfiguration<Carpool>
+{
+    public void Configure(EntityTypeBuilder<Carpool> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.UserName).HasMaxLength(256);
+        builder.Property(b => b.PhoneNumber).HasMaxLength(256);
+        builder.Property(b => b.DepartureTimeText).HasMaxLength(256);
+        builder.Property(b => b.Role).HasMaxLength(256);
+    }
+}
+#endregion Traffic
