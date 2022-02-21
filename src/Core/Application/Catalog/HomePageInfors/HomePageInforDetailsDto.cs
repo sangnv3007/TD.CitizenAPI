@@ -1,5 +1,3 @@
-using TD.CitizenAPI.Application.Catalog.Brands;
-
 namespace TD.CitizenAPI.Application.Catalog.HomePageInfors;
 
 public class HomePageInforDetailsDto : IDto

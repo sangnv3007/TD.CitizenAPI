@@ -1,12 +1,10 @@
 ﻿using TD.CitizenAPI.Application.Catalog.AreaInfors;
-using TD.CitizenAPI.Application.Catalog.Areas;
-using TD.CitizenAPI.Application.Catalog.Categories;
-using TD.CitizenAPI.Application.Catalog.PlaceTypes;
 
 namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
 public class AreaInforsController : VersionedApiController
 {
+    //[ApiVersion("2.0")]
 
     [HttpGet("{code}")]
     [OpenApiOperation("Get category details.", "")]

@@ -1,6 +1,4 @@
 ﻿using TD.CitizenAPI.Application.Catalog.Areas;
-using TD.CitizenAPI.Application.Catalog.Categories;
-using TD.CitizenAPI.Application.Catalog.PlaceTypes;
 
 namespace TD.CitizenAPI.Host.Controllers.Catalog;
 

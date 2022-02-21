@@ -5,6 +5,8 @@ using TD.CitizenAPI.Host.Controllers;
 using TD.CitizenAPI.Infrastructure;
 using TD.CitizenAPI.Infrastructure.Common;
 using Serilog;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 [assembly: ApiConventionType(typeof(FSHApiConventions))]
 
@@ -24,6 +26,13 @@ try
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddApplication();
+
+    //Firebase
+    FirebaseApp.Create(new AppOptions()
+    {
+        Credential = GoogleCredential.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "Configurations", "firebase_admin_sdk.json")),
+    });
+    //End Firebase
 
     var app = builder.Build();
 

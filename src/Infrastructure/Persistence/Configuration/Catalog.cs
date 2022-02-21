@@ -195,7 +195,6 @@ public class MarketProductConfig : IEntityTypeConfiguration<MarketProduct>
         builder.Property(b => b.DisplayUnit).HasMaxLength(256);
         builder.Property(b => b.DisplayFactor).HasMaxLength(256);
         builder.Property(b => b.Image).HasMaxLength(1024);
-        builder.Property(b => b.Description).HasMaxLength(2048);
     }
 }
 

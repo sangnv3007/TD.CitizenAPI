@@ -46,4 +46,12 @@ public class MarketProductsController : VersionedApiController
     {
         return Mediator.Send(new DeleteMarketProductRequest(id));
     }
+
+    [HttpPost("fetchdata")]
+    //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
+    [OpenApiOperation("Generate a number of random brands.", "")]
+    public Task<string> FetchMarketProductAsync(FetchMarketProductRequest request)
+    {
+        return Mediator.Send(request);
+    }
 }
