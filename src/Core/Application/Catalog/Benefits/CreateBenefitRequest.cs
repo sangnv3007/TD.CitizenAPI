@@ -1,6 +1,6 @@
 namespace TD.CitizenAPI.Application.Catalog.Benefits;
 
-public partial class CreateBenefitRequest : IRequest<Result<Guid>>
+public class CreateBenefitRequest : IRequest<Result<Guid>>
 {
     public string Name { get; set; } = default!;
     public string? Code { get; set; }
@@ -14,12 +14,12 @@ public class CreateBenefitRequestValidator : CustomValidator<CreateBenefitReques
         RuleFor(p => p.Name).NotEmpty();
 }
 
-public class CreateHotlineCategoryRequestHandler : IRequestHandler<CreateBenefitRequest, Result<Guid>>
+public class CreateBenefitRequestHandler : IRequestHandler<CreateBenefitRequest, Result<Guid>>
 {
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<Benefit> _repository;
 
-    public CreateHotlineCategoryRequestHandler(IRepositoryWithEvents<Benefit> repository) => _repository = repository;
+    public CreateBenefitRequestHandler(IRepositoryWithEvents<Benefit> repository) => _repository = repository;
 
     public async Task<Result<Guid>> Handle(CreateBenefitRequest request, CancellationToken cancellationToken)
     {
