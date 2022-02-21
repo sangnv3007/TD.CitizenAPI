@@ -259,3 +259,174 @@ public class CarpoolConfig : IEntityTypeConfiguration<Carpool>
     }
 }
 #endregion Traffic
+
+#region Company
+public class BenefitConfig : IEntityTypeConfiguration<Benefit>
+{
+    public void Configure(EntityTypeBuilder<Benefit> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+
+    }
+}
+public class DegreeConfig : IEntityTypeConfiguration<Degree>
+{
+    public void Configure(EntityTypeBuilder<Degree> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class ExperienceConfig : IEntityTypeConfiguration<Experience>
+{
+    public void Configure(EntityTypeBuilder<Experience> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class IndustryConfig : IEntityTypeConfiguration<Industry>
+{
+    public void Configure(EntityTypeBuilder<Industry> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class JobAgeConfig : IEntityTypeConfiguration<JobAge>
+{
+    public void Configure(EntityTypeBuilder<JobAge> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class JobNameConfig : IEntityTypeConfiguration<JobName>
+{
+    public void Configure(EntityTypeBuilder<JobName> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class JobPositionConfig : IEntityTypeConfiguration<JobPosition>
+{
+    public void Configure(EntityTypeBuilder<JobPosition> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class JobTypeConfig : IEntityTypeConfiguration<JobType>
+{
+    public void Configure(EntityTypeBuilder<JobType> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class SalaryConfig : IEntityTypeConfiguration<Salary>
+{
+    public void Configure(EntityTypeBuilder<Salary> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+public class CompanyConfig : IEntityTypeConfiguration<Company>
+{
+    public void Configure(EntityTypeBuilder<Company> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.UserName).HasMaxLength(256);
+        builder.Property(b => b.InternationalName).HasMaxLength(1024);
+        builder.Property(b => b.ShortName).HasMaxLength(1024);
+        builder.Property(b => b.TaxCode).HasMaxLength(256);
+        builder.Property(b => b.Address).HasMaxLength(2048);
+        builder.Property(b => b.Representative).HasMaxLength(1024);
+        builder.Property(b => b.PhoneNumber).HasMaxLength(256);
+        builder.Property(b => b.Website).HasMaxLength(256);
+        builder.Property(b => b.Email).HasMaxLength(256);
+        builder.Property(b => b.Fax).HasMaxLength(256);
+        builder.Property(b => b.ProfileVideo).HasMaxLength(1024);
+        builder.Property(b => b.CompanySize).HasMaxLength(256);
+
+    }
+}
+public class CompanyIndustryConfig : IEntityTypeConfiguration<CompanyIndustry>
+{
+    public void Configure(EntityTypeBuilder<CompanyIndustry> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+public class JobApplicationConfig : IEntityTypeConfiguration<JobApplication>
+{
+    public void Configure(EntityTypeBuilder<JobApplication> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(1024);
+        builder.Property(b => b.UserName).HasMaxLength(256);
+    }
+}
+public class JobAppliedConfig : IEntityTypeConfiguration<JobApplied>
+{
+    public void Configure(EntityTypeBuilder<JobApplied> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(256);
+    }
+}
+public class JobSavedConfig : IEntityTypeConfiguration<JobSaved>
+{
+    public void Configure(EntityTypeBuilder<JobSaved> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(256);
+    }
+}
+public class RecruitmentConfig : IEntityTypeConfiguration<Recruitment>
+{
+    public void Configure(EntityTypeBuilder<Recruitment> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(256);
+        builder.Property(b => b.Name).HasMaxLength(1024);
+        builder.Property(b => b.ContactName).HasMaxLength(256);
+        builder.Property(b => b.ContactEmail).HasMaxLength(256);
+        builder.Property(b => b.ContactPhone).HasMaxLength(256);
+        builder.Property(b => b.ContactAdress).HasMaxLength(2048);
+        builder.Property(b => b.Address).HasMaxLength(2048);
+
+    }
+}
+public class RecruitmentBenefitConfig : IEntityTypeConfiguration<RecruitmentBenefit>
+{
+    public void Configure(EntityTypeBuilder<RecruitmentBenefit> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+#endregion Company
