@@ -280,7 +280,6 @@ public class DegreeConfig : IEntityTypeConfiguration<Degree>
         builder.IsMultiTenant();
         builder.Property(b => b.Name).HasMaxLength(256);
         builder.Property(b => b.Code).HasMaxLength(256);
-        builder.Property(b => b.Icon).HasMaxLength(256);
         builder.Property(b => b.Description).HasMaxLength(1024);
     }
 }

@@ -15,11 +15,11 @@ public class JobApplied : AuditableEntity, IAggregateRoot
         RecruitmentId = recruitmentId;
     }
 
-    public JobApplied Update(string? name, string? code,  string? description)
+    public JobApplied Update(string? userName, string? cVFile, Guid? recruitmentId)
     {
-        if (name is not null && Name?.Equals(name) is not true) Name = name;
-        if (code is not null && Code?.Equals(code) is not true) Code = code;
-        if (description is not null && Description?.Equals(description) is not true) Description = description;
+        if (userName is not null && UserName?.Equals(userName) is not true) UserName = userName;
+        if (cVFile is not null && CVFile?.Equals(cVFile) is not true) CVFile = cVFile;
+        if (recruitmentId.HasValue && recruitmentId.Value != Guid.Empty && !RecruitmentId.Equals(recruitmentId.Value)) RecruitmentId = recruitmentId.Value;
 
         return this;
     }
