@@ -61,7 +61,7 @@ public class SendNotificationJob : ISendNotificationJob
     }
 
     [Queue("notdefault")]
-    public async Task SendNotificationAsync(NotificationRequest request, CancellationToken cancellationToken)
+    public async Task SendNotificationAsync(SendNotificationRequest request, CancellationToken cancellationToken)
     {
         await NotifyAsync("FetchProductAsync processing has started", 0, cancellationToken);
 
