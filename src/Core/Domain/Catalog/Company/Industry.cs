@@ -6,6 +6,7 @@ public class Industry : AuditableEntity, IAggregateRoot
     public string Name { get; set; }
     public string? Code { get; set; }
     public string? Description { get; set; }
+    public virtual ICollection<CompanyIndustry> CompanyIndustries { get; set; }
 
     public Industry(string name, string? code, string? description)
     {

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TD.CitizenAPI.Infrastructure.Persistence.Configuration;
 
-
 #region Other
 public class BrandConfig : IEntityTypeConfiguration<Brand>
 {
@@ -379,6 +378,8 @@ public class CompanyIndustryConfig : IEntityTypeConfiguration<CompanyIndustry>
     public void Configure(EntityTypeBuilder<CompanyIndustry> builder)
     {
         builder.IsMultiTenant();
+        builder.HasOne(sc => sc.Company).WithMany(s => s.CompanyIndustries).HasForeignKey(sc => sc.CompanyId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(sc => sc.Industry).WithMany(s => s.CompanyIndustries).HasForeignKey(sc => sc.IndustryId).OnDelete(DeleteBehavior.Cascade);
     }
 }
 public class JobApplicationConfig : IEntityTypeConfiguration<JobApplication>

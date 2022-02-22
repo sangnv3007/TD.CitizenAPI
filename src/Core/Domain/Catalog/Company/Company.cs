@@ -36,6 +36,8 @@ public class Company : AuditableEntity, IAggregateRoot
     public virtual Area? District { get; set; }
     public virtual Area? Commune { get; set; }
 
+    public virtual ICollection<CompanyIndustry> CompanyIndustries { get; set; }
+
     public Company(string? userName, string name, string? internationalName, string? shortName, string? taxCode, string? address, double? latitude, double? longitude, Guid? provinceId, Guid? districtId, Guid? communeId, string? representative, string? phoneNumber, string? website, string? email, string? profileVideo, string? fax, DateTime? dateOfIssue, string? businessSector, string? images, string? image, string? logo, string? description, string? companySize)
     {
         UserName = userName;
