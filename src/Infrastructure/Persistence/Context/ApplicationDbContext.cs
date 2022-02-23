@@ -47,6 +47,14 @@ public class ApplicationDbContext : BaseDbContext
 
     #region Traffic
     public DbSet<VehicleType> VehicleTypes => Set<VehicleType>();
+    public DbSet<CarPolicy> CarPolicies => Set<CarPolicy>();
+    public DbSet<CarUtility> CarUtilities => Set<CarUtility>();
+    public DbSet<CompanyCarPolicy> CompanyCarPolicies => Set<CompanyCarPolicy>();
+    public DbSet<Vehicle> Vehicles => Set<Vehicle>();
+    public DbSet<VehicleCarUtility> VehicleCarUtilities => Set<VehicleCarUtility>();
+    public DbSet<Trip> Trips => Set<Trip>();
+    public DbSet<TripRoute> TripRoutes => Set<TripRoute>();
+
     public DbSet<Carpool> Carpools => Set<Carpool>();
     #endregion Traffic
 

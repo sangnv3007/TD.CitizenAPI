@@ -4,6 +4,8 @@ public class CompanyCarPolicy : AuditableEntity, IAggregateRoot
 {
     public Guid? CompanyId { get; set; }
     public Guid? CarPolicyId { get; set; }
+    public Company? Company { get; set; }
+    public CarPolicy? CarPolicy { get; set; }
 
     public CompanyCarPolicy(Guid? companyId, Guid? carPolicyId)
     {

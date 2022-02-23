@@ -257,6 +257,69 @@ public class CarpoolConfig : IEntityTypeConfiguration<Carpool>
         builder.Property(b => b.Role).HasMaxLength(256);
     }
 }
+
+public class CarPolicyConfig : IEntityTypeConfiguration<CarPolicy>
+{
+    public void Configure(EntityTypeBuilder<CarPolicy> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+    }
+}
+
+public class CarUtilityTypeConfig : IEntityTypeConfiguration<CarUtility>
+{
+    public void Configure(EntityTypeBuilder<CarUtility> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+    }
+}
+
+public class CompanyCarPolicyTypeConfig : IEntityTypeConfiguration<CompanyCarPolicy>
+{
+    public void Configure(EntityTypeBuilder<CompanyCarPolicy> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+public class VehicleConfig : IEntityTypeConfiguration<Vehicle>
+{
+    public void Configure(EntityTypeBuilder<Vehicle> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+    }
+}
+public class TripConfig : IEntityTypeConfiguration<Trip>
+{
+    public void Configure(EntityTypeBuilder<Trip> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+    }
+}
+public class TripRouteConfig : IEntityTypeConfiguration<TripRoute>
+{
+    public void Configure(EntityTypeBuilder<TripRoute> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Type).HasMaxLength(256);
+    }
+}
+
+public class VehicleCarUtilityConfig : IEntityTypeConfiguration<VehicleCarUtility>
+{
+    public void Configure(EntityTypeBuilder<VehicleCarUtility> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+
 #endregion Traffic
 
 #region Company

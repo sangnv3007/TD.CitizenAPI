@@ -4,6 +4,8 @@ public class VehicleCarUtility : AuditableEntity, IAggregateRoot
 {
     public Guid? VehicleId { get; set; }
     public Guid? CarUtilityId { get; set; }
+    public virtual Vehicle? Vehicle { get; set; }
+    public virtual CarUtility? CarUtility { get; set; }
 
     public VehicleCarUtility(Guid? vehicleId, Guid? carUtilityId)
     {
