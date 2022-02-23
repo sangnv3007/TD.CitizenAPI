@@ -38,8 +38,7 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
     private readonly IRepositoryWithEvents<AreaInfor> _repository;
     private readonly IRepositoryWithEvents<AreaInforValue> _areaInforValuerepository;
 
-
-    public CreateAreaInforRequestHandler(IRepositoryWithEvents<AreaInfor> repository, IRepositoryWithEvents<AreaInforValue> areaInforValuerepository) => (_repository,_areaInforValuerepository) = (repository, areaInforValuerepository);
+    public CreateAreaInforRequestHandler(IRepositoryWithEvents<AreaInfor> repository, IRepositoryWithEvents<AreaInforValue> areaInforValuerepository) => (_repository, _areaInforValuerepository) = (repository, areaInforValuerepository);
 
     public async Task<Result<Guid>> Handle(CreateAreaInforRequest request, CancellationToken cancellationToken)
     {

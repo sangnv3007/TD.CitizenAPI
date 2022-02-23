@@ -12,8 +12,6 @@ public class SearchTripsRequest : PaginationFilter, IRequest<PaginationResponse<
     public string? TimeStartTo { get; set; }
 }
 
-
-
 public class SearchTripsRequestHandler : IRequestHandler<SearchTripsRequest, PaginationResponse<TripDto>>
 {
     private readonly IReadRepository<Trip> _repository;

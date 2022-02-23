@@ -1,6 +1,5 @@
 namespace TD.CitizenAPI.Application.Catalog.Notifications;
 
-
 public class SendNotificationRequest : IRequest<string>
 {
     public List<string> Topics { get; set; } = default!;

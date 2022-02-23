@@ -6,6 +6,5 @@ public interface IFetchMarketProductJob : IScopedService
 {
     [DisplayName("Fetch MarketProduct")]
     Task FetchProductAsync(CancellationToken cancellationToken);
-
    
 }

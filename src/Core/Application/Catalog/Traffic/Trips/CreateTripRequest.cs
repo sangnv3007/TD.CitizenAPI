@@ -13,7 +13,9 @@ public class CreateTripRequest : IRequest<Result<Guid>>
     public Guid? DepartureDistrictId { get; set; }
     public Guid? DepartureCommuneId { get; set; }
 
-    //Diem den
+    /// <summary>
+    /// Diem den
+    /// </summary>
     public string? ArrivalPlaceName { get; set; }
     public double? ArrivalLatitude { get; set; }
     public double? ArrivalLongitude { get; set; }
@@ -21,16 +23,23 @@ public class CreateTripRequest : IRequest<Result<Guid>>
     public Guid? ArrivalDistrictId { get; set; }
     public Guid? ArrivalCommuneId { get; set; }
 
-    //Gia ve
+    /// <summary>
+    /// Gia ve
+    /// </summary>
     public int? Price { get; set; }
-    //Thoi gian xuat phat
+
+    /// <summary>
+    /// Thoi gian xuat phat
+    /// </summary>
     public string? TimeStart { get; set; }
     public string? Frequency { get; set; }
-    //Thoi gian du kien cua chuyen di
+
+    /// <summary>
+    /// Thoi gian du kien cua chuyen di
+    /// </summary>
     public int? Duration { get; set; }
     public bool? Status { get; set; }
 
-   
 }
 
 public class CreateTripRequestValidator : CustomValidator<CreateTripRequest>

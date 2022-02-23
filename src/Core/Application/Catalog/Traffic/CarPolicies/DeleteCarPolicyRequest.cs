@@ -1,6 +1,4 @@
-﻿using TD.CitizenAPI.Application.Catalog.Carpools;
-
-namespace TD.CitizenAPI.Application.Catalog.CarPolicies;
+﻿namespace TD.CitizenAPI.Application.Catalog.CarPolicies;
 
 public class DeleteCarPolicyRequest : IRequest<Result<Guid>>
 {
@@ -21,7 +19,6 @@ public class DeleteCarPolicyRequestHandler : IRequestHandler<DeleteCarPolicyRequ
 
     public async Task<Result<Guid>> Handle(DeleteCarPolicyRequest request, CancellationToken cancellationToken)
     {
- 
 
         var item = await _repository.GetByIdAsync(request.Id, cancellationToken);
 

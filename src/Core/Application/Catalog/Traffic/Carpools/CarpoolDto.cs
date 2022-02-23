@@ -10,13 +10,18 @@ public class CarpoolDto : IDto
     public string? PhoneNumber { get; set; }
     public string UserName { get; set; } = default!;
     public string? Description { get; set; }
-    //Diem khoi hanh
+
+    /// <summary>
+    /// Diem khoi hanh
+    /// </summary>
     public string? DeparturePlaceName { get; set; }
     public double? DepartureLatitude { get; set; }
     public double? DepartureLongitude { get; set; }
    
 
-    //Diem den
+    /// <summary>
+    /// Diem den
+    /// </summary>
     public string? ArrivalPlaceName { get; set; }
     public double? ArrivalLatitude { get; set; }
     public double? ArrivalLongitude { get; set; }
@@ -25,14 +30,25 @@ public class CarpoolDto : IDto
     public DateTime? DepartureDate { get; set; }
     public TimeSpan? DepartureTime { get; set; }
     public string? DepartureTimeText { get; set; }
-    //Loai phuong tien
-    //Vai tro
+    /// <summary>
+    /// Loai phuong tien
+    /// Vai tro
+    /// </summary>
     public string? Role { get; set; }
-    //Gia
+
+    /// <summary>
+    /// Gia
+    /// </summary>
     public decimal Price { get; set; }
-    //So ghe
+
+    /// <summary>
+    /// So ghe
+    /// </summary>
     public int SeatCount { get; set; }
-    //Trang thai
+
+    /// <summary>
+    /// Trang thai
+    /// </summary>
     public int Status { get; set; }
 
     public virtual VehicleTypeDto? VehicleType { get; set; }

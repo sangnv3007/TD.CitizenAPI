@@ -18,7 +18,6 @@ public class DeleteTripRequestHandler : IRequestHandler<DeleteTripRequest, Resul
 
     public async Task<Result<Guid>> Handle(DeleteTripRequest request, CancellationToken cancellationToken)
     {
- 
 
         var item = await _repository.GetByIdAsync(request.Id, cancellationToken);
 

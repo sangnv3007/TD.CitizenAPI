@@ -20,6 +20,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using TD.CitizenAPI.Infrastructure.Auth;
+using TD.CitizenAPI.Application.Common.Persistence;
+using TD.CitizenAPI.Domain.Catalog;
+using TD.CitizenAPI.Application.Catalog.Areas;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 
@@ -40,6 +43,8 @@ internal partial class UserService : IUserService
     private readonly ICacheService _cache;
     private readonly ICacheKeyService _cacheKeys;
     private readonly ITenantInfo _currentTenant;
+    private readonly IRepository<Area> _areaRepository;
+
 
     public UserService(
         SignInManager<ApplicationUser> signInManager,
@@ -56,7 +61,8 @@ internal partial class UserService : IUserService
         ICacheService cache,
         ICacheKeyService cacheKeys,
         ITenantInfo currentTenant,
-        IOptions<SecuritySettings> securitySettings)
+        IOptions<SecuritySettings> securitySettings,
+        IRepository<Area> areaRepository)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -73,6 +79,7 @@ internal partial class UserService : IUserService
         _cacheKeys = cacheKeys;
         _currentTenant = currentTenant;
         _securitySettings = securitySettings.Value;
+        _areaRepository = areaRepository;
     }
 
     public async Task<PaginationResponse<UserDetailsDto>> SearchAsync(UserListFilter filter, CancellationToken cancellationToken)
@@ -145,7 +152,22 @@ internal partial class UserService : IUserService
 
         _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
 
-        return user.Adapt<UserDetailsDto>();
+        var tmp = user.Adapt<UserDetailsDto>();
+        
+        if (!string.IsNullOrEmpty(tmp.ProvinceCode))
+        {
+            tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.ProvinceCode), cancellationToken);
+
+        }
+        if (!string.IsNullOrEmpty(tmp.DistrictCode))
+        {
+            tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.DistrictCode), cancellationToken);
+        }
+        if (!string.IsNullOrEmpty(tmp.CommuneCode))
+        {
+            tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.CommuneCode), cancellationToken);
+        }
+        return tmp;
     }
 
     public async Task ToggleStatusAsync(ToggleUserStatusRequest request, CancellationToken cancellationToken)

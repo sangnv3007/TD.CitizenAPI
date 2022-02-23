@@ -47,6 +47,21 @@ public class PersonalController : VersionNeutralApiController
         return Ok();
     }
 
+
+    [HttpPost("update-avatar")]
+    [DisableRequestSizeLimit]
+    public async Task<IActionResult> UpdateAvatar([FromForm(Name = "file")] IFormFile file)
+    {
+        if (User.GetUserId() is not { } userId || string.IsNullOrEmpty(userId))
+        {
+            return Unauthorized();
+        }
+
+        await _userService.UpdateAvatar(file, userId);
+        return Ok();
+    }
+
+
     [HttpGet("permissions")]
     [OpenApiOperation("Get permissions of currently logged in user.", "")]
     public async Task<ActionResult<List<string>>> GetPermissionsAsync(CancellationToken cancellationToken)

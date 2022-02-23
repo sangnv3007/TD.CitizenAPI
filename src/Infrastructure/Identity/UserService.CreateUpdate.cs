@@ -9,6 +9,8 @@ using TD.CitizenAPI.Shared.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Http;
+using TD.CitizenAPI.Domain.Catalog;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 
@@ -147,13 +149,40 @@ internal partial class UserService
         return string.Join(Environment.NewLine, messages);
     }
 
+    public async Task UpdateAvatar(IFormFile? request, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+        try
+        {
+            var file = await _fileStorage.UploadFileAsync<Attachment>(request, default);
+            user.ImageUrl = file.Url;
+        } catch
+        {
+
+        }
+
+        var result = await _userManager.UpdateAsync(user);
+
+        await _signInManager.RefreshSignInAsync(user);
+
+        await _events.PublishAsync(new ApplicationUserUpdatedEvent(user.Id));
+
+        if (!result.Succeeded)
+        {
+            throw new InternalServerException(_localizer["Update avatar failed"], result.GetErrors(_localizer));
+        }
+    }
+
     public async Task UpdateAsync(UpdateUserRequest request, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
 
         _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
 
-        string currentImage = user.ImageUrl ?? string.Empty;
+        /*string currentImage = user.ImageUrl ?? string.Empty;
         if (request.Image != null || request.DeleteCurrentImage)
         {
             user.ImageUrl = await _fileStorage.UploadAsync<ApplicationUser>(request.Image, FileType.Image);
@@ -162,10 +191,29 @@ internal partial class UserService
                 string root = Directory.GetCurrentDirectory();
                 _fileStorage.Remove(Path.Combine(root, currentImage));
             }
-        }
+        }*/
 
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
+        user.Gender = request.Gender;
+
+        if (!user.IsVerified)
+        {
+            user.FullName = request.FirstName;
+            user.DateOfBirth = request.DateOfBirth;
+            user.IdentityNumber = request.IdentityNumber;
+            user.IdentityPlace = request.IdentityPlace;
+            user.IdentityDate = request.IdentityDate;
+            user.PlaceOfOrigin = request.PlaceOfOrigin;
+            user.PlaceOfDestination = request.PlaceOfDestination;
+            user.Nationality = request.Nationality;
+        }
+        user.ProvinceCode = request.ProvinceCode;
+        user.DistrictCode = request.DistrictCode;
+        user.CommuneCode = request.CommuneCode;
+        user.Address = request.Address;
+
+
         user.PhoneNumber = request.PhoneNumber;
         string phoneNumber = await _userManager.GetPhoneNumberAsync(user);
         if (request.PhoneNumber != phoneNumber)

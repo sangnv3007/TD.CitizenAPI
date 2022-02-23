@@ -17,7 +17,6 @@ public class TripRouteDto : IDto
     public int? Duration { get; set; }
     public bool? Status { get; set; }
 
-
     public virtual Area? Province { get; set; }
     public virtual Area? District { get; set; }
     public virtual Area? Commune { get; set; }

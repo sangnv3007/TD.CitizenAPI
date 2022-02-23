@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using TD.CitizenAPI.Application.Identity.Users.Password;
 
@@ -38,4 +39,6 @@ public interface IUserService : ITransientService
     Task<string> ForgotPasswordAsync(ForgotPasswordRequest request, string origin);
     Task<string> ResetPasswordAsync(ResetPasswordRequest request);
     Task ChangePasswordAsync(ChangePasswordRequest request, string userId);
+    Task UpdateAvatar(IFormFile? request, string userId);
+
 }

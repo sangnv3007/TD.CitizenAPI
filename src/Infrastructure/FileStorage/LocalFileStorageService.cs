@@ -140,6 +140,68 @@ public class LocalFileStorageService : IFileStorageService
         return await Task.FromResult(listFile);
     }
 
+
+    public async Task<AttachmentDto> UploadFileAsync<T>(IFormFile? formFile, CancellationToken cancellationToken = default)
+    where T : class
+    {
+        var attachment = new AttachmentDto();
+        string folder = typeof(T).Name;
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            folder = folder.Replace(@"\", "/");
+        }
+
+        string folderName = Path.Combine("Files", "Others", folder);
+
+        string pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        bool exists = Directory.Exists(pathToSave);
+        if (!exists)
+        {
+            Directory.CreateDirectory(pathToSave);
+        }
+
+
+        if (formFile != null && formFile.Length > 0)
+            {
+                string? fileName = formFile.FileName.Trim('"');
+                fileName = RemoveSpecialCharacters(fileName);
+                fileName = fileName.ReplaceWhitespace("-");
+
+                Guid dir_UUID = Guid.NewGuid();
+                string dir_UUID_String = dir_UUID.ToString();
+
+
+                string? target = Path.Combine(pathToSave, dir_UUID_String);
+                if (!Directory.Exists(target))
+                {
+                    Directory.CreateDirectory(target);
+                }
+
+                string? fullPath = Path.Combine(target, fileName);
+                string? dbPath = Path.Combine(folderName, dir_UUID_String, fileName);
+
+                if (File.Exists(dbPath))
+                {
+                    dbPath = NextAvailableFilename(dbPath);
+                    fullPath = NextAvailableFilename(fullPath);
+                }
+
+                using var stream = new FileStream(fullPath, FileMode.Create);
+                await formFile.CopyToAsync(stream, cancellationToken);
+
+                //formFile.CopyTo(stream);
+                dbPath = dbPath.Replace("\\", "/");
+
+
+                attachment.Name = fileName;
+                attachment.Type = Path.GetExtension(formFile.FileName);
+                attachment.Url = dbPath;
+
+        }
+
+        return await Task.FromResult(attachment);
+    }
+
     public static string RemoveSpecialCharacters(string str)
     {
         return Regex.Replace(str, "[^a-zA-Z0-9_.]+", string.Empty, RegexOptions.Compiled);

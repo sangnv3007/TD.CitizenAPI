@@ -10,17 +10,20 @@ public class CarpoolDetailsDto : IDto
     public string? PhoneNumber { get; set; }
     public string UserName { get; set; } = default!;
     public string? Description { get; set; }
-    //Diem khoi hanh
+
+    /// <summary>
+    /// Diem khoi hanh
+    /// </summary>
     public string? DeparturePlaceName { get; set; }
     public double? DepartureLatitude { get; set; }
     public double? DepartureLongitude { get; set; }
 
-
-    //Diem den
+    /// <summary>
+    /// Diem den
+    /// </summary>
     public string? ArrivalPlaceName { get; set; }
     public double? ArrivalLatitude { get; set; }
     public double? ArrivalLongitude { get; set; }
-
 
     public DateTime? DepartureDate { get; set; }
     public TimeSpan? DepartureTime { get; set; }

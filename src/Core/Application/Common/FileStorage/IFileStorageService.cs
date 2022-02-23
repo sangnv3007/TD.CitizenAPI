@@ -11,5 +11,8 @@ public interface IFileStorageService : ITransientService
     public Task<List<AttachmentDto>> UploadFilesAsync<T>(List<IFormFile>? files, CancellationToken cancellationToken = default)
     where T : class;
 
+    public Task<AttachmentDto> UploadFileAsync<T>(IFormFile? file, CancellationToken cancellationToken = default)
+   where T : class;
+
     public void Remove(string? path);
 }

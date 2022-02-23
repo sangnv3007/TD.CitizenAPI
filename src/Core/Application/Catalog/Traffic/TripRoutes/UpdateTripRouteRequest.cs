@@ -42,7 +42,6 @@ public class UpdateTripRouteRequestHandler : IRequestHandler<UpdateTripRouteRequ
 
         await _repository.UpdateAsync(item, cancellationToken);
 
-
         return Result<Guid>.Success(request.Id);
     }
 }
