@@ -45,7 +45,7 @@ internal class TokenService : ITokenService
             throw new UnauthorizedException(_localizer["tenant.invalid"]);
         }
 
-        var user = await _userManager.FindByEmailAsync(request.Email.Trim().Normalize());
+        var user = await _userManager.FindByNameAsync(request.UserName.Trim().Normalize());
         if (user is null)
         {
             throw new UnauthorizedException(_localizer["auth.failed"]);
@@ -56,9 +56,9 @@ internal class TokenService : ITokenService
             throw new UnauthorizedException(_localizer["identity.usernotactive"]);
         }
 
-        if (_securitySettings.RequireConfirmedAccount && !user.EmailConfirmed)
+        if (_securitySettings.RequireConfirmedAccount && !user.EmailConfirmed && !user.PhoneNumberConfirmed)
         {
-            throw new UnauthorizedException(_localizer["identity.emailnotconfirmed"]);
+            throw new UnauthorizedException(_localizer["identity.emailorphonenumbernotconfirmed"]);
         }
 
         if (_currentTenant.Id != MultitenancyConstants.Root.Id)
@@ -140,7 +140,7 @@ internal class TokenService : ITokenService
     {
         var token = new JwtSecurityToken(
            claims: claims,
-           expires: DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpirationInMinutes),
+           expires: DateTime.UtcNow.AddDays(_jwtSettings.TokenExpirationInMinutes),
            signingCredentials: signingCredentials);
         var tokenHandler = new JwtSecurityTokenHandler();
         return tokenHandler.WriteToken(token);

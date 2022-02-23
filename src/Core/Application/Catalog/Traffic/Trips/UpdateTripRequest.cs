@@ -3,7 +3,7 @@ namespace TD.CitizenAPI.Application.Catalog.Trips;
 public class UpdateTripRequest : IRequest<Result<Guid>>
 {
     public Guid Id { get; set; }
-    public string? Name { get; set; };
+    public string? Name { get; set; }
     public string? Description { get; set; }
     public Guid? VehicleId { get; set; }
 

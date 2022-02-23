@@ -7,7 +7,7 @@ public class DeleteTripRouteRequest : IRequest<Result<Guid>>
     public DeleteTripRouteRequest(Guid id) => Id = id;
 }
 
-public class DeleteTripRouteRequestHandler : IRequestHandler<DeleteTripRouteRouteRequest, Result<Guid>>
+public class DeleteTripRouteRequestHandler : IRequestHandler<DeleteTripRouteRequest, Result<Guid>>
 {
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<TripRoute> _repository;
