@@ -1,3 +1,5 @@
+using TD.CitizenAPI.Application.Identity.Users;
+
 namespace TD.CitizenAPI.Application.Catalog.JobApplications;
 
 public class SearchJobApplicationsRequest : PaginationFilter, IRequest<PaginationResponse<JobApplicationDto>>
@@ -21,26 +23,30 @@ public class SearchJobApplicationsRequest : PaginationFilter, IRequest<Paginatio
     //Hinh thuc lam viec
     public Guid? JobTypeId { get; set; }
 }
-
-public class JobNamesBySearchRequestSpec : EntitiesByPaginationFilterSpec<JobName, JobApplicationDto>
+public class SearchJobApplicationsRequestHandler : IRequestHandler<SearchJobApplicationsRequest, PaginationResponse<JobApplicationDto>>
 {
-    public JobNamesBySearchRequestSpec(SearchJobApplicationsRequest request)
-        : base(request) =>
-        Query.OrderBy(c => c.Name, !request.HasOrderBy());
-}
+    private readonly IReadRepository<JobApplication> _repository;
+    private readonly IUserService _userService;
 
-public class SearchJobNamesRequestHandler : IRequestHandler<SearchJobApplicationsRequest, PaginationResponse<JobApplicationDto>>
-{
-    private readonly IReadRepository<JobName> _repository;
-
-    public SearchJobNamesRequestHandler(IReadRepository<JobName> repository) => _repository = repository;
+    public SearchJobApplicationsRequestHandler(IReadRepository<JobApplication> repository, IUserService userService) => (_repository, _userService) = (repository, userService);
 
     public async Task<PaginationResponse<JobApplicationDto>> Handle(SearchJobApplicationsRequest request, CancellationToken cancellationToken)
     {
-        var spec = new JobNamesBySearchRequestSpec(request);
+        var spec = new JobApplicationsBySearchRequestSpec(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
         int count = await _repository.CountAsync(spec, cancellationToken);
+
+        foreach (var item in list)
+        {
+            if (item != null && !string.IsNullOrWhiteSpace(item.UserName))
+            {
+                var tmp = await _userService.GetAsyncByUserName(item.UserName, cancellationToken);
+                item.FullName = tmp.FullName;
+                item.ImageUrl = tmp.ImageUrl;
+                item.PhoneNumber = tmp.PhoneNumber;
+            }
+        }
 
         return new PaginationResponse<JobApplicationDto>(list, count, request.PageNumber, request.PageSize);
     }

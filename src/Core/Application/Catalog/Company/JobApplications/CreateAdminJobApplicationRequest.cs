@@ -1,7 +1,8 @@
 namespace TD.CitizenAPI.Application.Catalog.JobApplications;
 
-public class CreateJobApplicationRequest : IRequest<Result<Guid>>
+public class CreateAdminJobApplicationRequest : IRequest<Result<Guid>>
 {
+    public string? UserName { get; set; }
     public string? Name { get; set; }
     public string? CVFile { get; set; }
     public string? Image { get; set; }
@@ -26,23 +27,22 @@ public class CreateJobApplicationRequest : IRequest<Result<Guid>>
     public int? IsSearchAllowed { get; set; }
 }
 
-public class CreateJobApplicationRequestValidator : CustomValidator<CreateJobApplicationRequest>
+public class CreateAdminJobApplicationRequestValidator : CustomValidator<CreateJobApplicationRequest>
 {
-    public CreateJobApplicationRequestValidator(IReadRepository<JobApplication> repository, IStringLocalizer<CreateJobApplicationRequestValidator> localizer) =>
+    public CreateAdminJobApplicationRequestValidator(IReadRepository<JobApplication> repository, IStringLocalizer<CreateAdminJobApplicationRequestValidator> localizer) =>
         RuleFor(p => p.Name).NotEmpty();
 }
 
-public class CreateJobApplicationRequestHandler : IRequestHandler<CreateJobApplicationRequest, Result<Guid>>
+public class CreateAdminJobApplicationRequestHandler : IRequestHandler<CreateAdminJobApplicationRequest, Result<Guid>>
 {
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<JobApplication> _repository;
-    private readonly ICurrentUser _currentUser;
 
-    public CreateJobApplicationRequestHandler(IRepositoryWithEvents<JobApplication> repository, ICurrentUser currentUser) => (_repository, _currentUser) = (repository, currentUser);
+    public CreateAdminJobApplicationRequestHandler(IRepositoryWithEvents<JobApplication> repository) => _repository = repository;
 
-    public async Task<Result<Guid>> Handle(CreateJobApplicationRequest request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CreateAdminJobApplicationRequest request, CancellationToken cancellationToken)
     {
-        var item = new JobApplication(_currentUser.GetUserName(), request.Name, request.CVFile, request.Image, request.CurrentPositionId, request.PositionId, request.JobNameId, request.DegreeId, request.ExperienceId, request.MinExpectedSalary, request.Address, request.JobTypeId, request.IsSearchAllowed);
+        var item = new JobApplication(request.UserName, request.Name, request.CVFile, request.Image, request.CurrentPositionId, request.PositionId, request.JobTypeId, request.DegreeId, request.ExperienceId, request.MinExpectedSalary, request.Address, request.JobTypeId, request.IsSearchAllowed);
         await _repository.AddAsync(item, cancellationToken);
         return Result<Guid>.Success(item.Id);
     }

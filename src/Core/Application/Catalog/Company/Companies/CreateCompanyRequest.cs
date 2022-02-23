@@ -38,8 +38,16 @@ public class CreateCompanyRequest : IRequest<Result<Guid>>
 
 public class CreateCompanyRequestValidator : CustomValidator<CreateCompanyRequest>
 {
-    public CreateCompanyRequestValidator(IReadRepository<Company> repository, IStringLocalizer<CreateCompanyRequestValidator> localizer) =>
+    public CreateCompanyRequestValidator(IReadRepository<Company> repository, IStringLocalizer<CreateCompanyRequestValidator> localizer)
+    {
         RuleFor(p => p.Name).NotEmpty();
+        //RuleFor(p => p.Level).NotNull().LessThanOrEqualTo(4).GreaterThan(0).WithMessage("Please specify a level");
+        RuleFor(p => p.TaxCode)
+                .NotEmpty()
+                .MaximumLength(256)
+                .MustAsync(async (code, ct) => await repository.GetBySpecAsync(new CompanyByTaxCodeSpec(code), ct) is null)
+                    .WithMessage((_, taxCode) => string.Format(localizer["company.alreadyexists"], taxCode));
+    }
 }
 
 public class CreateCompanyRequestHandler : IRequestHandler<CreateCompanyRequest, Result<Guid>>
@@ -52,7 +60,7 @@ public class CreateCompanyRequestHandler : IRequestHandler<CreateCompanyRequest,
 
     public async Task<Result<Guid>> Handle(CreateCompanyRequest request, CancellationToken cancellationToken)
     {
-        var item = new Company(request.UserName, request.Name, request.InternationalName, request.ShortName, request.TaxCode, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Representative, request.PhoneNumber, request.Website, request.Email, request.ProfileVideo, request.Fax, request.DateOfIssue, request.BusinessSector, request.Images, request.Image, request.Logo, request.Description, request.CompanySize);
+        var item = new Company(request.UserName, request.Name, request.InternationalName, request.ShortName, request.TaxCode, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Representative, request.PhoneNumber, request.Website, request.Email, request.ProfileVideo, request.Fax, request.DateOfIssue, request.BusinessSector, request.Images, request.Image, request.Logo, request.Description, request.CompanySize, 0);
         await _repository.AddAsync(item, cancellationToken);
 
 

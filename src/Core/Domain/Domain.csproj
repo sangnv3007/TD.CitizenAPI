@@ -12,6 +12,7 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Catalog\Ecommerce\" />
+      <Folder Include="Catalog\Travel\" />
       <Folder Include="Catalog\User\" />
     </ItemGroup>
 </Project>

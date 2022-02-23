@@ -1,3 +1,5 @@
+using TD.CitizenAPI.Application.Catalog.Areas;
+
 namespace TD.CitizenAPI.Application.Catalog.Companies;
 
 public class CompanyDetailsDto : IDto
@@ -32,8 +34,11 @@ public class CompanyDetailsDto : IDto
     public string? Description { get; set; }
     //Quy mo cong ty
     public string? CompanySize { get; set; }
+    public int? Status { get; set; }
 
-    public virtual Area? Province { get; set; }
-    public virtual Area? District { get; set; }
-    public virtual Area? Commune { get; set; }
+    public virtual AreaDto? Province { get; set; }
+    public virtual AreaDto? District { get; set; }
+    public virtual AreaDto? Commune { get; set; }
+    public virtual ICollection<CompanyIndustryDto>? CompanyIndustries { get; set; }
+
 }

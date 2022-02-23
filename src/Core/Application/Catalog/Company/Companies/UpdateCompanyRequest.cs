@@ -33,6 +33,8 @@ public class UpdateCompanyRequest : IRequest<Result<Guid>>
     //Quy mo cong ty
     public string? CompanySize { get; set; }
 
+    public int? Status { get; set; }
+
     public virtual ICollection<Guid>? Industries { get; set; }
 }
 
@@ -60,13 +62,17 @@ public class UpdateCompanyRequestHandler : IRequestHandler<UpdateCompanyRequest,
 
         _ = item ?? throw new NotFoundException(string.Format(_localizer["company.notfound"], request.Id));
 
-        item.Update(request.UserName, request.Name, request.InternationalName, request.ShortName, request.TaxCode, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Representative, request.PhoneNumber, request.Website, request.Email, request.ProfileVideo, request.Fax, request.DateOfIssue, request.BusinessSector, request.Images, request.Image, request.Logo, request.Description, request.CompanySize);
+        item.Update(request.UserName, request.Name, request.InternationalName, request.ShortName, request.TaxCode, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Representative, request.PhoneNumber, request.Website, request.Email, request.ProfileVideo, request.Fax, request.DateOfIssue, request.BusinessSector, request.Images, request.Image, request.Logo, request.Description, request.CompanySize, request.Status);
 
         await _repository.UpdateAsync(item, cancellationToken);
 
 
         var item_CompanyIndustries = item.CompanyIndustries;
-        await _companyIndustryRepository.DeleteRangeAsync(item_CompanyIndustries);
+        if (item_CompanyIndustries != null && item_CompanyIndustries.Count > 0)
+        {
+            await _companyIndustryRepository.DeleteRangeAsync(item_CompanyIndustries);
+
+        }
 
         if (request.Industries != null)
         {

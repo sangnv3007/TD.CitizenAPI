@@ -4,23 +4,23 @@ public class JobApplied : AuditableEntity, IAggregateRoot
 {
     //Viec da ứng tuyển
     public string? UserName { get; set; }
-    public string? CVFile { get; set; }
+    public Guid? JobApplicationId { get; set; }
     public Guid? RecruitmentId { get; set; }
+    public int? Status { get; set; }
     public virtual Recruitment? Recruitment { get; set; }
+    public virtual JobApplication? JobApplication { get; set; }
 
-    public JobApplied(string? userName, string? cVFile, Guid? recruitmentId)
+    public JobApplied(string? userName, Guid? jobApplicationId, Guid? recruitmentId, int? status)
     {
         UserName = userName;
-        CVFile = cVFile;
+        JobApplicationId = jobApplicationId;
         RecruitmentId = recruitmentId;
+        Status = status;
     }
 
-    public JobApplied Update(string? userName, string? cVFile, Guid? recruitmentId)
+    public JobApplied Update(int? status)
     {
-        if (userName is not null && UserName?.Equals(userName) is not true) UserName = userName;
-        if (cVFile is not null && CVFile?.Equals(cVFile) is not true) CVFile = cVFile;
-        if (recruitmentId.HasValue && recruitmentId.Value != Guid.Empty && !RecruitmentId.Equals(recruitmentId.Value)) RecruitmentId = recruitmentId.Value;
-
+        if (status.HasValue && !Status.Equals(status.Value)) Status = status.Value;
         return this;
     }
 }

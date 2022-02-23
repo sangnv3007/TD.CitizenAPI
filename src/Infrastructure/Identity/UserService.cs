@@ -124,6 +124,18 @@ internal partial class UserService : IUserService
     public Task<int> GetCountAsync(CancellationToken cancellationToken) =>
         _userManager.Users.AsNoTracking().CountAsync(cancellationToken);
 
+
+    public async Task<UserDetailsDto> GetAsyncByUserName(string userName, CancellationToken cancellationToken)
+    {
+        var user = await _userManager.Users
+            .AsNoTracking()
+            .Where(u => u.UserName == userName)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+        return user.Adapt<UserDetailsDto>();
+    }
     public async Task<UserDetailsDto> GetAsync(string userId, CancellationToken cancellationToken)
     {
         var user = await _userManager.Users

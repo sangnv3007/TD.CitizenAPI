@@ -31,14 +31,15 @@ public class Company : AuditableEntity, IAggregateRoot
     public string? Description { get; set; }
     //Quy mo cong ty
     public string? CompanySize { get; set; }
+    public int? Status { get; set; }
 
     public virtual Area? Province { get; set; }
     public virtual Area? District { get; set; }
     public virtual Area? Commune { get; set; }
 
-    public virtual ICollection<CompanyIndustry> CompanyIndustries { get; set; }
+    public virtual ICollection<CompanyIndustry>? CompanyIndustries { get; set; }
 
-    public Company(string? userName, string name, string? internationalName, string? shortName, string? taxCode, string? address, double? latitude, double? longitude, Guid? provinceId, Guid? districtId, Guid? communeId, string? representative, string? phoneNumber, string? website, string? email, string? profileVideo, string? fax, DateTime? dateOfIssue, string? businessSector, string? images, string? image, string? logo, string? description, string? companySize)
+    public Company(string? userName, string name, string? internationalName, string? shortName, string? taxCode, string? address, double? latitude, double? longitude, Guid? provinceId, Guid? districtId, Guid? communeId, string? representative, string? phoneNumber, string? website, string? email, string? profileVideo, string? fax, DateTime? dateOfIssue, string? businessSector, string? images, string? image, string? logo, string? description, string? companySize, int? status)
     {
         UserName = userName;
         Name = name;
@@ -64,9 +65,10 @@ public class Company : AuditableEntity, IAggregateRoot
         Logo = logo;
         Description = description;
         CompanySize = companySize;
+        Status = status;
     }
 
-    public Company Update(string? userName, string? name, string? internationalName, string? shortName, string? taxCode, string? address, double? latitude, double? longitude, Guid? provinceId, Guid? districtId, Guid? communeId, string? representative, string? phoneNumber, string? website, string? email, string? profileVideo, string? fax, DateTime? dateOfIssue, string? businessSector, string? images, string? image, string? logo, string? description, string? companySize)
+    public Company Update(string? userName, string? name, string? internationalName, string? shortName, string? taxCode, string? address, double? latitude, double? longitude, Guid? provinceId, Guid? districtId, Guid? communeId, string? representative, string? phoneNumber, string? website, string? email, string? profileVideo, string? fax, DateTime? dateOfIssue, string? businessSector, string? images, string? image, string? logo, string? description, string? companySize, int? status)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;
         if (userName is not null && UserName?.Equals(userName) is not true) UserName = userName;
@@ -94,6 +96,17 @@ public class Company : AuditableEntity, IAggregateRoot
         if (latitude.HasValue && !Latitude.Equals(latitude.Value)) Latitude = latitude.Value;
         if (longitude.HasValue && !Longitude.Equals(longitude.Value)) Longitude = longitude.Value;
         if (dateOfIssue.HasValue && !DateOfIssue.Equals(dateOfIssue.Value)) DateOfIssue = dateOfIssue.Value;
+
+        if (status.HasValue && !Status.Equals(status.Value)) Status = status.Value;
+
+
+        return this;
+    }
+
+    public Company Update(int? status)
+    {
+        if (status.HasValue && !Status.Equals(status.Value)) Status = status.Value;
+
 
         return this;
     }

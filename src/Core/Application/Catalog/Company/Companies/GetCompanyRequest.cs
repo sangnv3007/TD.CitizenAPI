@@ -10,7 +10,7 @@ public class GetCompanyRequest : IRequest<Result<CompanyDetailsDto>>
 public class CompanyByIdSpec : Specification<Company, CompanyDetailsDto>, ISingleResultSpecification
 {
     public CompanyByIdSpec(Guid id) =>
-        Query.Where(p => p.Id == id).Include(p => p.Province).Include(p => p.District).Include(p => p.Commune);
+        Query.Where(p => p.Id == id).Include(p => p.Province).Include(p => p.District).Include(p => p.Commune).Include(p => p.CompanyIndustries).ThenInclude(p => p.Industry);
 }
 
 public class GetCompanyRequestHandler : IRequestHandler<GetCompanyRequest, Result<CompanyDetailsDto>>
