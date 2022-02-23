@@ -1,6 +1,12 @@
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Finbuckle.MultiTenant;
+using Mapster;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
+using TD.CitizenAPI.Application.Catalog.Areas;
 using TD.CitizenAPI.Application.Common.Caching;
 using TD.CitizenAPI.Application.Common.Events;
 using TD.CitizenAPI.Application.Common.Exceptions;
@@ -8,21 +14,15 @@ using TD.CitizenAPI.Application.Common.FileStorage;
 using TD.CitizenAPI.Application.Common.Interfaces;
 using TD.CitizenAPI.Application.Common.Mailing;
 using TD.CitizenAPI.Application.Common.Models;
+using TD.CitizenAPI.Application.Common.Persistence;
 using TD.CitizenAPI.Application.Common.Specification;
 using TD.CitizenAPI.Application.Identity.Users;
+using TD.CitizenAPI.Domain.Catalog;
 using TD.CitizenAPI.Domain.Identity;
+using TD.CitizenAPI.Infrastructure.Auth;
 using TD.CitizenAPI.Infrastructure.Mailing;
 using TD.CitizenAPI.Infrastructure.Persistence.Context;
 using TD.CitizenAPI.Shared.Authorization;
-using Mapster;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Options;
-using TD.CitizenAPI.Infrastructure.Auth;
-using TD.CitizenAPI.Application.Common.Persistence;
-using TD.CitizenAPI.Domain.Catalog;
-using TD.CitizenAPI.Application.Catalog.Areas;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 
@@ -114,6 +114,12 @@ internal partial class UserService : IUserService
         return await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber) is ApplicationUser user && user.Id != exceptId;
     }
 
+    public async Task<bool> ExistsWithIdentityNumberAsync(string identityNumber, string? exceptId = null)
+    {
+        EnsureValidTenant();
+        return await _userManager.Users.FirstOrDefaultAsync(x => x.IdentityNumber == identityNumber) is ApplicationUser user && user.Id != exceptId;
+    }
+
     private void EnsureValidTenant()
     {
         if (string.IsNullOrWhiteSpace(_currentTenant?.Id))
@@ -141,7 +147,26 @@ internal partial class UserService : IUserService
 
         _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
 
-        return user.Adapt<UserDetailsDto>();
+        //return user.Adapt<UserDetailsDto>();
+        var tmp = user.Adapt<UserDetailsDto>();
+
+        if (!string.IsNullOrEmpty(tmp.ProvinceCode))
+        {
+            tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.ProvinceCode), cancellationToken);
+
+        }
+
+        if (!string.IsNullOrEmpty(tmp.DistrictCode))
+        {
+            tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.DistrictCode), cancellationToken);
+        }
+
+        if (!string.IsNullOrEmpty(tmp.CommuneCode))
+        {
+            tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.CommuneCode), cancellationToken);
+        }
+
+        return tmp;
     }
     public async Task<UserDetailsDto> GetAsync(string userId, CancellationToken cancellationToken)
     {
@@ -153,20 +178,23 @@ internal partial class UserService : IUserService
         _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
 
         var tmp = user.Adapt<UserDetailsDto>();
-        
+
         if (!string.IsNullOrEmpty(tmp.ProvinceCode))
         {
             tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.ProvinceCode), cancellationToken);
 
         }
+
         if (!string.IsNullOrEmpty(tmp.DistrictCode))
         {
             tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.DistrictCode), cancellationToken);
         }
+
         if (!string.IsNullOrEmpty(tmp.CommuneCode))
         {
             tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.CommuneCode), cancellationToken);
         }
+
         return tmp;
     }
 

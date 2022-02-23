@@ -11,6 +11,8 @@ public interface IUserService : ITransientService
     Task<bool> ExistsWithNameAsync(string name);
     Task<bool> ExistsWithEmailAsync(string email, string? exceptId = null);
     Task<bool> ExistsWithPhoneNumberAsync(string phoneNumber, string? exceptId = null);
+    Task<bool> ExistsWithIdentityNumberAsync(string identityNumber, string? exceptId = null);
+
 
     Task<List<UserDetailsDto>> GetListAsync(CancellationToken cancellationToken);
 
@@ -20,9 +22,13 @@ public interface IUserService : ITransientService
 
     Task<UserDetailsDto> GetAsync(string userId, CancellationToken cancellationToken);
 
+    Task<List<UserRoleDto>> GetRolesAsyncByUserName(string userName, CancellationToken cancellationToken);
     Task<List<UserRoleDto>> GetRolesAsync(string userId, CancellationToken cancellationToken);
     Task<string> AssignRolesAsync(string userId, UserRolesRequest request, CancellationToken cancellationToken);
+    Task<string> AssignRolesAsyncByUserName(string userName, UserRolesRequest request, CancellationToken cancellationToken);
 
+
+    Task<List<string>> GetPermissionsAsyncByUserName(string userName, CancellationToken cancellationToken);
     Task<List<string>> GetPermissionsAsync(string userId, CancellationToken cancellationToken);
     Task<bool> HasPermissionAsync(string userId, string permission, CancellationToken cancellationToken = default);
     Task InvalidatePermissionCacheAsync(string userId, CancellationToken cancellationToken);

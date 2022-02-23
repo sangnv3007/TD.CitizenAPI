@@ -21,11 +21,12 @@ public class CreateUserRequestValidator : CustomValidator<CreateUserRequest>
             .MustAsync(async (phone, _) => !await userService.ExistsWithPhoneNumberAsync(phone!))
                 .WithMessage((_, phone) => string.Format(localizer["Phone number {0} is already registered."], phone))
                 .Unless(u => string.IsNullOrWhiteSpace(u.PhoneNumber));
+        /*RuleFor(u => u.IdentityNumber).Cascade(CascadeMode.Stop)
+           .MustAsync(async (identityNumber, _) => !await userService.ExistsWithIdentityNumberAsync(identityNumber!))
+               .WithMessage((_, identityNumber) => string.Format(localizer["Identity number {0} is already registered."], identityNumber))
+               .Unless(u => string.IsNullOrWhiteSpace(u.IdentityNumber));*/
 
-        RuleFor(p => p.FirstName).Cascade(CascadeMode.Stop)
-            .NotEmpty();
-
-        RuleFor(p => p.LastName).Cascade(CascadeMode.Stop)
+        RuleFor(p => p.FullName).Cascade(CascadeMode.Stop)
             .NotEmpty();
 
         RuleFor(p => p.Password).Cascade(CascadeMode.Stop)

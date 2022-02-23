@@ -7,6 +7,27 @@ namespace TD.CitizenAPI.Infrastructure.Identity;
 
 internal partial class UserService
 {
+    
+    public async Task<List<string>> GetPermissionsAsyncByUserName(string userName, CancellationToken cancellationToken)
+    {
+        var user = await _userManager.FindByNameAsync(userName);
+
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+        var userRoles = await _userManager.GetRolesAsync(user);
+        var permissions = new List<string>();
+        foreach (var role in await _roleManager.Roles
+            .Where(r => userRoles.Contains(r.Name))
+            .ToListAsync(cancellationToken))
+        {
+            permissions.AddRange(await _db.RoleClaims
+                .Where(rc => rc.RoleId == role.Id && rc.ClaimType == FSHClaims.Permission)
+                .Select(rc => rc.ClaimValue)
+                .ToListAsync(cancellationToken));
+        }
+
+        return permissions.Distinct().ToList();
+    }
     public async Task<List<string>> GetPermissionsAsync(string userId, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByIdAsync(userId);

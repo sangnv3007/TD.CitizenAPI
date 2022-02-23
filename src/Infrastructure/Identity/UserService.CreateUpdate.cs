@@ -1,16 +1,15 @@
-﻿using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web;
+using System.Security.Claims;
 using TD.CitizenAPI.Application.Common.Exceptions;
 using TD.CitizenAPI.Application.Common.Mailing;
 using TD.CitizenAPI.Application.Identity;
 using TD.CitizenAPI.Application.Identity.Users;
-using TD.CitizenAPI.Domain.Common;
+using TD.CitizenAPI.Domain.Catalog;
 using TD.CitizenAPI.Domain.Identity;
 using TD.CitizenAPI.Shared.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Web;
-using Microsoft.AspNetCore.Http;
-using TD.CitizenAPI.Domain.Catalog;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 
@@ -109,12 +108,22 @@ internal partial class UserService
         var user = new ApplicationUser
         {
             Email = request.Email,
-            FirstName = request.FirstName,
-            LastName = request.LastName,
+            DateOfBirth = request.DateOfBirth,
+            IdentityNumber = request.IdentityNumber,
             UserName = request.UserName,
             PhoneNumber = request.PhoneNumber,
             IsActive = true
         };
+
+        if (!string.IsNullOrWhiteSpace(request.IdentityNumber))
+        {
+            bool tmp = await ExistsWithIdentityNumberAsync(request.IdentityNumber!);
+
+            if (tmp)
+            {
+                throw new InternalServerException(string.Format(_localizer["Identity number { 0 } is already registered."], request.IdentityNumber));
+            }
+        }
 
         var result = await _userManager.CreateAsync(user, request.Password);
         if (!result.Succeeded)
@@ -159,7 +168,8 @@ internal partial class UserService
         {
             var file = await _fileStorage.UploadFileAsync<Attachment>(request, default);
             user.ImageUrl = file.Url;
-        } catch
+        }
+        catch
         {
 
         }
