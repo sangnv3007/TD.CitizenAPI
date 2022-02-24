@@ -21,9 +21,10 @@ public class SearchCategoriesRequestHandler : IRequestHandler<SearchCategoriesRe
     {
         var spec = new CategoriesBySearchRequestSpec(request);
 
-        var list = await _repository.ListAsync(spec, cancellationToken);
+        /*var list = await _repository.ListAsync(spec, cancellationToken);
         int count = await _repository.CountAsync(spec, cancellationToken);
 
-        return new PaginationResponse<CategoryDto>(list, count, request.PageNumber, request.PageSize);
+        return new PaginationResponse<CategoryDto>(list, count, request.PageNumber, request.PageSize);*/
+        return await _repository.PaginatedListAsync(spec, request.PageNumber, request.PageSize, cancellationToken: cancellationToken);
     }
 }
