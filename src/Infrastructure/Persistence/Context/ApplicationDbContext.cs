@@ -16,8 +16,7 @@ public class ApplicationDbContext : BaseDbContext
     }
 
     #region Other
-    public DbSet<Product> Products => Set<Product>();
-    public DbSet<Brand> Brands => Set<Brand>();
+    
     public DbSet<Attachment> Attachments => Set<Attachment>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Notification> Notifications => Set<Notification>();
@@ -76,6 +75,29 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<JobApplied> JobApplieds => Set<JobApplied>();
     public DbSet<JobSaved> JobSaveds => Set<JobSaved>();
     #endregion Company
+
+    #region Ecommerce
+    public DbSet<Brand> Brands => Set<Brand>();
+    public DbSet<EcommerceCategory> EcommerceCategories => Set<EcommerceCategory>();
+    public DbSet<Domain.Catalog.Attribute> Attributes => Set<Domain.Catalog.Attribute>();
+    public DbSet<AttributeValue> AttributeValues => Set<AttributeValue>();
+
+    public DbSet<AttributeBoolean> AttributeBooleans => Set<AttributeBoolean>();
+    public DbSet<AttributeDatetime> AttributeDatetimes => Set<AttributeDatetime>();
+    public DbSet<AttributeDecimal> AttributeDecimals => Set<AttributeDecimal>();
+    public DbSet<AttributeInt> AttributeInts => Set<AttributeInt>();
+    public DbSet<AttributeText> AttributeTexts => Set<AttributeText>();
+    public DbSet<AttributeVarchar> AttributeVarchars => Set<AttributeVarchar>();
+    public DbSet<Product> Products => Set<Product>();
+
+    public DbSet<EcommerceCategoryAttribute> EcommerceCategoryAttributes => Set<EcommerceCategoryAttribute>();
+    public DbSet<EcommerceCategoryProduct> EcommerceCategoryProducts => Set<EcommerceCategoryProduct>();
+
+    public DbSet<ProductReview> ProductReviews => Set<ProductReview>();
+    public DbSet<ProductSaved> ProductSaveds => Set<ProductSaved>();
+
+
+    #endregion Ecommerce
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

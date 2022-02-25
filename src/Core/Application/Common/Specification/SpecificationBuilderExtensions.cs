@@ -3,7 +3,6 @@ using System.Reflection;
 
 namespace TD.CitizenAPI.Application.Common.Specification;
 
-// See https://github.com/ardalis/Specification/issues/53
 public static class SpecificationBuilderExtensions
 {
     public static ISpecificationBuilder<T> SearchBy<T>(this ISpecificationBuilder<T> query, BaseFilter filter) =>
@@ -64,7 +63,9 @@ public static class SpecificationBuilderExtensions
             {
                 // search all fields (only first level)
                 foreach (var property in typeof(T).GetProperties()
-                    .Where(prop => Type.GetTypeCode(Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType) != TypeCode.Object))
+                    .Where(prop => (Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType) is { } propertyType
+                        && !propertyType.IsEnum
+                        && Type.GetTypeCode(propertyType) != TypeCode.Object))
                 {
                     var paramExpr = Expression.Parameter(typeof(T));
                     var propertyExpr = Expression.Property(paramExpr, property);

@@ -6,27 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace TD.CitizenAPI.Infrastructure.Persistence.Configuration;
 
 #region Other
-public class BrandConfig : IEntityTypeConfiguration<Brand>
-{
-    public void Configure(EntityTypeBuilder<Brand> builder)
-    {
-        builder.IsMultiTenant();
-
-        builder.Property(b => b.Name).HasMaxLength(256);
-    }
-}
-
-public class ProductConfig : IEntityTypeConfiguration<Product>
-{
-    public void Configure(EntityTypeBuilder<Product> builder)
-    {
-        builder.IsMultiTenant();
-
-        builder.Property(b => b.Name).HasMaxLength(1024);
-
-        builder.Property(p => p.ImagePath).HasMaxLength(2048);
-    }
-}
 
 public class AttachmentConfig : IEntityTypeConfiguration<Attachment>
 {
@@ -493,3 +472,164 @@ public class RecruitmentBenefitConfig : IEntityTypeConfiguration<RecruitmentBene
     }
 }
 #endregion Company
+
+#region Ecommerce
+
+public class BrandConfig : IEntityTypeConfiguration<Brand>
+{
+    public void Configure(EntityTypeBuilder<Brand> builder)
+    {
+        builder.IsMultiTenant();
+
+        builder.Property(b => b.Name).HasMaxLength(256);
+    }
+}
+
+public class EcommerceCategoryConfig : IEntityTypeConfiguration<EcommerceCategory>
+{
+    public void Configure(EntityTypeBuilder<EcommerceCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(1024);
+        builder.Property(x => x.Slug).HasMaxLength(1024);
+        builder.Property(x => x.MetaTitle).HasMaxLength(1024);
+        builder.Property(x => x.Icon).HasMaxLength(1024);
+        builder.Property(x => x.Image).HasMaxLength(1024);
+        builder.Property(x => x.Tags).HasMaxLength(1024);
+        builder.Property(e => e.Tags).HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+    }
+}
+
+public class AttributeConfig : IEntityTypeConfiguration<Domain.Catalog.Attribute>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.Attribute> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+
+public class AttributeValueConfig : IEntityTypeConfiguration<Domain.Catalog.AttributeValue>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeValue> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+
+
+public class ProductConfig : IEntityTypeConfiguration<Product>
+{
+    public void Configure(EntityTypeBuilder<Product> builder)
+    {
+        builder.IsMultiTenant();
+
+        builder.Property(b => b.Name).HasMaxLength(1024);
+        builder.Property(x => x.Price).HasDefaultValue(0).HasColumnType("bigint");
+        builder.Property(x => x.ListPrice).HasDefaultValue(0).HasColumnType("bigint");
+        builder.Property(p => p.ImagePath).HasMaxLength(2048);
+        builder.HasOne(s => s.PrimaryEcommerceCategory).WithMany(g => g.PrimaryProducts).HasForeignKey(s => s.PrimaryEcommerceCategoryId);
+
+    }
+}
+
+public class ProductReviewConfig : IEntityTypeConfiguration<ProductReview>
+{
+    public void Configure(EntityTypeBuilder<ProductReview> builder)
+    {
+        builder.IsMultiTenant();
+
+      
+    }
+}
+
+public class ProductSavedConfig : IEntityTypeConfiguration<ProductSaved>
+{
+    public void Configure(EntityTypeBuilder<ProductSaved> builder)
+    {
+        builder.IsMultiTenant();
+
+      
+    }
+}
+
+
+public class AttributeBooleanConfiguration : IEntityTypeConfiguration<Domain.Catalog.AttributeBoolean>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeBoolean> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(x => x.Value).HasDefaultValue(false);
+        builder.HasOne(s => s.Product).WithMany(g => g.AttributeBooleans).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.AttributeBooleans).HasForeignKey(s => s.AttributeId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public class AttributeDatetimeConfiguration : IEntityTypeConfiguration<Domain.Catalog.AttributeDatetime>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeDatetime> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(x => x.Value).HasColumnType("datetime2");
+        builder.HasOne(s => s.Product).WithMany(g => g.AttributeDatetimes).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.AttributeDatetimes).HasForeignKey(s => s.AttributeId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+public class AttributeDecimalConfiguration : IEntityTypeConfiguration<Domain.Catalog.AttributeDecimal>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeDecimal> builder)
+    {
+        builder.IsMultiTenant();
+        builder.HasOne(s => s.Product).WithMany(g => g.AttributeDecimals).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.AttributeDecimals).HasForeignKey(s => s.AttributeId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public class AttributeIntConfiguration : IEntityTypeConfiguration<Domain.Catalog.AttributeInt>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeInt> builder)
+    {
+        builder.IsMultiTenant();
+        builder.HasOne(s => s.Product).WithMany(g => g.AttributeInts).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.AttributeInts).HasForeignKey(s => s.AttributeId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public class AttributeTextConfiguration : IEntityTypeConfiguration<Domain.Catalog.AttributeText>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeText> builder)
+    {
+        builder.IsMultiTenant();
+        builder.HasOne(s => s.Product).WithMany(g => g.AttributeTexts).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.AttributeTexts).HasForeignKey(s => s.AttributeId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public class AttributeVarcharConfiguration : IEntityTypeConfiguration<Domain.Catalog.AttributeVarchar>
+{
+    public void Configure(EntityTypeBuilder<Domain.Catalog.AttributeVarchar> builder)
+    {
+        builder.IsMultiTenant();
+        builder.HasOne(s => s.Product).WithMany(g => g.AttributeVarchars).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.AttributeVarchars).HasForeignKey(s => s.AttributeId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public class EcommerceCategoryAttributeConfig : IEntityTypeConfiguration<EcommerceCategoryAttribute>
+{
+    public void Configure(EntityTypeBuilder<EcommerceCategoryAttribute> builder)
+    {
+        builder.IsMultiTenant();
+        builder.HasOne(s => s.EcommerceCategory).WithMany(g => g.EcommerceCategoryAttributes).HasForeignKey(s => s.EcommerceCategoryId);
+        builder.HasOne(s => s.Attribute).WithMany(g => g.EcommerceCategoryAttributes).HasForeignKey(s => s.AttributeId);
+    }
+}
+
+public class EcommerceCategoryProductConfig : IEntityTypeConfiguration<EcommerceCategoryProduct>
+{
+    public void Configure(EntityTypeBuilder<EcommerceCategoryProduct> builder)
+    {
+        builder.IsMultiTenant();
+    }
+}
+
+#endregion Ecommerce
