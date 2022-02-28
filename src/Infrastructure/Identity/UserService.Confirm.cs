@@ -1,9 +1,9 @@
 using System.Text;
-using TD.CitizenAPI.Application.Identity;
 using TD.CitizenAPI.Infrastructure.Common;
 using TD.CitizenAPI.Shared.Multitenancy;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using TD.CitizenAPI.Application.Common.Exceptions;
 
 namespace TD.CitizenAPI.Infrastructure.Identity;
 

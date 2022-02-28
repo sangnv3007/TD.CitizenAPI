@@ -5,7 +5,6 @@ using Microsoft.Identity.Web;
 using System.Security.Claims;
 using TD.CitizenAPI.Application.Common.Exceptions;
 using TD.CitizenAPI.Application.Common.Mailing;
-using TD.CitizenAPI.Application.Identity;
 using TD.CitizenAPI.Application.Identity.Users;
 using TD.CitizenAPI.Domain.Catalog;
 using TD.CitizenAPI.Domain.Identity;
@@ -149,7 +148,7 @@ internal partial class UserService
                 new List<string> { user.Email },
                 _localizer["Confirm Registration"],
                 _templateService.GenerateEmailTemplate("email-confirmation", eMailModel));
-            _jobService.Enqueue(() => _mailService.SendAsync(mailRequest));
+            _jobService.Enqueue(() => _mailService.SendAsync(mailRequest, CancellationToken.None));
             messages.Add(_localizer[$"Please check {user.Email} to verify your account!"]);
         }
 

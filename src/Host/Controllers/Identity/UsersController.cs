@@ -43,7 +43,6 @@ public class UsersController : VersionNeutralApiController
     }
 
     [HttpPost]
-    [TenantIdHeader]
     [MustHavePermission(FSHAction.Create, FSHResource.Users)]
     [OpenApiOperation("Create a new user.", "")]
     public Task<string> CreateAsync(CreateUserRequest request)

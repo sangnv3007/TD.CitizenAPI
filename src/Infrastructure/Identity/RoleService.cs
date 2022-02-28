@@ -2,7 +2,6 @@ using Finbuckle.MultiTenant;
 using TD.CitizenAPI.Application.Common.Events;
 using TD.CitizenAPI.Application.Common.Exceptions;
 using TD.CitizenAPI.Application.Common.Interfaces;
-using TD.CitizenAPI.Application.Identity;
 using TD.CitizenAPI.Application.Identity.Roles;
 using TD.CitizenAPI.Domain.Identity;
 using TD.CitizenAPI.Infrastructure.Persistence.Context;

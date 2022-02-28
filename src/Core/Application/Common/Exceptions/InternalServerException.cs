@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace TD.CitizenAPI.Application.Identity;
+namespace TD.CitizenAPI.Application.Common.Exceptions;
 
 public class InternalServerException : CustomException
 {
