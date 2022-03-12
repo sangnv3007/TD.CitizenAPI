@@ -12,6 +12,13 @@ public class CompaniesController : VersionedApiController
         return Mediator.Send(request);
     }
 
+    [HttpGet("current-company")]
+    [OpenApiOperation("Search categories using available filters.", "")]
+    public Task<Result<CompanyDetailsDto>> CurrentCompany()
+    {
+        return Mediator.Send(new CurrentCompaniesRequest());
+    }
+
 
     [HttpGet("{id:guid}")]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]

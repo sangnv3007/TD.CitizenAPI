@@ -16,6 +16,9 @@ internal static class Startup
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                     options.User.RequireUniqueEmail = true;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultPhoneProvider;
+                    options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultPhoneProvider;
                 })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders()

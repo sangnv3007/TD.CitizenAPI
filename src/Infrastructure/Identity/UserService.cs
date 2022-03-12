@@ -45,7 +45,6 @@ internal partial class UserService : IUserService
     private readonly ITenantInfo _currentTenant;
     private readonly IRepository<Area> _areaRepository;
 
-
     public UserService(
         SignInManager<ApplicationUser> signInManager,
         UserManager<ApplicationUser> userManager,
@@ -150,20 +149,20 @@ internal partial class UserService : IUserService
         //return user.Adapt<UserDetailsDto>();
         var tmp = user.Adapt<UserDetailsDto>();
 
-        if (!string.IsNullOrEmpty(tmp.ProvinceCode))
+        if (!string.IsNullOrEmpty(tmp.ProvinceId))
         {
-            tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.ProvinceCode), cancellationToken);
+            tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.ProvinceId), cancellationToken);
 
         }
 
-        if (!string.IsNullOrEmpty(tmp.DistrictCode))
+        if (!string.IsNullOrEmpty(tmp.DistrictId))
         {
-            tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.DistrictCode), cancellationToken);
+            tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.DistrictId), cancellationToken);
         }
 
-        if (!string.IsNullOrEmpty(tmp.CommuneCode))
+        if (!string.IsNullOrEmpty(tmp.CommuneId))
         {
-            tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.CommuneCode), cancellationToken);
+            tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.CommuneId), cancellationToken);
         }
 
         return tmp;
@@ -179,20 +178,20 @@ internal partial class UserService : IUserService
 
         var tmp = user.Adapt<UserDetailsDto>();
 
-        if (!string.IsNullOrEmpty(tmp.ProvinceCode))
+        if (!string.IsNullOrEmpty(tmp.ProvinceId))
         {
-            tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.ProvinceCode), cancellationToken);
+            tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.ProvinceId), cancellationToken);
 
         }
 
-        if (!string.IsNullOrEmpty(tmp.DistrictCode))
+        if (!string.IsNullOrEmpty(tmp.DistrictId))
         {
-            tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.DistrictCode), cancellationToken);
+            tmp.District = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.DistrictId), cancellationToken);
         }
 
-        if (!string.IsNullOrEmpty(tmp.CommuneCode))
+        if (!string.IsNullOrEmpty(tmp.CommuneId))
         {
-            tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaDtoByCodeSpec(tmp.CommuneCode), cancellationToken);
+            tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.CommuneId), cancellationToken);
         }
 
         return tmp;

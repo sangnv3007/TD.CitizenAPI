@@ -55,12 +55,13 @@ public class CreateCompanyRequestHandler : IRequestHandler<CreateCompanyRequest,
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<Company> _repository;
     private readonly IRepositoryWithEvents<CompanyIndustry> _companyIndustryRepository;
+    private readonly ICurrentUser _currentUser;
 
-    public CreateCompanyRequestHandler(IRepositoryWithEvents<Company> repository, IRepositoryWithEvents<CompanyIndustry> companyIndustryRepository) => (_repository, _companyIndustryRepository) = (repository, companyIndustryRepository);
+    public CreateCompanyRequestHandler(IRepositoryWithEvents<Company> repository, IRepositoryWithEvents<CompanyIndustry> companyIndustryRepository, ICurrentUser currentUser) => (_repository, _companyIndustryRepository, _currentUser) = (repository, companyIndustryRepository, currentUser);
 
     public async Task<Result<Guid>> Handle(CreateCompanyRequest request, CancellationToken cancellationToken)
     {
-        var item = new Company(request.UserName, request.Name, request.InternationalName, request.ShortName, request.TaxCode, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Representative, request.PhoneNumber, request.Website, request.Email, request.ProfileVideo, request.Fax, request.DateOfIssue, request.BusinessSector, request.Images, request.Image, request.Logo, request.Description, request.CompanySize, 0);
+        var item = new Company(request.UserName??_currentUser.GetUserName(), request.Name, request.InternationalName, request.ShortName, request.TaxCode, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Representative, request.PhoneNumber, request.Website, request.Email, request.ProfileVideo, request.Fax, request.DateOfIssue, request.BusinessSector, request.Images, request.Image, request.Logo, request.Description, request.CompanySize, 0);
         await _repository.AddAsync(item, cancellationToken);
 
 

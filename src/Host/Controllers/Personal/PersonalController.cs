@@ -20,6 +20,12 @@ public class PersonalController : VersionNeutralApiController
             : Ok(await _userService.GetAsync(userId, cancellationToken));
     }
 
+   /* [HttpGet("user-infor")]
+    public async Task<IActionResult> UserInfor()
+    {
+        return Ok(await _identityService.GetUserInfor());
+    }*/
+
     [HttpPut("profile")]
     [OpenApiOperation("Update profile details of currently logged in user.", "")]
     public async Task<ActionResult> UpdateProfileAsync(UpdateUserRequest request)

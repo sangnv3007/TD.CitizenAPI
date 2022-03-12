@@ -13,7 +13,7 @@ public class CompaniesBySearchRequestSpec : EntitiesByPaginationFilterSpec<Compa
             .Where(p => p.ProvinceId.Equals(request.ProvinceId!.Value), request.ProvinceId.HasValue)
             .Where(p => p.DistrictId.Equals(request.DistrictId!.Value), request.DistrictId.HasValue)
             .Where(p => p.CommuneId.Equals(request.CommuneId!.Value), request.CommuneId.HasValue)
-            .Where(p => p.UserName == request.UserName, string.IsNullOrWhiteSpace(request.UserName))
+            .Where(p => p.UserName == request.UserName, !string.IsNullOrWhiteSpace(request.UserName))
         ;
 
 }

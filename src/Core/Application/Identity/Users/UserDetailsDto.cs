@@ -31,9 +31,9 @@ public class UserDetailsDto
     public string? PlaceOfDestination { get; set; }
     //Quoc tich
     public string? Nationality { get; set; }
-    public string? ProvinceCode { get; set; }
-    public string? DistrictCode { get; set; }
-    public string? CommuneCode { get; set; }
+    public string? ProvinceId { get; set; }
+    public string? DistrictId { get; set; }
+    public string? CommuneId { get; set; }
     public string? Address { get; set; }
     public AreaDto? Province { get; set; }
     public AreaDto? District { get; set; }

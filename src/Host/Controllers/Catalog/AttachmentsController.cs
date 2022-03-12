@@ -7,7 +7,7 @@ public class AttachmentsController : VersionedApiController
 {
     [HttpPost]
     [DisableRequestSizeLimit]
-    [MustHavePermission(FSHAction.Create, FSHResource.Products)]
+    //[MustHavePermission(FSHAction.Create, FSHResource.Products)]
     [OpenApiOperation("Create a new attachment.", "")]
     public async Task<IActionResult> Post([FromForm(Name = "files")] List<IFormFile> files)
     {

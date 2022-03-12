@@ -12,7 +12,7 @@ public class CarpoolsBySearchRequestSpec : EntitiesByPaginationFilterSpec<Carpoo
         {
             try
             {
-                departureDateStart = DateTime.ParseExact(request.DepartureDateStart, "yyyy-mm-dd", CultureInfo.InvariantCulture);
+                departureDateStart = DateTime.ParseExact(request.DepartureDateStart, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
             catch (Exception)
             {
@@ -24,7 +24,7 @@ public class CarpoolsBySearchRequestSpec : EntitiesByPaginationFilterSpec<Carpoo
         if (!string.IsNullOrWhiteSpace(request.DepartureDateEnd)) {
             try
             {
-                departureDateStart = DateTime.ParseExact(request.DepartureDateEnd, "yyyy-mm-dd", CultureInfo.InvariantCulture);
+                departureDateStart = DateTime.ParseExact(request.DepartureDateEnd, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
             catch (Exception)
             {

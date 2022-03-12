@@ -2,6 +2,7 @@ namespace TD.CitizenAPI.Application.Catalog.Areas;
 
 public class SearchAreasRequest : PaginationFilter, IRequest<PaginationResponse<AreaDto>>
 {
+    public Guid? ParentId { get; set; }
     public string? ParentCode { get; set; }
     public string? Type { get; set; }
     public int? Level { get; set; }
@@ -26,6 +27,14 @@ public class SearchCategoriesRequestHandler : IRequestHandler<SearchAreasRequest
 
     public async Task<PaginationResponse<AreaDto>> Handle(SearchAreasRequest request, CancellationToken cancellationToken)
     {
+
+
+        if (request.ParentId.HasValue)
+        {
+            var area = await _repository.GetByIdAsync(request.ParentId, cancellationToken);
+            if (area != null) request.ParentCode = area.Code;
+        }
+
         var spec = new AreasBySearchRequestSpec(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);

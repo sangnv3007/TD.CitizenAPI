@@ -13,7 +13,7 @@ public class RecruitmentsBySearchRequestSpec : EntitiesByPaginationFilterSpec<Re
         {
             try
             {
-                resumeApplyExpiredFrom = DateTime.ParseExact(request.ResumeApplyExpiredFrom, "yyyy-mm-dd", CultureInfo.InvariantCulture);
+                resumeApplyExpiredFrom = DateTime.ParseExact(request.ResumeApplyExpiredFrom, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
             catch (Exception)
             {
@@ -26,7 +26,7 @@ public class RecruitmentsBySearchRequestSpec : EntitiesByPaginationFilterSpec<Re
         {
             try
             {
-                resumeApplyExpiredTo = DateTime.ParseExact(request.ResumeApplyExpiredTo, "yyyy-mm-dd", CultureInfo.InvariantCulture);
+                resumeApplyExpiredTo = DateTime.ParseExact(request.ResumeApplyExpiredTo, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
             catch (Exception)
             {

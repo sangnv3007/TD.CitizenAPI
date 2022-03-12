@@ -106,6 +106,7 @@ internal partial class UserService
     {
         var user = new ApplicationUser
         {
+            FullName = request.FullName,
             Email = request.Email,
             DateOfBirth = request.DateOfBirth,
             IdentityNumber = request.IdentityNumber,
@@ -132,7 +133,7 @@ internal partial class UserService
 
         await _userManager.AddToRoleAsync(user, FSHRoles.Basic);
 
-        var messages = new List<string> { string.Format(_localizer["User {0} Registered."], user.UserName) };
+        var messages = new List<string> { string.Format(_localizer["Tài khoản {0} được tạo thành công."], user.UserName) };
 
         if (_securitySettings.RequireConfirmedAccount && !string.IsNullOrEmpty(user.Email))
         {
@@ -202,13 +203,13 @@ internal partial class UserService
             }
         }*/
 
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
+       
         user.Gender = request.Gender;
+        user.ImageUrl = request.ImageUrl;
 
         if (!user.IsVerified)
         {
-            user.FullName = request.FirstName;
+            user.FullName = request.FullName;
             user.DateOfBirth = request.DateOfBirth;
             user.IdentityNumber = request.IdentityNumber;
             user.IdentityPlace = request.IdentityPlace;
@@ -217,18 +218,19 @@ internal partial class UserService
             user.PlaceOfDestination = request.PlaceOfDestination;
             user.Nationality = request.Nationality;
         }
-        user.ProvinceCode = request.ProvinceCode;
-        user.DistrictCode = request.DistrictCode;
-        user.CommuneCode = request.CommuneCode;
+
+        user.ProvinceId = request.ProvinceId;
+        user.DistrictId = request.DistrictId;
+        user.CommuneId = request.CommuneId;
         user.Address = request.Address;
 
 
-        user.PhoneNumber = request.PhoneNumber;
+        /*user.PhoneNumber = request.PhoneNumber;
         string phoneNumber = await _userManager.GetPhoneNumberAsync(user);
         if (request.PhoneNumber != phoneNumber)
         {
             await _userManager.SetPhoneNumberAsync(user, request.PhoneNumber);
-        }
+        }*/
 
         var result = await _userManager.UpdateAsync(user);
 
