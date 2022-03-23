@@ -1,6 +1,6 @@
 ﻿namespace TD.CitizenAPI.Application.Catalog.Products;
 
-public class ProductsBySearchRequestWithBrandsSpec : EntitiesByPaginationFilterSpec<Product, CategoriesInProduct>
+public class ProductsBySearchRequestWithBrandsSpec : EntitiesByPaginationFilterSpec<Product, ProductDto>
 {
     public ProductsBySearchRequestWithBrandsSpec(SearchProductsRequest request)
         : base(request) =>

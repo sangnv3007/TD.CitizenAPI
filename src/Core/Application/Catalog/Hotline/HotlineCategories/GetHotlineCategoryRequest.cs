@@ -7,7 +7,7 @@ public class GetHotlineCategoryRequest : IRequest<Result<HotlineCategoryDetailsD
     public GetHotlineCategoryRequest(Guid id) => Id = id;
 }
 
-public class HotlineCategoryByIdSpec : Specification<MarketCategory, HotlineCategoryDetailsDto>, ISingleResultSpecification
+public class HotlineCategoryByIdSpec : Specification<HotlineCategory, HotlineCategoryDetailsDto>, ISingleResultSpecification
 {
     public HotlineCategoryByIdSpec(Guid id) =>
         Query.Where(p => p.Id == id);

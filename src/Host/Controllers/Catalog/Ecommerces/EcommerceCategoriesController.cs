@@ -14,20 +14,31 @@ public class EcommerceCategoriesController : VersionedApiController
         return Mediator.Send(request);
     }
 
+    [AllowAnonymous]
+    [HttpGet("allChild")]
+    //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
+    [OpenApiOperation("Get category details.", "")]
+    public Task<Result<List<EcommerceCategoryWithChildDto>>> SearchAsyansc()
+    {
+        return Mediator.Send(new AllEcommerceCategoryRequest());
+    }
+
 
     [HttpPost("{id:guid}/Attributes/search")]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
-    public Task<PaginationResponse<EcommerceCategoryAttributeDto>> SearchAsync(SearchEcommerceCategoryAttributesRequest request)
+    public Task<PaginationResponse<EcommerceCategoryAttributeDto>> SearchAsync(SearchEcommerceCategoryAttributesRequest request, Guid id)
     {
+        request.EcommerceCategoryId = id;
         return Mediator.Send(request);
     }
 
     [HttpPost("{id:guid}/Attributes")]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
     [OpenApiOperation("Create a new category.", "")]
-    public Task<Result<Guid>> CreateAsync(CreateEcommerceCategoryAttributeRequest request)
+    public Task<Result<Guid>> CreateAsync(CreateEcommerceCategoryAttributeRequest request, Guid id)
     {
+        request.EcommerceCategoryId = id;
         return Mediator.Send(request);
     }
 
@@ -37,9 +48,13 @@ public class EcommerceCategoriesController : VersionedApiController
     [OpenApiOperation("Update a category.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateEcommerceCategoryAttributeRequest request, Guid id, Guid idAttribute)
     {
-        return (id != request.AttributeId || idAttribute != request.Id)
+
+        request.EcommerceCategoryId = id;
+        request.Id = idAttribute;
+        return Ok(await Mediator.Send(request));
+        /*return (id != request.EcommerceCategoryId || idAttribute != request.Id)
             ? BadRequest()
-            : Ok(await Mediator.Send(request));
+            : Ok(await Mediator.Send(request));*/
     }
 
     [HttpDelete("{id:guid}/Attributes/{idAttribute:guid}")]

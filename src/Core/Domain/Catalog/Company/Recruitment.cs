@@ -61,6 +61,9 @@ public class Recruitment : AuditableEntity, IAggregateRoot
     public virtual Area? District { get; set; }
     public virtual Area? Commune { get; set; }
 
+    public virtual ICollection<RecruitmentBenefit>? RecruitmentBenefits { get; set; }
+
+
     public Recruitment(string? userName, string? name, string? description, string? image, Guid? companyId, Guid? jobTypeId, Guid? jobNameId, Guid? jobPositionId, Guid? salaryId, Guid? experienceId, string? gender, Guid? jobAgeId, Guid? degreeId, string? otherRequirement, string? resumeRequirement, DateTime? resumeApplyExpired, int? numberOfJob, int? status, string? contactName, string? contactEmail, string? contactPhone, string? contactAdress, string? address, double? latitude, double? longitude, Guid? provinceId, Guid? districtId, Guid? communeId)
     {
         UserName = userName;

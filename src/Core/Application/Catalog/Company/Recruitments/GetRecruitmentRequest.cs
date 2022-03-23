@@ -22,6 +22,7 @@ public class RecruitmentByIdSpec : Specification<Recruitment, RecruitmentDetails
         .Include(p => p.Province)
         .Include(p => p.District)
         .Include(p => p.Commune)
+        .Include(p => p.RecruitmentBenefits)
         ;
 }
 

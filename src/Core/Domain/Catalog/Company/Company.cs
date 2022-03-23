@@ -83,7 +83,7 @@ public class Company : AuditableEntity, IAggregateRoot
         if (fax is not null && Fax?.Equals(fax) is not true) Fax = fax;
         if (businessSector is not null && BusinessSector?.Equals(businessSector) is not true) BusinessSector = businessSector;
         if (images is not null && Images?.Equals(images) is not true) Images = images;
-        if (image is not null && Image?.Equals(taxCode) is not true) Image = taxCode;
+        if (image is not null && Image?.Equals(image) is not true) Image = image;
         if (logo is not null && Logo?.Equals(logo) is not true) Logo = logo;
         if (description is not null && Description?.Equals(description) is not true) Description = description;
         if (companySize is not null && CompanySize?.Equals(companySize) is not true) CompanySize = companySize;

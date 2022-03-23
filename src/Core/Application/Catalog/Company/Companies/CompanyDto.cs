@@ -12,6 +12,8 @@ public class CompanyDto : IDto
     public string? Representative { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Website { get; set; }
+    public string? Address { get; set; }
+
     //Ngay cap
     //Linh vuc kinh doanh
     public string? BusinessSector { get; set; }

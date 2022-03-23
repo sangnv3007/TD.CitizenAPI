@@ -7,12 +7,7 @@ public class UpdateEcommerceCategoryAttributeRequest : IRequest<Result<Guid>>
     public Guid? AttributeId { get; set; }
     public int Position { get; set; } = 0;
 
-    public class UpdateEcommerceCategoryAttributeRequestValidator : CustomValidator<UpdateEcommerceCategoryAttributeRequest>
-    {
-        public UpdateEcommerceCategoryAttributeRequestValidator(IRepository<EcommerceCategoryAttribute> repository, IStringLocalizer<UpdateEcommerceCategoryAttributeRequestValidator> localizer) =>
-            RuleFor(p => p.EcommerceCategoryId)
-                .NotEmpty();
-    }
+
 
     public class UpdateEcommerceCategoryAttributeRequestHandler : IRequestHandler<UpdateEcommerceCategoryAttributeRequest, Result<Guid>>
     {

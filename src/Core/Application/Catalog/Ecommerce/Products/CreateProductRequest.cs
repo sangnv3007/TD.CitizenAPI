@@ -6,7 +6,7 @@ namespace TD.CitizenAPI.Application.Catalog.Products;
 
 public class CreateProductRequest : IRequest<Guid>
 {
-    public string UserName { get; set; } = default!;
+    public string? UserName { get; set; }
     public Guid? CompanyId { get; set; }
     public int Type { get; set; } = 1;
     public string Name { get; set; } = default!;
@@ -45,7 +45,7 @@ public class CreateProductRequest : IRequest<Guid>
     public Guid? DistrictId { get; set; }
     public Guid? CommuneId { get; set; }
 
-    public virtual ICollection<CategoriesInProduct>? Categories { get; set; }
+    public virtual ICollection<Guid>? Categories { get; set; }
     public virtual ICollection<AttributeValueInProduct>? Attributes { get; set; }
 
 }
@@ -60,7 +60,7 @@ public class CreateProductRequestHandler : IRequestHandler<CreateProductRequest,
     private readonly IRepository<AttributeText> _repositoryAttributeText;
     private readonly IRepository<AttributeVarchar> _repositoryAttributeVarchar;
     private readonly IRepository<Attribute> _repositoryAttribute;
-
+    private readonly ICurrentUser _currentUser;
 
     private readonly IFileStorageService _file;
 
@@ -73,39 +73,40 @@ public class CreateProductRequestHandler : IRequestHandler<CreateProductRequest,
         IRepository<AttributeDecimal> repositoryAttributeDecimal,
         IRepository<AttributeInt> repositoryAttributeInt,
         IRepository<AttributeText> repositoryAttributeText,
-        IRepository<AttributeVarchar> repositoryAttributeVarchar) =>
-        (_repository, _file, _repositoryAttribute, _repositoryAttributeBoolean, _repositoryAttributeDatetime, _repositoryAttributeDecimal, _repositoryAttributeInt, _repositoryAttributeText, _repositoryAttributeVarchar) = (repository, file, repositoryAttribute, repositoryAttributeBoolean, repositoryAttributeDatetime, repositoryAttributeDecimal, repositoryAttributeInt, repositoryAttributeText, repositoryAttributeVarchar);
+        IRepository<AttributeVarchar> repositoryAttributeVarchar,
+        ICurrentUser currentUser)
+    {
+        (_repository, _file, _repositoryAttribute, _repositoryAttributeBoolean, _repositoryAttributeDatetime, _repositoryAttributeDecimal, _repositoryAttributeInt, _repositoryAttributeText, _repositoryAttributeVarchar, _currentUser) = (repository, file, repositoryAttribute, repositoryAttributeBoolean, repositoryAttributeDatetime, repositoryAttributeDecimal, repositoryAttributeInt, repositoryAttributeText, repositoryAttributeVarchar, currentUser);
+    }
 
     public async Task<Guid> Handle(CreateProductRequest request, CancellationToken cancellationToken)
     {
         //string productImagePath = await _file.UploadAsync<Product>(request.Image, FileType.Image, cancellationToken);
 
-        var product = new Product(request.UserName, request.CompanyId, request.Type, request.Name, request.Code, request.SKU, request.Barcode, request.Description, request.ShortDescription, 0, request.ImagePath, request.Image, request.ThumbnailUrl, request.Images, request.VideoURL, request.Price, request.ListPrice, request.Quantity, request.PrimaryEcommerceCategoryId, request.BrandId, request.Status, request.FromDate, request.ToDate, request.PhoneNumber, request.Address, request.ProvinceId, request.DistrictId, request.CommuneId);
-
-        product.EcommerceCategoryProducts = new List<EcommerceCategoryProduct>();
-        product.AttributeDatetimes = new List<AttributeDatetime>();
-        product.AttributeDecimals = new List<AttributeDecimal>();
-        product.AttributeInts = new List<AttributeInt>();
-        product.AttributeVarchars = new List<AttributeVarchar>();
-        product.AttributeBooleans = new List<AttributeBoolean>();
-        product.AttributeTexts = new List<AttributeText>();
-
-        if (request.Categories != null)
+        var product = new Product(request.UserName ?? _currentUser.GetUserName(), request.CompanyId, request.Type, request.Name, request.Code, request.SKU, request.Barcode, request.Description, request.ShortDescription, 0, request.ImagePath, request.Image, request.ThumbnailUrl, request.Images, request.VideoURL, request.Price, request.ListPrice, request.Quantity, request.PrimaryEcommerceCategoryId, request.BrandId, request.Status, request.FromDate, request.ToDate, request.PhoneNumber, request.Address, request.ProvinceId, request.DistrictId, request.CommuneId)
         {
-            foreach (var item in request.Categories)
+            EcommerceCategoryProducts = new List<EcommerceCategoryProduct>(),
+            AttributeDatetimes = new List<AttributeDatetime>(),
+            AttributeDecimals = new List<AttributeDecimal>(),
+            AttributeInts = new List<AttributeInt>(),
+            AttributeVarchars = new List<AttributeVarchar>(),
+            AttributeBooleans = new List<AttributeBoolean>(),
+            AttributeTexts = new List<AttributeText>()
+        };
+
+        if (request.Categories != null && request.Categories.Count > 0)
+        {
+            for (int i = 0; i < request.Categories.Count; i++)
             {
-                try
+                bool isPrimary = false;
+                if (i == request.Categories.Count - 1)
                 {
-                    product.EcommerceCategoryProducts.Add(new EcommerceCategoryProduct(item.Id, product, item.IsPrimary));
-                    if (item.IsPrimary)
-                    {
-                        product.PrimaryEcommerceCategoryId = item.Id;
-                    }
+                    isPrimary = true;
+                    product.PrimaryEcommerceCategoryId = request.Categories.ElementAt(i);
                 }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine(e);
-                }
+
+
+                product.EcommerceCategoryProducts.Add(new EcommerceCategoryProduct(request.Categories.ElementAt(i), product, isPrimary));
             }
         }
 

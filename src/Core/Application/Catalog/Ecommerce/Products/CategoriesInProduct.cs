@@ -6,6 +6,6 @@ public class CategoriesInProduct : IDto
 {
     public Guid Id { get; set; }
     public bool IsPrimary { get; set; }
-    public EcommerceCategoryDto? EcommerceCategory { get; set; }
+    public EcommerceCategoryWithChildDto? EcommerceCategory { get; set; }
 
 }

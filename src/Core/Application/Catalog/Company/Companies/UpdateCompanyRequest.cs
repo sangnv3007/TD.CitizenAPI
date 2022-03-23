@@ -67,8 +67,10 @@ public class UpdateCompanyRequestHandler : IRequestHandler<UpdateCompanyRequest,
         await _repository.UpdateAsync(item, cancellationToken);
 
 
-        var item_CompanyIndustries = item.CompanyIndustries;
-        if (item_CompanyIndustries != null && item_CompanyIndustries.Count > 0)
+        var item_CompanyIndustries = await _companyIndustryRepository.ListAsync(new CompanyIndustryByCompanySpec(item.Id), cancellationToken);
+
+        // var item_CompanyIndustries = item.CompanyIndustries;
+        if (item_CompanyIndustries?.Count > 0)
         {
             await _companyIndustryRepository.DeleteRangeAsync(item_CompanyIndustries);
 

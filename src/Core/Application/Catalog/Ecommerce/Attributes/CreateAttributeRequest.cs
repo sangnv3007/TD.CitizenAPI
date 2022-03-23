@@ -16,7 +16,7 @@ public class CreateAttributeRequest : IRequest<Result<Guid>>
     //Datatype : int, decimal, varchar, text, datetime
     public DataType DataType { get; set; }
     public FrontendInput InputType { get; set; }*/
-    public string FrontendInput { get; set; } = default!;
+    public string? FrontendInput { get; set; }
     public string DataType { get; set; } = default!;
     public string InputType { get; set; } = default!;
 
@@ -45,7 +45,7 @@ public class CreateAttributeRequestHandler : IRequestHandler<CreateAttributeRequ
 
     public async Task<Result<Guid>> Handle(CreateAttributeRequest request, CancellationToken cancellationToken)
     {
-        var item = new Domain.Catalog.Attribute(request.Code, request.DisplayName, request.Description, request.IsSearchable, request.IsRequired, request.IsFilterable, request.IsSearchable, request.IsEditable, request.IsSellerEditable, request.DefaultValue, request.FrontendInput, request.DataType, request.InputType, request.IsActive);
+        var item = new Domain.Catalog.Attribute(request.Code, request.DisplayName, request.Description, request.IsSearchable, request.IsRequired, request.IsFilterable, request.IsSearchable, request.IsEditable, request.IsSellerEditable, request.DefaultValue, request.FrontendInput ?? string.Empty, request.DataType, request.InputType, request.IsActive);
         await _repository.AddAsync(item, cancellationToken);
         return Result<Guid>.Success(item.Id);
     }

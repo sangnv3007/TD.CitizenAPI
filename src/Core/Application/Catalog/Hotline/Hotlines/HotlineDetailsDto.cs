@@ -12,6 +12,8 @@ public class HotlineDetailsDto : IDto
     public string? Image { get; set; }
     public bool? Active { get; set; }
     public int? Order { get; set; }
+    public Guid? HotlineCategoryId { get; set; }
+
     public HotlineCategory? HotlineCategory { get; set; }
     public double? Latitude { get; set; }
     public double? Longitude { get; set; }

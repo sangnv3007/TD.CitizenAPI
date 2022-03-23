@@ -13,4 +13,14 @@ public class AreaInforsController : VersionedApiController
         return Mediator.Send(new GetAreaInforRequest(code));
     }
 
+    [HttpPost]
+    //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
+    [OpenApiOperation("Create a new category.", "")]
+    public Task<Result<Guid>> CreateAsync(CreateAreaInforRequest request)
+    {
+        return Mediator.Send(request);
+    }
+
+   
+
 }

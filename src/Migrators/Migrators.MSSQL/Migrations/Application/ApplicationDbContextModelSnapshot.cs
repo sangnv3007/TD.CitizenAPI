@@ -3827,8 +3827,8 @@ namespace Migrators.MSSQL.Migrations.Application
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("IdentityDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("IdentityNumber")
                         .HasColumnType("nvarchar(max)");

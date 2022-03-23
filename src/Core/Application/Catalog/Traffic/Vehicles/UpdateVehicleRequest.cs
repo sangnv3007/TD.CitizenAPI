@@ -23,7 +23,7 @@ public class UpdateVehicleRequest : IRequest<Result<Guid>>
     public Guid? VehicleTypeId { get; set; }
     public Guid? CompanyId { get; set; }
 
-    public virtual ICollection<Guid>? VehicleCarUtilities { get; set; }
+    public virtual ICollection<Guid>? CarUtilities { get; set; }
 }
 
 public class UpdateVehicleRequestValidator : CustomValidator<UpdateVehicleRequest>
@@ -53,16 +53,18 @@ public class UpdateVehicleRequestHandler : IRequestHandler<UpdateVehicleRequest,
 
         await _repository.UpdateAsync(item, cancellationToken);
 
-        var item_CompanyIndustries = item.VehicleCarUtilities;
+
+        var item_CompanyIndustries = await _vehicleCarUtilitRepository.ListAsync(new VehicleCarUtilitiesByVehicleSpec(item.Id), cancellationToken);
+
         if (item_CompanyIndustries != null && item_CompanyIndustries.Count > 0)
         {
             await _vehicleCarUtilitRepository.DeleteRangeAsync(item_CompanyIndustries);
 
         }
 
-        if (request.VehicleCarUtilities != null)
+        if (request.CarUtilities != null)
         {
-            foreach (var industryId in request.VehicleCarUtilities)
+            foreach (var industryId in request.CarUtilities)
             {
                 try
                 {

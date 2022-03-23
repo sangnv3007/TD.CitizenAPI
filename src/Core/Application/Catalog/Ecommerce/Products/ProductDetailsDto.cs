@@ -1,6 +1,8 @@
 ﻿using TD.CitizenAPI.Application.Catalog.Areas;
+using TD.CitizenAPI.Application.Catalog.Attributes;
 using TD.CitizenAPI.Application.Catalog.Brands;
 using TD.CitizenAPI.Application.Catalog.Companies;
+using TD.CitizenAPI.Application.Catalog.EcommerceCategories;
 
 namespace TD.CitizenAPI.Application.Catalog.Products;
 
@@ -53,7 +55,17 @@ public class ProductDetailsDto : IDto
     public virtual AreaDto? District { get; set; }
     public virtual AreaDto? Commune { get; set; }
 
-    public virtual EcommerceCategory? PrimaryEcommerceCategory { get; set; }
-    public virtual ICollection<CategoriesInProduct>? Categories { get; set; }
+    public virtual EcommerceCategoryDto? PrimaryEcommerceCategory { get; set; }
+    public virtual List<Guid>? Categories { get; set; }
     public virtual ICollection<AttributeValueInProductResponse>? Attributes { get; set; }
+
+    public virtual ICollection<AttributeDatetimeDto>? AttributeDatetimes { get; set; }
+
+    public virtual ICollection<AttributeDecimalDto>? AttributeDecimals { get; set; }
+
+    public virtual ICollection<AttributeIntDto>? AttributeInts { get; set; }
+
+    public virtual ICollection<AttributeTextDto>? AttributeTexts { get; set; }
+    public virtual ICollection<AttributeBooleanDto>? AttributeBooleans { get; set; }
+    public virtual ICollection<AttributeVarcharDto>? AttributeVarchars { get; set; }
 }

@@ -12,4 +12,6 @@ public class PlaceTypeDetailsDto : IDto
     public string? CoverImage { get; set; }
     public string? Description { get; set; }
     public CategoryDto Category { get; set; } = default!;
+    public Guid? CategoryId { get; set; }
+
 }

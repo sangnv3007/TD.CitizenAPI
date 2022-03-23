@@ -5,5 +5,5 @@ public class HotlineByIdWithIncludeSpec : Specification<Hotline, HotlineDetailsD
     public HotlineByIdWithIncludeSpec(Guid id) =>
         Query
             .Where(p => p.Id == id)
-            .Include(p => p.HotlineCategoryId);
+            .Include(p => p.HotlineCategory);
 }

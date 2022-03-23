@@ -1,4 +1,5 @@
 ﻿using TD.CitizenAPI.Application.Catalog.Attributes;
+using TD.CitizenAPI.Domain.Catalog;
 using TD.CitizenAPI.Domain.Common.Events;
 using Attribute = TD.CitizenAPI.Domain.Catalog.Attribute;
 
@@ -7,17 +8,17 @@ namespace TD.CitizenAPI.Application.Catalog.Products;
 public class UpdateProductRequest : IRequest<Guid>
 {
     public Guid Id { get; set; }
-    public string UserName { get; set; } = default!;
+    public string? UserName { get; set; }
     public Guid? CompanyId { get; set; }
     public int Type { get; set; } = 1;
-    public string Name { get; private set; } = default!;
+    public string? Name { get; set; }
     public string? Code { get; set; }
     public string? SKU { get; set; }
     public string? Barcode { get; set; }
-    public string? Description { get; private set; }
+    public string? Description { get; set; }
     public string? ShortDescription { get; set; }
 
-    public decimal Rate { get; private set; } = decimal.Zero;
+    public decimal Rate { get; set; } = decimal.Zero;
     public string? ImagePath { get; private set; }
     public string? Image { get; set; }
     public string? ThumbnailUrl { get; set; }
@@ -35,7 +36,7 @@ public class UpdateProductRequest : IRequest<Guid>
     //Danh muc san pham
     public Guid? PrimaryEcommerceCategoryId { get; set; }
 
-    public Guid? BrandId { get; private set; }
+    public Guid? BrandId { get; set; }
 
     public int Status { get; set; } = 1;
     public DateTime? FromDate { get; set; }
@@ -47,7 +48,7 @@ public class UpdateProductRequest : IRequest<Guid>
     public Guid? DistrictId { get; set; }
     public Guid? CommuneId { get; set; }
 
-    public virtual ICollection<CategoriesInProduct>? Categories { get; set; }
+    public virtual ICollection<Guid>? Categories { get; set; }
     public virtual ICollection<AttributeValueInProduct>? Attributes { get; set; }
 }
 
@@ -63,6 +64,7 @@ public class UpdateProductRequestHandler : IRequestHandler<UpdateProductRequest,
     private readonly IRepository<AttributeText> _repositoryAttributeText;
     private readonly IRepository<AttributeVarchar> _repositoryAttributeVarchar;
     private readonly IRepository<Attribute> _repositoryAttribute;
+    private readonly IRepository<EcommerceCategoryProduct> _repositoryEcommerceCategoryProduct;
 
     public UpdateProductRequestHandler(
         IRepository<Product> repository,
@@ -74,53 +76,60 @@ public class UpdateProductRequestHandler : IRequestHandler<UpdateProductRequest,
         IRepository<AttributeDecimal> repositoryAttributeDecimal,
         IRepository<AttributeInt> repositoryAttributeInt,
         IRepository<AttributeText> repositoryAttributeText,
+        IRepository<EcommerceCategoryProduct> repositoryEcommerceCategoryProduct,
         IRepository<AttributeVarchar> repositoryAttributeVarchar) =>
-        (_repository, _file, _repositoryAttribute, _repositoryAttributeBoolean, _repositoryAttributeDatetime, _repositoryAttributeDecimal, _repositoryAttributeInt, _repositoryAttributeText, _repositoryAttributeVarchar, _localizer) = (repository, file, repositoryAttribute, repositoryAttributeBoolean, repositoryAttributeDatetime, repositoryAttributeDecimal, repositoryAttributeInt, repositoryAttributeText, repositoryAttributeVarchar, localizer);
+        (_repository, _file, _repositoryAttribute, _repositoryAttributeBoolean, _repositoryAttributeDatetime, _repositoryAttributeDecimal, _repositoryAttributeInt, _repositoryAttributeText, _repositoryAttributeVarchar, _localizer, _repositoryEcommerceCategoryProduct) = (repository, file, repositoryAttribute, repositoryAttributeBoolean, repositoryAttributeDatetime, repositoryAttributeDecimal, repositoryAttributeInt, repositoryAttributeText, repositoryAttributeVarchar, localizer, repositoryEcommerceCategoryProduct);
 
     public async Task<Guid> Handle(UpdateProductRequest request, CancellationToken cancellationToken)
     {
-        var product = await _repository.GetByIdAsync(request.Id, cancellationToken);
+       /* var product = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        _ = product ?? throw new NotFoundException(string.Format(_localizer["product.notfound"], request.Id));
+        _ = product ?? throw new NotFoundException(string.Format(_localizer["product.notfound"], request.Id));*/
 
-      
-
-       
+        var product = await _repository.GetBySpecAsync(
+          new ProductByIdWithoutSpec(request.Id), cancellationToken)
+       ?? throw new NotFoundException(string.Format(_localizer["product.notfound"], request.Id));
 
         var updatedProduct = product.Update(request.UserName, request.CompanyId, request.Type, request.Name, request.Code, request.SKU, request.Barcode, request.Description, request.ShortDescription, request.Rate, request.ImagePath, request.Image, request.ThumbnailUrl, request.Images, request.VideoURL, request.Price, request.ListPrice, request.Quantity, request.PrimaryEcommerceCategoryId, request.BrandId, request.Status, request.FromDate, request.ToDate, request.PhoneNumber, request.Address, request.ProvinceId, request.DistrictId, request.CommuneId);
 
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
+      
+
+        await _repositoryEcommerceCategoryProduct.DeleteRangeAsync(product.EcommerceCategoryProducts);
         product.EcommerceCategoryProducts.Clear();
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
 
 
-        if (request.Categories != null)
+        if (request.Categories != null && request.Categories.Count > 0)
         {
-            foreach (var item in request.Categories)
+            for (int i = 0; i < request.Categories.Count; i++)
             {
-                try
+                bool isPrimary = false;
+                if (i == request.Categories.Count - 1)
                 {
-                    product.EcommerceCategoryProducts.Add(new EcommerceCategoryProduct(item.Id, product, item.IsPrimary));
-                    if (item.IsPrimary)
-                    {
-                        product.PrimaryEcommerceCategoryId = item.Id;
-                    }
+                    isPrimary = true;
+                    product.PrimaryEcommerceCategoryId = request.Categories.ElementAt(i);
                 }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine(e);
-                }
+
+
+                product.EcommerceCategoryProducts.Add(new EcommerceCategoryProduct(request.Categories.ElementAt(i), product, isPrimary));
             }
         }
 
+        product.AttributeDatetimes?.Clear();
+        product.AttributeDecimals?.Clear();
+        product.AttributeInts?.Clear();
+        product.AttributeVarchars?.Clear();
+        product.AttributeBooleans?.Clear();
+        product.AttributeTexts?.Clear();
 
-        product.AttributeDatetimes.Clear();
-        product.AttributeDecimals.Clear();
-        product.AttributeInts.Clear();
-        product.AttributeVarchars.Clear();
-        product.AttributeBooleans.Clear();
-        product.AttributeTexts.Clear();
+        product.AttributeDatetimes = new List<AttributeDatetime>();
+        product.AttributeDecimals = new List<AttributeDecimal>();
+        product.AttributeInts = new List<AttributeInt>();
+        product.AttributeVarchars = new List<AttributeVarchar>();
+        product.AttributeBooleans = new List<AttributeBoolean>();
+        product.AttributeTexts = new List<AttributeText>();
 
         if (request.Attributes != null)
         {

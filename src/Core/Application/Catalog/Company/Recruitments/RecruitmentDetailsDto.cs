@@ -58,6 +58,9 @@ public class RecruitmentDetailsDto : IDto
     public Guid? DistrictId { get; set; }
     public Guid? CommuneId { get; set; }
 
+    public virtual ICollection<RecruitmentBenefitDto>? RecruitmentBenefits { get; set; }
+
+
     public virtual CompanyDto? Company { get; set; }
     public virtual JobPositionDto? JobPosition { get; set; }
     public virtual JobTypeDto? JobType { get; set; }

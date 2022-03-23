@@ -136,3 +136,10 @@ Here are a few ways by which you can support.
 <br>
 
 <a href="https://www.buymeacoffee.com/codewithmukesh"><img width="250" alt="black-button" src="https://user-images.githubusercontent.com/31455818/138557309-27587d91-7b82-4cab-96bb-90f4f4e600f1.png" ></a>
+
+
+
+dotnet ef migrations add Update_17_User --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application
+
+dotnet ef migrations add ModifiedTenantTable --project .././Migrators/Migrators.MSSQL/ --context TenantDbContext -o Migrations/Tenant
+

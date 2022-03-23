@@ -1,3 +1,5 @@
+using TD.CitizenAPI.Application.Catalog.PlaceTypes;
+
 namespace TD.CitizenAPI.Application.Catalog.Places;
 
 public class PlaceDto : IDto
@@ -14,4 +16,5 @@ public class PlaceDto : IDto
     public string? Image { get; set; }
     public string? Images { get; set; }
     public string? Status { get; set; }
+    public PlaceTypeDto? PlaceType { get; set; }
 }

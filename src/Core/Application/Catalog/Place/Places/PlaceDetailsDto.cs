@@ -27,8 +27,13 @@ public class PlaceDetailsDto : IDto
     public DateTime? TimeEnd { get; set; }
 
     public PlaceType? PlaceType { get; set; }
+    public Guid? PlaceTypeId { get; set; }
 
     public Area? Province { get; set; }
     public Area? District { get; set; }
     public Area? Commune { get; set; }
+
+    public Guid? ProvinceId { get; set; }
+    public Guid? DistrictId { get; set; }
+    public Guid? CommuneId { get; set; }
 }

@@ -22,7 +22,7 @@ public class CreateVehicleRequest : IRequest<Result<Guid>>
     public Guid? VehicleTypeId { get; set; }
     public Guid? CompanyId { get; set; }
 
-    public virtual ICollection<Guid>? VehicleCarUtilities { get; set; }
+    public virtual ICollection<Guid>? CarUtilities { get; set; }
 }
 
 public class CreateVehicleRequestValidator : CustomValidator<CreateVehicleRequest>
@@ -45,9 +45,9 @@ public class CreateVehicleRequestHandler : IRequestHandler<CreateVehicleRequest,
         await _repository.AddAsync(item, cancellationToken);
 
 
-        if (request.VehicleCarUtilities != null)
+        if (request.CarUtilities != null)
         {
-            foreach (var industryId in request.VehicleCarUtilities)
+            foreach (var industryId in request.CarUtilities)
             {
                 try
                 {

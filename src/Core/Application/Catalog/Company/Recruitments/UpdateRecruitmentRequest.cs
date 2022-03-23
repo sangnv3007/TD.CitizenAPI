@@ -47,6 +47,8 @@ public class UpdateRecruitmentRequest : IRequest<Result<Guid>>
     public Guid? ProvinceId { get; set; }
     public Guid? DistrictId { get; set; }
     public Guid? CommuneId { get; set; }
+    public virtual ICollection<Guid>? Benefits { get; set; }
+
 }
 
 public class UpdateRecruitmentRequestValidator : CustomValidator<UpdateRecruitmentRequest>
@@ -61,9 +63,11 @@ public class UpdateRecruitmentRequestHandler : IRequestHandler<UpdateRecruitment
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<Recruitment> _repository;
     private readonly IStringLocalizer<UpdateRecruitmentRequestHandler> _localizer;
+    private readonly IRepositoryWithEvents<RecruitmentBenefit> _recruitmentBenefitRepository;
 
-    public UpdateRecruitmentRequestHandler(IRepositoryWithEvents<Recruitment> repository, IStringLocalizer<UpdateRecruitmentRequestHandler> localizer) =>
-        (_repository, _localizer) = (repository, localizer);
+
+    public UpdateRecruitmentRequestHandler(IRepositoryWithEvents<Recruitment> repository, IRepositoryWithEvents<RecruitmentBenefit> recruitmentBenefitRepository, IStringLocalizer<UpdateRecruitmentRequestHandler> localizer) =>
+        (_repository, _recruitmentBenefitRepository, _localizer) = (repository, recruitmentBenefitRepository, localizer);
 
     public async Task<Result<Guid>> Handle(UpdateRecruitmentRequest request, CancellationToken cancellationToken)
     {
@@ -74,6 +78,29 @@ public class UpdateRecruitmentRequestHandler : IRequestHandler<UpdateRecruitment
         item.Update(request.UserName, request.Name, request.Description, request.Image, request.CompanyId, request.JobTypeId, request.JobNameId, request.JobPositionId, request.SalaryId, request.ExperienceId, request.Gender, request.JobAgeId, request.DegreeId, request.OtherRequirement, request.ResumeRequirement, request.ResumeApplyExpired, request.NumberOfJob, request.Status, request.ContactName, request.ContactEmail, request.ContactPhone, request.ContactAdress, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId);
 
         await _repository.UpdateAsync(item, cancellationToken);
+
+        var item_CompanyIndustries = await _recruitmentBenefitRepository.ListAsync(new RecruitmentBenefitByRecruitmentSpec(item.Id), cancellationToken);
+
+        if (item_CompanyIndustries?.Count > 0)
+        {
+            await _recruitmentBenefitRepository.DeleteRangeAsync(item_CompanyIndustries);
+        }
+
+        if (request.Benefits != null)
+        {
+            foreach (var industryId in request.Benefits)
+            {
+                try
+                {
+                    var recruitmentBenefit = new RecruitmentBenefit(item.Id, industryId);
+                    await _recruitmentBenefitRepository.AddAsync(recruitmentBenefit, cancellationToken);
+                }
+                catch
+                {
+
+                }
+            }
+        }
 
         return Result<Guid>.Success(request.Id);
     }

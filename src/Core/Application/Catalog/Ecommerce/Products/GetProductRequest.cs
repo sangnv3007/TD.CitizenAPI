@@ -12,6 +12,47 @@ public class GetProductRequest : IRequest<Result<ProductDetailsDto>>
     public GetProductRequest(Guid id) => Id = id;
 }
 
+public class ProductByIdSpec : Specification<Product, ProductDetailsDto>, ISingleResultSpecification
+{
+    public ProductByIdSpec(Guid id) =>
+        Query.Where(p => p.Id == id).
+        Include(p => p.Brand)
+        .Include(p => p.Commune)
+        .Include(p => p.Province)
+        .Include(p => p.District)
+        .Include(p => p.Company)
+        .Include(p => p.PrimaryEcommerceCategory)
+        .Include(p => p.AttributeBooleans)
+        .Include(p => p.AttributeDatetimes)
+        .Include(p => p.AttributeDecimals)
+        .Include(p => p.AttributeInts)
+        .Include(p => p.AttributeTexts)
+        .Include(p => p.AttributeVarchars)
+
+        ;
+}
+
+public class ProductByIdWithoutSpec : Specification<Product>, ISingleResultSpecification
+{
+    public ProductByIdWithoutSpec(Guid id) =>
+        Query.Where(p => p.Id == id).
+        Include(p => p.Brand)
+        .Include(p => p.Commune)
+        .Include(p => p.Province)
+        .Include(p => p.District)
+        .Include(p => p.Company)
+        .Include(p => p.PrimaryEcommerceCategory)
+        .Include(p => p.AttributeBooleans)
+        .Include(p => p.AttributeDatetimes)
+        .Include(p => p.AttributeDecimals)
+        .Include(p => p.AttributeInts)
+        .Include(p => p.AttributeTexts)
+        .Include(p => p.AttributeVarchars)
+        .Include(p => p.EcommerceCategoryProducts)
+
+        ;
+}
+
 public class GetProductRequestHandler : IRequestHandler<GetProductRequest, Result<ProductDetailsDto>>
 {
     private readonly IRepository<Product> _repository;
@@ -29,73 +70,77 @@ public class GetProductRequestHandler : IRequestHandler<GetProductRequest, Resul
 
     public async Task<Result<ProductDetailsDto>> Handle(GetProductRequest request, CancellationToken cancellationToken) {
 
-        var product = await _repository.GetByIdAsync(request.Id, cancellationToken) ?? throw new NotFoundException(string.Format(_localizer["product.notfound"], request.Id));
-
-        var mappedProduct = product.Adapt<ProductDetailsDto>();
-
-        Guid? categoryPrimary = product.PrimaryEcommerceCategoryId;
-        List<CategoriesInProduct> categories = new List<CategoriesInProduct>();
-        List<AttributeValueInProductResponse> attributes = new List<AttributeValueInProductResponse>();
+      
+        var product = await _repository.GetBySpecAsync(
+           (ISpecification<Product, ProductDetailsDto>)new ProductByIdSpec(request.Id), cancellationToken)
+       ?? throw new NotFoundException(string.Format(_localizer["product.notfound"], request.Id));
 
 
-        foreach (var category in product.EcommerceCategoryProducts)
+        List<Guid> ids = new List<Guid>();
+        var parentId = product.PrimaryEcommerceCategoryId;
+        while (parentId != null)
         {
-
-            var item = await _repositoryEcommerceCategory.GetByIdAsync(category.EcommerceCategoryId, cancellationToken);
-            var mapped = item.Adapt<EcommerceCategoryDto>();
-
-            categories.Add(new CategoriesInProduct { Id = (Guid)category.EcommerceCategoryId, IsPrimary = category.IsPrimary, EcommerceCategory = mapped });
+            ids.Add((Guid)parentId);
+            var itemParent = await _repositoryEcommerceCategory.GetBySpecAsync(
+           (ISpecification<EcommerceCategory, EcommerceCategoryDetailsDto>)new EcommerceCategoryByIdSpec((Guid)parentId), cancellationToken);
+            if (itemParent != null)
+            {
+                parentId = itemParent.ParentId;
+            }
         }
 
+        ids.Reverse();
+        product.Categories = ids;
 
-        categories.OrderBy(p => p.Id);
+
+        List<AttributeValueInProductResponse> attributes = new List<AttributeValueInProductResponse>();
+
 
 
         foreach (var item in product.AttributeDatetimes)
         {
-            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByCodeSpec(item.Attribute.Code), cancellationToken);
+            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByIdSpec((DefaultIdType)item.AttributeId), cancellationToken);
             var mapped = itemAttribute.Adapt<AttributeDto>();
-            attributes.Add(new AttributeValueInProductResponse { Code = item.Attribute.Code, Value = item.Value, Attribute = mapped });
+            attributes.Add(new AttributeValueInProductResponse { Code = itemAttribute.Code, Value = item.Value, Attribute = mapped });
         }
 
         foreach (var item in product.AttributeDecimals)
         {
-            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByCodeSpec(item.Attribute.Code), cancellationToken);
+            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByIdSpec((DefaultIdType)item.AttributeId), cancellationToken);
             var mapped = itemAttribute.Adapt<AttributeDto>();
-            attributes.Add(new AttributeValueInProductResponse { Code = item.Attribute.Code, Value = item.Value, Attribute = mapped });
+            attributes.Add(new AttributeValueInProductResponse { Code = itemAttribute.Code, Value = item.Value, Attribute = mapped });
         }
 
         foreach (var item in product.AttributeInts)
         {
-            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByCodeSpec(item.Attribute.Code), cancellationToken);
+            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByIdSpec((DefaultIdType)item.AttributeId), cancellationToken);
             var mapped = itemAttribute.Adapt<AttributeDto>();
-            attributes.Add(new AttributeValueInProductResponse { Code = item.Attribute.Code, Value = item.Value, Attribute = mapped });
+            attributes.Add(new AttributeValueInProductResponse { Code = itemAttribute.Code, Value = item.Value, Attribute = mapped });
         }
 
         foreach (var item in product.AttributeVarchars)
         {
-            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByCodeSpec(item.Attribute.Code), cancellationToken);
+            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByIdSpec((DefaultIdType)item.AttributeId), cancellationToken);
             var mapped = itemAttribute.Adapt<AttributeDto>();
-            attributes.Add(new AttributeValueInProductResponse { Code = item.Attribute.Code, Value = item.Value, Attribute = mapped });
+            attributes.Add(new AttributeValueInProductResponse { Code = itemAttribute.Code, Value = item.Value, Attribute = mapped });
         }
 
         foreach (var item in product.AttributeBooleans)
         {
-            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByCodeSpec(item.Attribute.Code), cancellationToken);
+            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByIdSpec((DefaultIdType)item.AttributeId), cancellationToken);
             var mapped = itemAttribute.Adapt<AttributeDto>();
-            attributes.Add(new AttributeValueInProductResponse { Code = item.Attribute.Code, Value = item.Value, Attribute = mapped });
+            attributes.Add(new AttributeValueInProductResponse { Code = itemAttribute.Code, Value = item.Value, Attribute = mapped });
         }
 
         foreach (var item in product.AttributeTexts)
         {
-            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByCodeSpec(item.Attribute.Code), cancellationToken);
+            var itemAttribute = await _repositoryAttribute.GetBySpecAsync(new AttributeByIdSpec((DefaultIdType)item.AttributeId), cancellationToken);
             var mapped = itemAttribute.Adapt<AttributeDto>();
-            attributes.Add(new AttributeValueInProductResponse { Code = item.Attribute.Code, Value = item.Value, Attribute = mapped });
+            attributes.Add(new AttributeValueInProductResponse { Code = itemAttribute.Code, Value = item.Value, Attribute = mapped });
         }
 
-        mappedProduct.Attributes = attributes;
-        mappedProduct.Categories = categories;
+        product.Attributes = attributes;
 
-        return Result<ProductDetailsDto>.Success(mappedProduct);
+        return Result<ProductDetailsDto>.Success(product);
     }
 }

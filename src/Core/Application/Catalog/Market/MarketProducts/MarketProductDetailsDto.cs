@@ -15,4 +15,6 @@ public class MarketProductDetailsDto : IDto
     public string? DisplayUnit { get; set; }
     public string? DisplayFactor { get; set; }
     public virtual MarketCategory? MarketCategory { get; set; }
+    public Guid? MarketCategoryId { get; set; }
+
 }

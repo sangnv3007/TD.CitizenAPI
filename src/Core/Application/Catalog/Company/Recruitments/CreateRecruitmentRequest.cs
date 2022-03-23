@@ -47,6 +47,8 @@ public class CreateRecruitmentRequest : IRequest<Result<Guid>>
     public Guid? DistrictId { get; set; }
     public Guid? CommuneId { get; set; }
 
+    public virtual ICollection<Guid>? Benefits { get; set; }
+
 }
 
 public class CreateRecruitmentRequestValidator : CustomValidator<CreateRecruitmentRequest>
@@ -59,13 +61,33 @@ public class CreateRecruitmentRequestHandler : IRequestHandler<CreateRecruitment
 {
     // Add Domain Events automatically by using IRepositoryWithEvents
     private readonly IRepositoryWithEvents<Recruitment> _repository;
+    private readonly IRepositoryWithEvents<RecruitmentBenefit> _recruitmentBenefitRepository;
+    private readonly ICurrentUser _currentUser;
 
-    public CreateRecruitmentRequestHandler(IRepositoryWithEvents<Recruitment> repository) => _repository = repository;
+
+    public CreateRecruitmentRequestHandler(IRepositoryWithEvents<Recruitment> repository, IRepositoryWithEvents<RecruitmentBenefit> recruitmentBenefitRepository, ICurrentUser currentUser) => (_repository, _recruitmentBenefitRepository, _currentUser) = (repository, recruitmentBenefitRepository, currentUser);
 
     public async Task<Result<Guid>> Handle(CreateRecruitmentRequest request, CancellationToken cancellationToken)
     {
-        var item = new Recruitment(request.UserName, request.Name, request.Description, request.Image,request.CompanyId,request.JobTypeId,request.JobNameId, request.JobPositionId, request.SalaryId, request.ExperienceId, request.Gender, request.JobAgeId, request.DegreeId, request.OtherRequirement, request.ResumeRequirement, request.ResumeApplyExpired, request.NumberOfJob, request.Status, request.ContactName, request.ContactEmail, request.ContactPhone, request.ContactAdress, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId);
+        var item = new Recruitment(request.UserName ?? _currentUser.GetUserName(), request.Name, request.Description, request.Image, request.CompanyId, request.JobTypeId, request.JobNameId, request.JobPositionId, request.SalaryId, request.ExperienceId, request.Gender, request.JobAgeId, request.DegreeId, request.OtherRequirement, request.ResumeRequirement, request.ResumeApplyExpired, request.NumberOfJob, request.Status, request.ContactName, request.ContactEmail, request.ContactPhone, request.ContactAdress, request.Address, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId);
         await _repository.AddAsync(item, cancellationToken);
+
+        if (request.Benefits != null)
+        {
+            foreach (var industryId in request.Benefits)
+            {
+                try
+                {
+                    var recruitmentBenefit = new RecruitmentBenefit(item.Id, industryId);
+                    await _recruitmentBenefitRepository.AddAsync(recruitmentBenefit, cancellationToken);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
         return Result<Guid>.Success(item.Id);
     }
 }

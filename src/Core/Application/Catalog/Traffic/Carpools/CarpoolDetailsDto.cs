@@ -38,6 +38,17 @@ public class CarpoolDetailsDto : IDto
     //Trang thai
     public int Status { get; set; }
 
+    public Guid? DepartureProvinceId { get; set; }
+    public Guid? DepartureDistrictId { get; set; }
+    public Guid? DepartureCommuneId { get; set; }
+
+    //Diem den
+   
+    public Guid? ArrivalProvinceId { get; set; }
+    public Guid? ArrivalDistrictId { get; set; }
+    public Guid? ArrivalCommuneId { get; set; }
+    public Guid? VehicleTypeId { get; set; }
+
     public virtual VehicleTypeDto? VehicleType { get; set; }
     public virtual AreaDto? ArrivalProvince { get; set; }
     public virtual AreaDto? ArrivalDistrict { get; set; }

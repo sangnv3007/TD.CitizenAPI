@@ -4,7 +4,7 @@ using TD.CitizenAPI.Application.Catalog.MarketCategories;
 
 namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
-public class AttributeController : VersionedApiController
+public class AttributesController : VersionedApiController
 {
     [HttpPost("search")]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]

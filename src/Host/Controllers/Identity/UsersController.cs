@@ -9,6 +9,14 @@ public class UsersController : VersionNeutralApiController
 
     public UsersController(IUserService userService) => _userService = userService;
 
+
+    [HttpPost("search")]
+    [OpenApiOperation("Search categories using available filters.", "")]
+    public Task<PaginationResponse<UserDto>> SearchAsync(UserListFilter request, CancellationToken cancellationToken)
+    {
+        return _userService.SearchAsync(request, cancellationToken);
+    }
+
     [HttpGet]
     [MustHavePermission(FSHAction.View, FSHResource.Users)]
     [OpenApiOperation("Get list of all users.", "")]
@@ -23,6 +31,16 @@ public class UsersController : VersionNeutralApiController
     public Task<UserDetailsDto> GetByIdAsync(string username, CancellationToken cancellationToken)
     {
         return _userService.GetAsyncByUserName(username, cancellationToken);
+    }
+
+    [HttpPut("{username}")]
+    [MustHavePermission(FSHAction.View, FSHResource.Users)]
+    [OpenApiOperation("Get a user's details.", "")]
+    public  Task<bool> UpdateUserByUserNameAsync(string username, UpdateUserRequest request, CancellationToken cancellationToken)
+    {
+        //return _userService.UpdateAsyncByUserName(request, username);
+        return _userService.UpdateAsyncByUserName(request, username);
+       
     }
 
     [HttpGet("{username}/roles")]

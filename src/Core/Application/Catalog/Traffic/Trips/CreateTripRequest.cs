@@ -57,7 +57,8 @@ public class CreateTripRequestHandler : IRequestHandler<CreateTripRequest, Resul
 
     public async Task<Result<Guid>> Handle(CreateTripRequest request, CancellationToken cancellationToken)
     {
-        var item = new Trip(request.Name, request.Description, request.VehicleId, request.DeparturePlaceName, request.DepartureLatitude, request.DepartureLongitude, request.DepartureProvinceId, request.DepartureDistrictId, request.DepartureCommuneId, request.ArrivalPlaceName, request.ArrivalLatitude, request.ArrivalLongitude, request.ArrivalProvinceId, request.ArrivalDistrictId, request.ArrivalCommuneId, request.Price, request.TimeStart, request.Frequency, request.Duration, request.Status);
+        var item = new Trip(request.Name, request.Description, request.VehicleId, request.DeparturePlaceName, request.DepartureLatitude, request.DepartureLongitude, request.DepartureProvinceId, request.DepartureDistrictId, request.DepartureCommuneId, request.ArrivalPlaceName, request.ArrivalLatitude, request.ArrivalLongitude, request.ArrivalProvinceId, request.ArrivalDistrictId, request.ArrivalCommuneId, request.Price, request.TimeStart, request.Frequency, request.Duration, request.Status ?? true);
+        await _repository.AddAsync(item, cancellationToken);
 
         return Result<Guid>.Success(item.Id);
     }

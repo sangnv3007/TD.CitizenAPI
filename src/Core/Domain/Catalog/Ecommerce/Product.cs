@@ -49,15 +49,15 @@ public class Product : AuditableEntity, IAggregateRoot
     public virtual Area? Commune { get; set; }
 
     public virtual EcommerceCategory? PrimaryEcommerceCategory { get; set; }
-    public virtual ICollection<AttributeDatetime> AttributeDatetimes { get; set; } = new List<AttributeDatetime>();
+    public virtual ICollection<AttributeDatetime>? AttributeDatetimes { get; set; } 
 
-    public virtual ICollection<AttributeDecimal> AttributeDecimals { get; set; } = new List<AttributeDecimal>();
+    public virtual ICollection<AttributeDecimal>? AttributeDecimals { get; set; }
 
-    public virtual ICollection<AttributeInt> AttributeInts { get; set; }= new List<AttributeInt>();
+    public virtual ICollection<AttributeInt>? AttributeInts { get; set; }
 
-    public virtual ICollection<AttributeText> AttributeTexts { get; set; } = new List<AttributeText>();
-    public virtual ICollection<AttributeBoolean>? AttributeBooleans { get; set; } = new List<AttributeBoolean>();
-    public virtual ICollection<AttributeVarchar>? AttributeVarchars { get; set; } = new List<AttributeVarchar>();
+    public virtual ICollection<AttributeText>? AttributeTexts { get; set; }
+    public virtual ICollection<AttributeBoolean>? AttributeBooleans { get; set; }
+    public virtual ICollection<AttributeVarchar>? AttributeVarchars { get; set; }
 
     public virtual ICollection<EcommerceCategoryProduct> EcommerceCategoryProducts { get; set; } = new List<EcommerceCategoryProduct>();
 
@@ -93,7 +93,7 @@ public class Product : AuditableEntity, IAggregateRoot
         CommuneId = communeId;
     }
 
-    public Product Update(string? userName, Guid? companyId, int? type, string name, string? code, string? sKU, string? barcode, string? description, string? shortDescription, decimal? rate, string? imagePath, string? image, string? thumbnailUrl, string? images, string? videoURL, int? price, int? listPrice, int? quantity, Guid? primaryEcommerceCategoryId, Guid? brandId, int? status, DateTime? fromDate, DateTime? toDate, string? phoneNumber, string? address, Guid? provinceId, Guid? districtId, Guid? communeId)
+    public Product Update(string? userName, Guid? companyId, int? type, string? name, string? code, string? sKU, string? barcode, string? description, string? shortDescription, decimal? rate, string? imagePath, string? image, string? thumbnailUrl, string? images, string? videoURL, int? price, int? listPrice, int? quantity, Guid? primaryEcommerceCategoryId, Guid? brandId, int? status, DateTime? fromDate, DateTime? toDate, string? phoneNumber, string? address, Guid? provinceId, Guid? districtId, Guid? communeId)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;
         if (description is not null && Description?.Equals(description) is not true) Description = description;

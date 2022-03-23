@@ -1,6 +1,6 @@
 namespace TD.CitizenAPI.Application.Catalog.Products;
 
-public class SearchProductsRequest : PaginationFilter, IRequest<PaginationResponse<CategoriesInProduct>>
+public class SearchProductsRequest : PaginationFilter, IRequest<PaginationResponse<ProductDto>>
 {
     public Guid? BrandId { get; set; }
     public Guid? EcommerceCategoryId { get; set; }
@@ -19,19 +19,19 @@ public class SearchProductsRequest : PaginationFilter, IRequest<PaginationRespon
     public decimal? MaximumRate { get; set; }
 }
 
-public class SearchProductsRequestHandler : IRequestHandler<SearchProductsRequest, PaginationResponse<CategoriesInProduct>>
+public class SearchProductsRequestHandler : IRequestHandler<SearchProductsRequest, PaginationResponse<ProductDto>>
 {
     private readonly IReadRepository<Product> _repository;
 
     public SearchProductsRequestHandler(IReadRepository<Product> repository) => _repository = repository;
 
-    public async Task<PaginationResponse<CategoriesInProduct>> Handle(SearchProductsRequest request, CancellationToken cancellationToken)
+    public async Task<PaginationResponse<ProductDto>> Handle(SearchProductsRequest request, CancellationToken cancellationToken)
     {
         var spec = new ProductsBySearchRequestWithBrandsSpec(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
         int count = await _repository.CountAsync(spec, cancellationToken);
 
-        return new PaginationResponse<CategoriesInProduct>(list, count, request.PageNumber, request.PageSize);
+        return new PaginationResponse<ProductDto>(list, count, request.PageNumber, request.PageSize);
     }
 }

@@ -109,10 +109,19 @@ internal partial class UserService
             FullName = request.FullName,
             Email = request.Email,
             DateOfBirth = request.DateOfBirth,
-            IdentityNumber = request.IdentityNumber,
             UserName = request.UserName,
             PhoneNumber = request.PhoneNumber,
-            IsActive = true
+            IsActive = true,
+            Gender = request.Gender,
+
+            IdentityDate = request.IdentityDate,
+            IdentityNumber = request.IdentityNumber,
+            IdentityPlace = request.IdentityPlace,
+            ProvinceId = request.ProvinceId,
+            DistrictId = request.DistrictId,
+            CommuneId = request.CommuneId,
+            Address = request.Address,
+            ImageUrl = request.ImageUrl,
         };
 
         if (!string.IsNullOrWhiteSpace(request.IdentityNumber))
@@ -242,5 +251,47 @@ internal partial class UserService
         {
             throw new InternalServerException(_localizer["Update profile failed"], result.GetErrors(_localizer));
         }
+    }
+
+    public async Task<bool> UpdateAsyncByUserName(UpdateUserRequest request, string userName)
+    {
+        var user = await _userManager.FindByNameAsync(userName);
+
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+
+        user.Gender = request.Gender;
+        user.ImageUrl = request.ImageUrl;
+
+        if (!user.IsVerified)
+        {
+            user.FullName = request.FullName;
+            user.DateOfBirth = request.DateOfBirth;
+            user.IdentityNumber = request.IdentityNumber;
+            user.IdentityPlace = request.IdentityPlace;
+            user.IdentityDate = request.IdentityDate;
+            user.PlaceOfOrigin = request.PlaceOfOrigin;
+            user.PlaceOfDestination = request.PlaceOfDestination;
+            user.Nationality = request.Nationality;
+        }
+
+        user.ProvinceId = request.ProvinceId;
+        user.DistrictId = request.DistrictId;
+        user.CommuneId = request.CommuneId;
+        user.Address = request.Address;
+
+
+        var result = await _userManager.UpdateAsync(user);
+
+        await _signInManager.RefreshSignInAsync(user);
+
+        await _events.PublishAsync(new ApplicationUserUpdatedEvent(user.Id));
+
+        if (!result.Succeeded)
+        {
+            throw new InternalServerException(_localizer["Update profile failed"], result.GetErrors(_localizer));
+        }
+        return true;
+
     }
 }

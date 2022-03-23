@@ -22,7 +22,7 @@ public class CreateAreaInforRequest : IRequest<Result<Guid>>
     public List<AreaInforValueRequest>? Economy { get; set; }
 }
 
-public class CreateAreaInforRequestValidator : CustomValidator<CreateAreaInforRequest>
+/*public class CreateAreaInforRequestValidator : CustomValidator<CreateAreaInforRequest>
 {
     public CreateAreaInforRequestValidator(IReadRepository<AreaInfor> repository, IStringLocalizer<CreateAreaInforRequestValidator> localizer) =>
         RuleFor(p => p.AreaCode)
@@ -30,7 +30,7 @@ public class CreateAreaInforRequestValidator : CustomValidator<CreateAreaInforRe
             .MaximumLength(256)
             .MustAsync(async (name, ct) => await repository.GetBySpecAsync(new AreaInforByAreaCodeSpec(name), ct) is null)
                 .WithMessage((_, name) => string.Format(localizer["areainfor.alreadyexists"], name));
-}
+}*/
 
 public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequest, Result<Guid>>
 {
@@ -42,6 +42,17 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
 
     public async Task<Result<Guid>> Handle(CreateAreaInforRequest request, CancellationToken cancellationToken)
     {
+
+        var areaInfor = await _repository.GetBySpecAsync(new AreaInforByAreaCodeSpec(request.AreaCode), cancellationToken);
+
+        if (areaInfor != null)
+        {
+            var lstValue = await _areaInforValuerepository.ListAsync(new AreaInforValuesByCodeSpec(areaInfor.Id), cancellationToken);
+            await _repository.DeleteAsync(areaInfor);
+            if (lstValue != null && lstValue.Count>0)
+            await _areaInforValuerepository.DeleteRangeAsync(lstValue);
+        }
+
         var item = new AreaInfor(request.AreaCode, request.Introduce, request.Acreage, request.Population, request.Image, request.Images);
         item.DomainEvents.Add(EntityCreatedEvent.WithEntity(item));
         await _repository.AddAsync(item, cancellationToken);
@@ -53,9 +64,8 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.Administrative)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "Administrative";
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "Administrative", itemValue.Order ?? 1, item.Id);
+
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }
@@ -64,9 +74,7 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.Populations)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "Populations";
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "Populations", itemValue.Order ?? 1, item.Id);
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }
@@ -75,9 +83,8 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.Topographic)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "Topographic";
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "Topographic", itemValue.Order ?? 1, item.Id);
+
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }
@@ -86,9 +93,9 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.Weather)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "Weather";
+
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "Weather", itemValue.Order ?? 1, item.Id);
+
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }
@@ -97,9 +104,8 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.Mineral)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "Mineral";
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "Mineral", itemValue.Order ?? 1, item.Id);
+
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }
@@ -108,9 +114,8 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.History)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "History";
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "History", itemValue.Order ?? 1, item.Id);
+
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }
@@ -119,9 +124,8 @@ public class CreateAreaInforRequestHandler : IRequestHandler<CreateAreaInforRequ
             {
                 foreach (var itemValue in request.Economy)
                 {
-                    var itemValue_ = itemValue.Adapt<AreaInforValue>();
-                    itemValue_.AreaInforId = item.Id;
-                    itemValue_.Type = "Economy";
+                    AreaInforValue itemValue_ = new AreaInforValue(itemValue.Key, itemValue.Value, "Economy", itemValue.Order ?? 1, item.Id);
+
                     await _areaInforValuerepository.AddAsync(itemValue_, cancellationToken);
                 }
             }

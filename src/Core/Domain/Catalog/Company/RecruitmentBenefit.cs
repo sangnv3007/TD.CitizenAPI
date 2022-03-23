@@ -16,6 +16,12 @@ public class RecruitmentBenefit : AuditableEntity, IAggregateRoot
         BenefitId = benefitId;
     }
 
+    public RecruitmentBenefit(Guid? recruitmentId, Guid? benefitId)
+    {
+        RecruitmentId = recruitmentId;
+        BenefitId = benefitId;
+    }
+
     public RecruitmentBenefit Update(string? name, Guid? recruitmentId, Guid? benefitId)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;

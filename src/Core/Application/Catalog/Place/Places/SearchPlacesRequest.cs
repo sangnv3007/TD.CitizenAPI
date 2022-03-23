@@ -7,6 +7,9 @@ public class SearchPlacesRequest : PaginationFilter, IRequest<PaginationResponse
     public double? Range { get; set; }
     public string? PlaceTypeIds { get; set; }
     public Guid? AreaId { get; set; }
+    public Guid? ProvinceId { get; set; }
+    public Guid? DistrictId { get; set; }
+    public Guid? CommuneId { get; set; }
 
 }
 

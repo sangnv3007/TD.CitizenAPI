@@ -5,7 +5,10 @@ public class EcommerceCategoryDetailsDto : IDto
     public Guid Id { get; set; }
     public Guid? ParentId { get; set; }
 
-    public string Name { get; set; } = default!;
+    public List<Guid>? ParentsId { get; set; }
+
+
+    public string? Name { get; set; }
     public string? Slug { get; set; }
     public string? Description { get; set; }
     public string? MetaTitle { get; set; }
@@ -18,6 +21,6 @@ public class EcommerceCategoryDetailsDto : IDto
     public string[]? Tags { get; set; }
     public int? Status { get; set; }
     public bool? IsActive { get; set; }
-    public virtual EcommerceCategoryDto? Parent { get; set; }
+    //public virtual EcommerceCategoryDetailsDto? Parent { get; set; }
 
 }

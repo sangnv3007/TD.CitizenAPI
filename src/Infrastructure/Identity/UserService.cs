@@ -81,18 +81,23 @@ internal partial class UserService : IUserService
         _areaRepository = areaRepository;
     }
 
-    public async Task<PaginationResponse<UserDetailsDto>> SearchAsync(UserListFilter filter, CancellationToken cancellationToken)
+
+
+
+    public async Task<PaginationResponse<UserDto>> SearchAsync(UserListFilter filter, CancellationToken cancellationToken)
     {
-        var spec = new EntitiesByPaginationFilterSpec<ApplicationUser>(filter);
+        //var spec = new EntitiesByPaginationFilterSpec<ApplicationUser>(filter);
+
+         var spec = new UserListFilterSpec(filter);
 
         var users = await _userManager.Users
             .WithSpecification(spec)
-            .ProjectToType<UserDetailsDto>()
+            .ProjectToType<UserDto>()
             .ToListAsync(cancellationToken);
         int count = await _userManager.Users
             .CountAsync(cancellationToken);
 
-        return new PaginationResponse<UserDetailsDto>(users, count, filter.PageNumber, filter.PageSize);
+        return new PaginationResponse<UserDto>(users, count, filter.PageNumber, filter.PageSize);
     }
 
     public async Task<bool> ExistsWithNameAsync(string name)

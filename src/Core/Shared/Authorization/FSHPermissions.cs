@@ -26,6 +26,14 @@ public static class FSHResource
     public const string RoleClaims = nameof(RoleClaims);
     public const string Products = nameof(Products);
     public const string Brands = nameof(Brands);
+    public const string Companies = nameof(Companies);
+    public const string Ecommerces = nameof(Ecommerces);
+    public const string Hotlines = nameof(Hotlines);
+    public const string Markets = nameof(Markets);
+    public const string Others = nameof(Others);
+    public const string Places = nameof(Places);
+    public const string Traffics = nameof(Traffics);
+    public const string Travels = nameof(Travels);
 }
 
 public static class FSHPermissions
@@ -64,7 +72,55 @@ public static class FSHPermissions
         new("View Tenants", FSHAction.View, FSHResource.Tenants, IsRoot: true),
         new("Create Tenants", FSHAction.Create, FSHResource.Tenants, IsRoot: true),
         new("Update Tenants", FSHAction.Update, FSHResource.Tenants, IsRoot: true),
-        new("Upgrade Tenant Subscription", FSHAction.UpgradeSubscription, FSHResource.Tenants, IsRoot: true)
+        new("Upgrade Tenant Subscription", FSHAction.UpgradeSubscription, FSHResource.Tenants, IsRoot: true),
+
+        new("View Companies", FSHAction.View, FSHResource.Companies, IsBasic: true),
+        new("Search Companies", FSHAction.Search, FSHResource.Companies, IsBasic: true),
+        new("Create Companies", FSHAction.Create, FSHResource.Companies),
+        new("Update Companies", FSHAction.Update, FSHResource.Companies),
+        new("Delete Companies", FSHAction.Delete, FSHResource.Companies),
+
+        new("View Ecommerces", FSHAction.View, FSHResource.Ecommerces, IsBasic: true),
+        new("Search Ecommerces", FSHAction.Search, FSHResource.Ecommerces, IsBasic: true),
+        new("Create Ecommerces", FSHAction.Create, FSHResource.Ecommerces),
+        new("Update Ecommerces", FSHAction.Update, FSHResource.Ecommerces),
+        new("Delete Ecommerces", FSHAction.Delete, FSHResource.Ecommerces),
+
+        new("View Hotlines", FSHAction.View, FSHResource.Hotlines, IsBasic: true),
+        new("Search Hotlines", FSHAction.Search, FSHResource.Hotlines, IsBasic: true),
+        new("Create Hotlines", FSHAction.Create, FSHResource.Hotlines),
+        new("Update Hotlines", FSHAction.Update, FSHResource.Hotlines),
+        new("Delete Hotlines", FSHAction.Delete, FSHResource.Hotlines),
+
+        new("View Markets", FSHAction.View, FSHResource.Markets, IsBasic: true),
+        new("Search Markets", FSHAction.Search, FSHResource.Markets, IsBasic: true),
+        new("Create Markets", FSHAction.Create, FSHResource.Markets),
+        new("Update Markets", FSHAction.Update, FSHResource.Markets),
+        new("Delete Markets", FSHAction.Delete, FSHResource.Markets),
+
+        new("View Others", FSHAction.View, FSHResource.Others, IsBasic: true),
+        new("Search Others", FSHAction.Search, FSHResource.Others, IsBasic: true),
+        new("Create Others", FSHAction.Create, FSHResource.Others),
+        new("Update Others", FSHAction.Update, FSHResource.Others),
+        new("Delete Others", FSHAction.Delete, FSHResource.Others),
+
+        new("View Places", FSHAction.View, FSHResource.Places, IsBasic: true),
+        new("Search Places", FSHAction.Search, FSHResource.Places, IsBasic: true),
+        new("Create Places", FSHAction.Create, FSHResource.Places),
+        new("Update Places", FSHAction.Update, FSHResource.Places),
+        new("Delete Places", FSHAction.Delete, FSHResource.Places),
+
+        new("View Traffics", FSHAction.View, FSHResource.Traffics, IsBasic: true),
+        new("Search Traffics", FSHAction.Search, FSHResource.Traffics, IsBasic: true),
+        new("Create Traffics", FSHAction.Create, FSHResource.Traffics),
+        new("Update Traffics", FSHAction.Update, FSHResource.Traffics),
+        new("Delete Traffics", FSHAction.Delete, FSHResource.Traffics),
+
+        new("View Travels", FSHAction.View, FSHResource.Travels, IsBasic: true),
+        new("Search Travels", FSHAction.Search, FSHResource.Travels, IsBasic: true),
+        new("Create Travels", FSHAction.Create, FSHResource.Travels),
+        new("Update Travels", FSHAction.Update, FSHResource.Travels),
+        new("Delete Travels", FSHAction.Delete, FSHResource.Travels),
     };
 
     public static IReadOnlyList<FSHPermission> All { get; } = new ReadOnlyCollection<FSHPermission>(_all);
