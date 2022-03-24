@@ -24,7 +24,7 @@ public class UserDetailsDto
 
     public string? IdentityNumber { get; set; }
     public string? IdentityPlace { get; set; }
-    public string? IdentityDate { get; set; }
+    public DateTime? IdentityDate { get; set; }
     //Nguyen Quan
     public string? PlaceOfOrigin { get; set; }
     //Thuong tru

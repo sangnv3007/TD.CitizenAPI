@@ -8,7 +8,7 @@ public class AreaByIdStringSpec : Specification<Area, AreaDto>, ISingleResultSpe
     {
         Guid idGuid = Guid.Empty;
         Guid.TryParse(id, out idGuid);
-        Query.Where(p => p.Id == Guid.NewGuid());
+        Query.Where(p => p.Id == idGuid);
         }
 
 }

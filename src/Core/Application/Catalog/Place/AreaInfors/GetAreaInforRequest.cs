@@ -37,7 +37,7 @@ public class GetAreaInforRequestHandler : IRequestHandler<GetAreaInforRequest, R
                 var child = await _repository.GetBySpecAsync(new AreaInforByAreaCodeSpec(areaItem.Code), cancellationToken);
                 if (child != null)
                 {
-                    var chl = new AreaInforChildResponse() { Id = child.Id, Name = areaItem.NameWithType, Level = areaItem.Level, Image = child.Image, Code = child.AreaCode };
+                    var chl = new AreaInforChildResponse() { Id = child.Id, Name = areaItem.Name, NameWithType = areaItem.NameWithType, Type = areaItem.Type, Level = areaItem.Level, Image = child.Image, Code = child.AreaCode };
                     children.Add(chl);
                 }
 
@@ -46,7 +46,9 @@ public class GetAreaInforRequestHandler : IRequestHandler<GetAreaInforRequest, R
 
         var mappedArea = areaInfor.Adapt<AreaInforDetailsDto>();
         mappedArea.Children = children.Count > 0 ? children : null;
-        mappedArea.Name = area.NameWithType;
+        mappedArea.Name = area.Name;
+        mappedArea.NameWithType = area.NameWithType;
+        mappedArea.Type = area.Type;
         mappedArea.Level = area.Level;
 
         var lstValue = await _areaInforValueRepository.ListAsync(new AreaInforValueByAreaInforSpec(areaInfor.Id), cancellationToken);

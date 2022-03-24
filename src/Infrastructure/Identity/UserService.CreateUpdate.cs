@@ -87,7 +87,8 @@ internal partial class UserService
                 NormalizedUserName = username.ToUpperInvariant(),
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                IsActive = true
+                IsActive = true,
+                CreatedOn = DateTime.UtcNow,
             };
             result = await _userManager.CreateAsync(user);
 
@@ -122,6 +123,7 @@ internal partial class UserService
             CommuneId = request.CommuneId,
             Address = request.Address,
             ImageUrl = request.ImageUrl,
+            CreatedOn = DateTime.UtcNow,
         };
 
         if (!string.IsNullOrWhiteSpace(request.IdentityNumber))
