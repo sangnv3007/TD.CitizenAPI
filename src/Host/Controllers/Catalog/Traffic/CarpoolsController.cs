@@ -5,6 +5,8 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class CarpoolsController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<CarpoolDto>> SearchAsync(SearchCarpoolsRequest request)
@@ -14,6 +16,8 @@ public class CarpoolsController : VersionedApiController
 
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get category details.", "")]
     public Task<Result<CarpoolDetailsDto>> GetAsync(Guid id)

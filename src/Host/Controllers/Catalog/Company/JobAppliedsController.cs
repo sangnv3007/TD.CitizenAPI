@@ -6,6 +6,8 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class JobAppliedsController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<JobAppliedDto>> SearchAsync(SearchCurrentJobAppliedsRequest request)
@@ -14,6 +16,8 @@ public class JobAppliedsController : VersionedApiController
     }
 
     [HttpPost("candidates")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<JobAppliedDto>> SearchCandidatesAsync(SearchCandidatesRequest request)

@@ -14,14 +14,16 @@ public class GetAreaInforRequest : IRequest<Result<AreaInforDetailsDto>>
 public class GetAreaInforRequestHandler : IRequestHandler<GetAreaInforRequest, Result<AreaInforDetailsDto>>
 {
     private readonly IRepository<AreaInfor> _repository;
-    private readonly IRepository<Area> _areaRepository;
+    private readonly IReadRepository<Area> _areaRepository;
     private readonly IRepository<AreaInforValue> _areaInforValueRepository;
     private readonly IStringLocalizer<GetAreaInforRequestHandler> _localizer;
+    private readonly ICurrentUser _currentUser;
 
-    public GetAreaInforRequestHandler(IRepository<AreaInfor> repository, IRepository<Area> areaRepository, IRepository<AreaInforValue> areaInforValueRepository, IStringLocalizer<GetAreaInforRequestHandler> localizer) => (_repository, _areaRepository, _areaInforValueRepository, _localizer) = (repository, areaRepository, areaInforValueRepository, localizer);
+    public GetAreaInforRequestHandler(IRepository<AreaInfor> repository, IReadRepository<Area> areaRepository, IRepository<AreaInforValue> areaInforValueRepository, IStringLocalizer<GetAreaInforRequestHandler> localizer, ICurrentUser currentUser) => (_repository, _areaRepository, _areaInforValueRepository, _localizer, _currentUser) = (repository, areaRepository, areaInforValueRepository, localizer, currentUser);
 
     public async Task<Result<AreaInforDetailsDto>> Handle(GetAreaInforRequest request, CancellationToken cancellationToken)
     {
+
         var area = await _areaRepository.GetBySpecAsync(new AreaByCodeSpec(request.Code), cancellationToken) ?? throw new NotFoundException(string.Format(_localizer["area.notfound"], request.Code));
 
         var areaInfor = await _repository.GetBySpecAsync(new AreaInforByAreaCodeSpec(request.Code), cancellationToken) ?? throw new NotFoundException(string.Format(_localizer["areainfor.notfound"], request.Code));

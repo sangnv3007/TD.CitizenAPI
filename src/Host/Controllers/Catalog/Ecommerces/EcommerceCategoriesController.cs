@@ -7,6 +7,8 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class EcommerceCategoriesController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<EcommerceCategoryDto>> SearchAsync(SearchEcommerceCategoriesRequest request)
@@ -15,6 +17,7 @@ public class EcommerceCategoriesController : VersionedApiController
     }
 
     [AllowAnonymous]
+    [TenantIdHeader]
     [HttpGet("allChild")]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get category details.", "")]
@@ -23,7 +26,8 @@ public class EcommerceCategoriesController : VersionedApiController
         return Mediator.Send(new AllEcommerceCategoryRequest());
     }
 
-
+    [AllowAnonymous]
+    [TenantIdHeader]
     [HttpPost("{id:guid}/Attributes/search")]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
@@ -32,6 +36,7 @@ public class EcommerceCategoriesController : VersionedApiController
         request.EcommerceCategoryId = id;
         return Mediator.Send(request);
     }
+
 
     [HttpPost("{id:guid}/Attributes")]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]

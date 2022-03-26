@@ -6,6 +6,8 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class HomePageInforsController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<HomePageInforDto>> SearchAsync(SearchHomePageInforsRequest request)
@@ -14,6 +16,8 @@ public class HomePageInforsController : VersionedApiController
     }
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get category details.", "")]
     public Task<Result<HomePageInforDetailsDto>> GetAsync(Guid id)

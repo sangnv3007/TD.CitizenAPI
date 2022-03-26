@@ -7,6 +7,8 @@ public class AreaInforsController : VersionedApiController
     //[ApiVersion("2.0")]
 
     [HttpGet("{code}")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     [OpenApiOperation("Get category details.", "")]
     public Task<Result<AreaInforDetailsDto>> GetAsync(string code)
     {

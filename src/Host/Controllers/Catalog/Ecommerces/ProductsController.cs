@@ -5,6 +5,8 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class ProductsController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     [MustHavePermission(FSHAction.Search, FSHResource.Products)]
     [OpenApiOperation("Search products using available filters.", "")]
     public Task<PaginationResponse<ProductDto>> SearchAsync(SearchProductsRequest request)
@@ -20,6 +22,8 @@ public class ProductsController : VersionedApiController
             return Mediator.Send(new GetProductRequest(id));
         }*/
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get product details.", "")]
     public Task<Result<ProductDetailsDto>> GetAsync(Guid id)

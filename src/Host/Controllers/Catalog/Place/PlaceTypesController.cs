@@ -6,6 +6,8 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class PlaceTypesController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<PlaceTypeDto>> SearchAsync(SearchPlaceTypesRequest request)
@@ -15,6 +17,8 @@ public class PlaceTypesController : VersionedApiController
 
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get category details.", "")]
     public Task<Result<PlaceTypeDetailsDto>> GetAsync(Guid id)

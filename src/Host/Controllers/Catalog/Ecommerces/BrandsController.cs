@@ -4,7 +4,10 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
 public class BrandsController : VersionedApiController
 {
+
     [HttpPost("search")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     [MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search brands using available filters.", "")]
     public Task<PaginationResponse<BrandDto>> SearchAsync(SearchBrandsRequest request)
@@ -30,6 +33,8 @@ public class BrandsController : VersionedApiController
     }*/
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
+    [TenantIdHeader]
     [MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get brand details.", "")]
     public Task<Result<BrandDto>> GetAsync(Guid id)

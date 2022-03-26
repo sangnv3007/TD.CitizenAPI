@@ -5,6 +5,7 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 public class HotlineCategoriesController : VersionedApiController
 {
     [HttpPost("search")]
+    [AllowAnonymous]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
     [OpenApiOperation("Search categories using available filters.", "")]
     public Task<PaginationResponse<HotlineCategoryDto>> SearchAsync(SearchHotlineCategoriesRequest request)
@@ -14,6 +15,7 @@ public class HotlineCategoriesController : VersionedApiController
 
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
     [OpenApiOperation("Get category details.", "")]
     public Task<Result<HotlineCategoryDetailsDto>> GetAsync(Guid id)
