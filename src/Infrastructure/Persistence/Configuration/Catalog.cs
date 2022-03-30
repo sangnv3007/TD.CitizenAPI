@@ -147,9 +147,9 @@ public class AreaInforValueConfig : IEntityTypeConfiguration<AreaInforValue>
 #endregion Place
 
 #region Market
-public class MarketCategoryConfig : IEntityTypeConfiguration<MarketCategory>
+public class MarketCategoryConfig : IEntityTypeConfiguration<Drug>
 {
-    public void Configure(EntityTypeBuilder<MarketCategory> builder)
+    public void Configure(EntityTypeBuilder<Drug> builder)
     {
         builder.IsMultiTenant();
         builder.Property(b => b.Name).HasMaxLength(256);

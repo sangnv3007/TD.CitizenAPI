@@ -3,6 +3,7 @@ namespace TD.CitizenAPI.Application.Catalog.PlaceTypes;
 public class SearchPlaceTypesRequest : PaginationFilter, IRequest<PaginationResponse<PlaceTypeDto>>
 {
     public Guid? CategoryId { get; set; }
+    public string? CategoryCode { get; set; }
 }
 
 public class SearchCategoriesRequestHandler : IRequestHandler<SearchPlaceTypesRequest, PaginationResponse<PlaceTypeDto>>

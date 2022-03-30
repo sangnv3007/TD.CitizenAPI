@@ -42,11 +42,11 @@ public class CreateCompanyRequestValidator : CustomValidator<CreateCompanyReques
     {
         RuleFor(p => p.Name).NotEmpty();
         //RuleFor(p => p.Level).NotNull().LessThanOrEqualTo(4).GreaterThan(0).WithMessage("Please specify a level");
-        RuleFor(p => p.TaxCode)
+       /* RuleFor(p => p.TaxCode)
                 .NotEmpty()
                 .MaximumLength(256)
                 .MustAsync(async (code, ct) => await repository.GetBySpecAsync(new CompanyByTaxCodeSpec(code), ct) is null)
-                    .WithMessage((_, taxCode) => string.Format(localizer["company.alreadyexists"], taxCode));
+                    .WithMessage((_, taxCode) => string.Format(localizer["company.alreadyexists"], taxCode));*/
     }
 }
 

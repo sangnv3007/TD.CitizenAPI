@@ -12,6 +12,7 @@ public class TripByIdSpec : Specification<Trip, TripDetailsDto>, ISingleResultSp
     public TripByIdSpec(Guid id) =>
         Query.Where(p => p.Id == id)
         .Include(p => p.Vehicle)
+        .ThenInclude(p => p.VehicleType)
         .Include(p => p.ArrivalProvince)
         .Include(p => p.ArrivalDistrict)
         .Include(p => p.ArrivalCommune)

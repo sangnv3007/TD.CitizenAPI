@@ -6,7 +6,7 @@ public class PlaceTypesBySearchRequestWithCategoriesSpec : EntitiesByPaginationF
         : base(request) =>
         Query
             .Include(p => p.Category)
-        
             .OrderBy(c => c.Name, !request.HasOrderBy())
+            .Where(p => p.Category.Code == (request.CategoryCode), !string.IsNullOrWhiteSpace(request.CategoryCode))
             .Where(p => p.CategoryId.Equals(request.CategoryId!.Value), request.CategoryId.HasValue);
 }

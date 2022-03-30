@@ -5,7 +5,7 @@ public class SearchTripsRequest : PaginationFilter, IRequest<PaginationResponse<
     public Guid? AreaId { get; set; }
     public Guid? AreaDepartureId { get; set; }
     public Guid? AreaArrivalId { get; set; }
-    public string? VehicleTypeId { get; set; }
+    public Guid? VehicleTypeId { get; set; }
     public Guid? VehicleId { get; set; }
 
     public string? TimeStartFrom { get; set; }

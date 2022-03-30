@@ -11,7 +11,7 @@ public class JobApplicationsBySearchRequestSpec : EntitiesByPaginationFilterSpec
         .Include(p => p.Experience)
         .Include(p => p.Degree)
         .Include(p => p.JobType)
-        .Where(p => p.UserName == request.UserName, string.IsNullOrWhiteSpace(request.UserName))
+        .Where(p => p.UserName == request.UserName, !string.IsNullOrWhiteSpace(request.UserName))
         .Where(p => p.CurrentPositionId.Equals(request.CurrentPositionId!.Value), request.CurrentPositionId.HasValue)
         .Where(p => p.PositionId.Equals(request.PositionId!.Value), request.PositionId.HasValue)
         .Where(p => p.JobNameId.Equals(request.JobNameId!.Value), request.JobNameId.HasValue)

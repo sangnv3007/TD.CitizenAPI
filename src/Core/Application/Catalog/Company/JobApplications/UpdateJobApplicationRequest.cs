@@ -28,12 +28,7 @@ public class UpdateJobApplicationRequest : IRequest<Result<Guid>>
     public int? IsSearchAllowed { get; set; }
 }
 
-public class UpdateJobApplicationRequestValidator : CustomValidator<UpdateJobApplicationRequest>
-{
-    public UpdateJobApplicationRequestValidator(IRepository<JobApplication> repository, IStringLocalizer<UpdateJobApplicationRequestValidator> localizer) =>
-        RuleFor(p => p.Name)
-            .NotEmpty();
-}
+
 
 public class UpdateJobApplicationRequestHandler : IRequestHandler<UpdateJobApplicationRequest, Result<Guid>>
 {
@@ -50,7 +45,7 @@ public class UpdateJobApplicationRequestHandler : IRequestHandler<UpdateJobAppli
 
         _ = item ?? throw new NotFoundException(string.Format(_localizer["JobApplication.notfound"], request.Id));
 
-        item.Update(request.UserName, request.Name, request.CVFile, request.Image, request.CurrentPositionId, request.PositionId, request.JobTypeId, request.DegreeId, request.ExperienceId, request.MinExpectedSalary, request.Address, request.JobTypeId, request.IsSearchAllowed);
+        item.Update(request.UserName, request.Name, request.CVFile, request.Image, request.CurrentPositionId, request.PositionId, request.JobNameId, request.DegreeId, request.ExperienceId, request.MinExpectedSalary, request.Address, request.JobTypeId, request.IsSearchAllowed);
 
         await _repository.UpdateAsync(item, cancellationToken);
 

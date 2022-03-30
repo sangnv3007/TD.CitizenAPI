@@ -39,6 +39,19 @@ public class PersonalController : VersionNeutralApiController
         return Ok();
     }
 
+    [HttpPut("update-location")]
+    [OpenApiOperation("Update profile details of currently logged in user.", "")]
+    public async Task<ActionResult> UpdateLocationAsync(UpdateUserLocationRequest request)
+    {
+        if (User.GetUserId() is not { } userId || string.IsNullOrEmpty(userId))
+        {
+            return Unauthorized();
+        }
+
+        await _userService.UpdateLocationAsync(request, userId);
+        return Ok();
+    }
+
     [HttpPut("change-password")]
     [OpenApiOperation("Change password of currently logged in user.", "")]
     [ApiConventionMethod(typeof(FSHApiConventions), nameof(FSHApiConventions.Register))]

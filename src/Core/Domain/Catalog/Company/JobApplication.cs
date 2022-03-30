@@ -65,11 +65,13 @@ public class JobApplication : AuditableEntity, IAggregateRoot
         if (jobNameId.HasValue && jobNameId.Value != Guid.Empty && !JobNameId.Equals(jobNameId.Value)) JobNameId = jobNameId.Value;
         if (degreeId.HasValue && degreeId.Value != Guid.Empty && !DegreeId.Equals(degreeId.Value)) DegreeId = degreeId.Value;
         if (experienceId.HasValue && experienceId.Value != Guid.Empty && !ExperienceId.Equals(experienceId.Value)) ExperienceId = experienceId.Value;
-        if (jobTypeId.HasValue && jobTypeId.Value != Guid.Empty && !JobNameId.Equals(jobTypeId.Value)) JobNameId = jobTypeId.Value;
+        if (jobTypeId.HasValue && jobTypeId.Value != Guid.Empty && !JobTypeId.Equals(jobTypeId.Value)) JobTypeId = jobTypeId.Value;
 
         if (minExpectedSalary.HasValue && !MinExpectedSalary.Equals(minExpectedSalary.Value)) MinExpectedSalary = minExpectedSalary.Value;
         if (isSearchAllowed.HasValue && !IsSearchAllowed.Equals(isSearchAllowed.Value)) IsSearchAllowed = isSearchAllowed.Value;
 
         return this;
     }
+
+   
 }

@@ -49,6 +49,9 @@ public class CarpoolDetailsDto : IDto
     public Guid? ArrivalCommuneId { get; set; }
     public Guid? VehicleTypeId { get; set; }
 
+    public string? CreatedBy { get; set; }
+    public DateTime? CreatedOn { get; set; }
+
     public virtual VehicleTypeDto? VehicleType { get; set; }
     public virtual AreaDto? ArrivalProvince { get; set; }
     public virtual AreaDto? ArrivalDistrict { get; set; }

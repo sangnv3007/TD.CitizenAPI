@@ -255,6 +255,28 @@ internal partial class UserService
         }
     }
 
+
+    public async Task UpdateLocationAsync(UpdateUserLocationRequest request, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+        user.Latitude = request.Latitude;
+        user.Longitude = request.Longitude;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        await _signInManager.RefreshSignInAsync(user);
+
+        await _events.PublishAsync(new ApplicationUserUpdatedEvent(user.Id));
+
+        if (!result.Succeeded)
+        {
+            throw new InternalServerException(_localizer["Update profile failed"], result.GetErrors(_localizer));
+        }
+    }
+
     public async Task<bool> UpdateAsyncByUserName(UpdateUserRequest request, string userName)
     {
         var user = await _userManager.FindByNameAsync(userName);

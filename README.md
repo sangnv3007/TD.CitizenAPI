@@ -139,7 +139,7 @@ Here are a few ways by which you can support.
 
 
 
-dotnet ef migrations add Update_17_User --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application
+dotnet ef migrations add Update_19_User --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application
 
 dotnet ef migrations add ModifiedTenantTable --project .././Migrators/Migrators.MSSQL/ --context TenantDbContext -o Migrations/Tenant
 

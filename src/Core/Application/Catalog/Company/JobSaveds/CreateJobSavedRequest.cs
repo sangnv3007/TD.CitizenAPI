@@ -9,6 +9,7 @@ public class CreateJobSavedRequestValidator : CustomValidator<CreateJobSavedRequ
 {
     public CreateJobSavedRequestValidator(IReadRepository<JobSaved> repository, IStringLocalizer<CreateJobSavedRequestValidator> localizer) =>
         RuleFor(p => p.RecruitmentId).NotEmpty();
+       
 }
 
 public class CreateJobSavedRequestHandler : IRequestHandler<CreateJobSavedRequest, Result<Guid>>
@@ -22,8 +23,13 @@ public class CreateJobSavedRequestHandler : IRequestHandler<CreateJobSavedReques
 
     public async Task<Result<Guid>> Handle(CreateJobSavedRequest request, CancellationToken cancellationToken)
     {
-        var item = new JobSaved(_currentUser.GetUserName(), request.RecruitmentId);
-        await _repository.AddAsync(item, cancellationToken);
+        var item = await _repository.GetBySpecAsync(new JobSavedByUserNameRecruitmentIdSpec(_currentUser.GetUserName(), (Guid)request.RecruitmentId), cancellationToken);
+        if (item == null)
+        {
+             item = new JobSaved(_currentUser.GetUserName(), request.RecruitmentId);
+             await _repository.AddAsync(item, cancellationToken);
+        }
+      
         return Result<Guid>.Success(item.Id);
     }
 }

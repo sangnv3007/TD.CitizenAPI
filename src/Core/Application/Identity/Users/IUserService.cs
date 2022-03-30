@@ -39,6 +39,9 @@ public interface IUserService : ITransientService
     Task<string> CreateAsync(CreateUserRequest request, string origin);
     Task UpdateAsync(UpdateUserRequest request, string userId);
 
+    Task UpdateLocationAsync(UpdateUserLocationRequest request, string userId);
+
+
     Task<bool> UpdateAsyncByUserName(UpdateUserRequest request, string userName);
 
 

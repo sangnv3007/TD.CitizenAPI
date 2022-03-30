@@ -33,6 +33,7 @@ public class CreateTripRouteRequestHandler : IRequestHandler<CreateTripRouteRequ
     public async Task<Result<Guid>> Handle(CreateTripRouteRequest request, CancellationToken cancellationToken)
     {
         var item = new TripRoute(request.Type, request.Description, request.TripId, request.PlaceName, request.Latitude, request.Longitude, request.ProvinceId, request.DistrictId, request.CommuneId, request.Duration, request.Status);
+        await _repository.AddAsync(item, cancellationToken);
 
         return Result<Guid>.Success(item.Id);
     }
