@@ -5,15 +5,15 @@ public class Product : AuditableEntity, IAggregateRoot
     public string UserName { get; set; } = default!;
     public Guid? CompanyId { get; set; }
     public int Type { get; set; } = 1;
-    public string Name { get; private set; } = default!;
+    public string Name { get;  set; } = default!;
     public string? Code { get; set; }
     public string? SKU { get; set; }
     public string? Barcode { get; set; }
     public string? Description { get; private set; }
     public string? ShortDescription { get; set; }
 
-    public decimal Rate { get; private set; } = decimal.Zero;
-    public string? ImagePath { get; private set; }
+    public decimal Rate { get;  set; } = decimal.Zero;
+    public string? ImagePath { get;  set; }
     public string? Image { get; set; }
     public string? ThumbnailUrl { get; set; }
     public string? Images { get; set; }
@@ -30,7 +30,7 @@ public class Product : AuditableEntity, IAggregateRoot
     //Danh muc san pham
     public Guid? PrimaryEcommerceCategoryId { get; set; }
 
-    public Guid? BrandId { get; private set; }
+    public Guid? BrandId { get;  set; }
 
     public int Status { get; set; } = 1;
     public DateTime? FromDate { get; set; }
@@ -43,7 +43,7 @@ public class Product : AuditableEntity, IAggregateRoot
     public Guid? CommuneId { get; set; }
 
     public virtual Company? Company { get; set; }
-    public virtual Brand Brand { get; private set; } = default!;
+    public virtual Brand? Brand { get;  set; }
     public virtual Area? Province { get; set; }
     public virtual Area? District { get; set; }
     public virtual Area? Commune { get; set; }

@@ -105,11 +105,19 @@ public class EcommerceCategoriesController : VersionedApiController
         return Mediator.Send(new DeleteEcommerceCategoryRequest(id));
     }
 
-   /* [HttpPost("fetchdata")]
+    /* [HttpPost("fetchdata")]
+     //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
+     [OpenApiOperation("Generate a number of random brands.", "")]
+     public Task<string> FetchMarketProductAsync(FetchMarketProductRequest request)
+     {
+         return Mediator.Send(request);
+     }*/
+
+    [HttpPost("fetchdata")]
     //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
     [OpenApiOperation("Generate a number of random brands.", "")]
-    public Task<string> FetchMarketProductAsync(FetchMarketProductRequest request)
+    public Task<string> FetchCategoriesAsync(GenerateEcommerceCategoriesRequest request)
     {
         return Mediator.Send(request);
-    }*/
+    }
 }

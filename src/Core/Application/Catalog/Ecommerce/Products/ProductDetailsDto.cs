@@ -9,18 +9,18 @@ namespace TD.CitizenAPI.Application.Catalog.Products;
 public class ProductDetailsDto : IDto
 {
     public Guid Id { get; set; }
-    public string UserName { get; set; } = default!;
+    public string? UserName { get; set; }
     public Guid? CompanyId { get; set; }
     public int Type { get; set; } = 1;
-    public string Name { get; private set; } = default!;
+    public string Name { get;  set; } = default!;
     public string? Code { get; set; }
     public string? SKU { get; set; }
     public string? Barcode { get; set; }
-    public string? Description { get; private set; }
+    public string? Description { get; set; }
     public string? ShortDescription { get; set; }
 
-    public decimal Rate { get; private set; } = decimal.Zero;
-    public string? ImagePath { get; private set; }
+    public decimal Rate { get;  set; } = decimal.Zero;
+    public string? ImagePath { get;  set; }
     public string? Image { get; set; }
     public string? ThumbnailUrl { get; set; }
     public string? Images { get; set; }
@@ -37,11 +37,12 @@ public class ProductDetailsDto : IDto
     //Danh muc san pham
     public Guid? PrimaryEcommerceCategoryId { get; set; }
 
-    public Guid? BrandId { get; private set; }
+    public Guid? BrandId { get;  set; }
 
     public int Status { get; set; } = 1;
     public DateTime? FromDate { get; set; }
     public DateTime? ToDate { get; set; }
+    public DateTime? CreatedOn { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Address { get; set; }
 
@@ -50,7 +51,7 @@ public class ProductDetailsDto : IDto
     public Guid? CommuneId { get; set; }
 
     public virtual CompanyDto? Company { get; set; }
-    public virtual BrandDto Brand { get; private set; } = default!;
+    public virtual BrandDto? Brand { get;  set; }
     public virtual AreaDto? Province { get; set; }
     public virtual AreaDto? District { get; set; }
     public virtual AreaDto? Commune { get; set; }

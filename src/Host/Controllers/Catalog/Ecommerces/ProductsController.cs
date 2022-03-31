@@ -73,4 +73,14 @@ public class ProductsController : VersionedApiController
         var result = await Mediator.Send(filter);
         return File(result, "application/octet-stream", "ProductExports");
     }
+
+    [HttpPost("fetchdata")]
+    //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
+    [OpenApiOperation("Generate a number of random brands.", "")]
+    public Task<string> FetchCategoriesAsync(GenerateProductsRequest request)
+    {
+        return Mediator.Send(request);
     }
+
+}
+

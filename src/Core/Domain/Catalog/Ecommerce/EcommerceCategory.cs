@@ -42,6 +42,10 @@ public class EcommerceCategory : AuditableEntity, IAggregateRoot
         IsActive = isActive;
     }
 
+    public EcommerceCategory()
+    {
+    }
+
     public EcommerceCategory Update(Guid? parentId, string? name, string? slug, string? description, string? metaTitle, string? metaDescription, int? position, bool? includeInMenu, int? level, string? icon, string? image, string[]? tags, int? status, bool? isActive)
     {
         if (name is not null && Name?.Equals(name) is not true) Name = name;
