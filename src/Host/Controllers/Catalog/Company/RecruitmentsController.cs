@@ -8,7 +8,7 @@ public class RecruitmentsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách tin tuyển dụng.", "")]
     public Task<PaginationResponse<RecruitmentDto>> SearchAsync(SearchRecruitmentsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class RecruitmentsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết tin tuyển dụng.", "")]
     public Task<Result<RecruitmentDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetRecruitmentRequest(id));
@@ -27,7 +27,7 @@ public class RecruitmentsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới tin tuyển dụng.", "")]
     public Task<Result<Guid>> CreateAsync(CreateRecruitmentRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class RecruitmentsController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật tin tuyển dụng.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateRecruitmentRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class RecruitmentsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa tin tuyển dụng.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteRecruitmentRequest(id));

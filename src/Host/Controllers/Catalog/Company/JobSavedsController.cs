@@ -7,7 +7,7 @@ public class JobSavedsController : VersionedApiController
 {
     [HttpPost("search")]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách công việc đã lưu.", "")]
     public Task<PaginationResponse<JobSavedDto>> SearchAsync(SearchJobSavedsRequest request)
     {
         return Mediator.Send(request);
@@ -17,7 +17,7 @@ public class JobSavedsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Lưu công việc mới.", "")]
     public Task<Result<Guid>> CreateAsync(CreateJobSavedRequest request)
     {
         return Mediator.Send(request);
@@ -27,7 +27,7 @@ public class JobSavedsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa công việc đã lưu.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteJobSavedRequest(id));

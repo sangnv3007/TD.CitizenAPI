@@ -1,25 +1,25 @@
 namespace TD.CitizenAPI.Application.Catalog.AlertOrganizations;
 
-public class SearchMarketCategoriesRequest : PaginationFilter, IRequest<PaginationResponse<AlertOrganizationDto>>
+public class SearchAlertOrganizationsRequest : PaginationFilter, IRequest<PaginationResponse<AlertOrganizationDto>>
 {
 }
 
-public class MarketCategoriesBySearchRequestSpec : EntitiesByPaginationFilterSpec<AlertOrganization, AlertOrganizationDto>
+public class AlertOrganizationsBySearchRequestSpec : EntitiesByPaginationFilterSpec<AlertOrganization, AlertOrganizationDto>
 {
-    public MarketCategoriesBySearchRequestSpec(SearchMarketCategoriesRequest request)
+    public AlertOrganizationsBySearchRequestSpec(SearchAlertOrganizationsRequest request)
         : base(request) =>
         Query.OrderBy(c => c.Name, !request.HasOrderBy());
 }
 
-public class SearchMarketCategoriesRequestHandler : IRequestHandler<SearchMarketCategoriesRequest, PaginationResponse<AlertOrganizationDto>>
+public class SearchAlertOrganizationsRequestHandler : IRequestHandler<SearchAlertOrganizationsRequest, PaginationResponse<AlertOrganizationDto>>
 {
     private readonly IReadRepository<AlertOrganization> _repository;
 
-    public SearchMarketCategoriesRequestHandler(IReadRepository<AlertOrganization> repository) => _repository = repository;
+    public SearchAlertOrganizationsRequestHandler(IReadRepository<AlertOrganization> repository) => _repository = repository;
 
-    public async Task<PaginationResponse<AlertOrganizationDto>> Handle(SearchMarketCategoriesRequest request, CancellationToken cancellationToken)
+    public async Task<PaginationResponse<AlertOrganizationDto>> Handle(SearchAlertOrganizationsRequest request, CancellationToken cancellationToken)
     {
-        var spec = new MarketCategoriesBySearchRequestSpec(request);
+        var spec = new AlertOrganizationsBySearchRequestSpec(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
         int count = await _repository.CountAsync(spec, cancellationToken);

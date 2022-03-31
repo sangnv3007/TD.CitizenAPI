@@ -9,7 +9,7 @@ public class JobAppliedsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách công việc đã ứng tuyển.", "")]
     public Task<PaginationResponse<JobAppliedDto>> SearchAsync(SearchCurrentJobAppliedsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class JobAppliedsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách công việc đã ứng tuyển.", "")]
     public Task<PaginationResponse<JobAppliedDto>> SearchCandidatesAsync(SearchCandidatesRequest request)
     {
         return Mediator.Send(request);
@@ -27,7 +27,7 @@ public class JobAppliedsController : VersionedApiController
 
     [HttpGet("{id:guid}")]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết công việc đã ứng tuyển.", "")]
     public Task<Result<JobAppliedDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetJobAppliedRequest(id));
@@ -35,7 +35,7 @@ public class JobAppliedsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới ứng tuyển.", "")]
     public Task<Result<Guid>> CreateAsync(CreateJobAppliedRequest request)
     {
         return Mediator.Send(request);
@@ -44,7 +44,7 @@ public class JobAppliedsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa ứng tuyển.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteJobAppliedRequest(id));

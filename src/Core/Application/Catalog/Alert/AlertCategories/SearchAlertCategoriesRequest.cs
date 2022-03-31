@@ -4,22 +4,22 @@ public class SearchAlertCategoriesRequest : PaginationFilter, IRequest<Paginatio
 {
 }
 
-public class MarketCategoriesBySearchRequestSpec : EntitiesByPaginationFilterSpec<AlertCategory, AlertCategoryDto>
+public class AlertCategoriesBySearchRequestSpec : EntitiesByPaginationFilterSpec<AlertCategory, AlertCategoryDto>
 {
-    public MarketCategoriesBySearchRequestSpec(SearchAlertCategoriesRequest request)
+    public AlertCategoriesBySearchRequestSpec(SearchAlertCategoriesRequest request)
         : base(request) =>
         Query.OrderBy(c => c.Name, !request.HasOrderBy());
 }
 
-public class SearchMarketCategoriesRequestHandler : IRequestHandler<SearchAlertCategoriesRequest, PaginationResponse<AlertCategoryDto>>
+public class SearchAlertCategoriesRequestHandler : IRequestHandler<SearchAlertCategoriesRequest, PaginationResponse<AlertCategoryDto>>
 {
     private readonly IReadRepository<AlertCategory> _repository;
 
-    public SearchMarketCategoriesRequestHandler(IReadRepository<AlertCategory> repository) => _repository = repository;
+    public SearchAlertCategoriesRequestHandler(IReadRepository<AlertCategory> repository) => _repository = repository;
 
     public async Task<PaginationResponse<AlertCategoryDto>> Handle(SearchAlertCategoriesRequest request, CancellationToken cancellationToken)
     {
-        var spec = new MarketCategoriesBySearchRequestSpec(request);
+        var spec = new AlertCategoriesBySearchRequestSpec(request);
 
         var list = await _repository.ListAsync(spec, cancellationToken);
         int count = await _repository.CountAsync(spec, cancellationToken);

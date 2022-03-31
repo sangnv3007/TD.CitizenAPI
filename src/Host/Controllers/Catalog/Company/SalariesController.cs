@@ -8,7 +8,7 @@ public class SalariesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách mức lương.", "")]
     public Task<PaginationResponse<SalaryDto>> SearchAsync(SearchSalariesRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class SalariesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết mức lương.", "")]
     public Task<Result<SalaryDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetSalaryRequest(id));
@@ -27,7 +27,7 @@ public class SalariesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới mức lương.", "")]
     public Task<Result<Guid>> CreateAsync(CreateSalaryRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class SalariesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật mức lương.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateSalaryRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class SalariesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa mức lương.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteSalaryRequest(id));

@@ -10,7 +10,7 @@ public class EcommerceCategoriesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách danh mục sản phẩm.", "")]
     public Task<PaginationResponse<EcommerceCategoryDto>> SearchAsync(SearchEcommerceCategoriesRequest request)
     {
         return Mediator.Send(request);
@@ -20,7 +20,7 @@ public class EcommerceCategoriesController : VersionedApiController
     [TenantIdHeader]
     [HttpGet("allChild")]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Toàn bộ danh mục sản phẩm theo dạng cây cha con.", "")]
     public Task<Result<List<EcommerceCategoryWithChildDto>>> SearchAsyansc()
     {
         return Mediator.Send(new AllEcommerceCategoryRequest());
@@ -30,7 +30,7 @@ public class EcommerceCategoriesController : VersionedApiController
     [TenantIdHeader]
     [HttpPost("{id:guid}/Attributes/search")]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách thuộc tính của danh mục sản phẩm.", "")]
     public Task<PaginationResponse<EcommerceCategoryAttributeDto>> SearchAsync(SearchEcommerceCategoryAttributesRequest request, Guid id)
     {
         request.EcommerceCategoryId = id;
@@ -40,7 +40,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpPost("{id:guid}/Attributes")]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Thêm mới thuộc tính cho danh mục sản phẩm.", "")]
     public Task<Result<Guid>> CreateAsync(CreateEcommerceCategoryAttributeRequest request, Guid id)
     {
         request.EcommerceCategoryId = id;
@@ -64,7 +64,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpDelete("{id:guid}/Attributes/{idAttribute:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa thuộc tính khỏi danh mục sản phẩm.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id, Guid idAttribute)
     {
         return Mediator.Send(new DeleteEcommerceCategoryAttributeRequest(idAttribute));
@@ -73,7 +73,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpGet("{id:guid}")]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết danh mục sản phẩm.", "")]
     public Task<Result<EcommerceCategoryDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetEcommerceCategoryRequest(id));
@@ -81,7 +81,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới danh mục sản phẩm.", "")]
     public Task<Result<Guid>> CreateAsync(CreateEcommerceCategoryRequest request)
     {
         return Mediator.Send(request);
@@ -89,7 +89,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật danh mục sản phẩm.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateEcommerceCategoryRequest request, Guid id)
     {
         return id != request.Id
@@ -99,7 +99,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa danh mục sản phẩm.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteEcommerceCategoryRequest(id));
@@ -115,7 +115,7 @@ public class EcommerceCategoriesController : VersionedApiController
 
     [HttpPost("fetchdata")]
     //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
-    [OpenApiOperation("Generate a number of random brands.", "")]
+    [OpenApiOperation("Fetch dữ liệu danh mục sản phẩm Tiki.", "")]
     public Task<string> FetchCategoriesAsync(GenerateEcommerceCategoriesRequest request)
     {
         return Mediator.Send(request);

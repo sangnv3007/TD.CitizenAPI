@@ -8,7 +8,7 @@ public class MarketProductsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh mục hàng hóa.", "")]
     public Task<PaginationResponse<MarketProductDto>> SearchAsync(SearchMarketProductsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class MarketProductsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết hàng hóa.", "")]
     public Task<Result<MarketProductDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetMarketProductRequest(id));
@@ -27,7 +27,7 @@ public class MarketProductsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới hàng hóa.", "")]
     public Task<Result<Guid>> CreateAsync(CreateMarketProductRequest request)
     {
         return Mediator.Send(request);
@@ -45,7 +45,7 @@ public class MarketProductsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa hàng hóa.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteMarketProductRequest(id));
@@ -53,7 +53,7 @@ public class MarketProductsController : VersionedApiController
 
     [HttpPost("fetchdata")]
     //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
-    [OpenApiOperation("Generate a number of random brands.", "")]
+    [OpenApiOperation("Fetch dữ liệu hàng hóa.", "")]
     public Task<string> FetchMarketProductAsync(FetchMarketProductRequest request)
     {
         return Mediator.Send(request);

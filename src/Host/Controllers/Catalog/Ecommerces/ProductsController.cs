@@ -8,7 +8,7 @@ public class ProductsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     [MustHavePermission(FSHAction.Search, FSHResource.Products)]
-    [OpenApiOperation("Search products using available filters.", "")]
+    [OpenApiOperation("Danh sách sản phẩm.", "")]
     public Task<PaginationResponse<ProductDto>> SearchAsync(SearchProductsRequest request)
     {
         return Mediator.Send(request);
@@ -25,7 +25,7 @@ public class ProductsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get product details.", "")]
+    [OpenApiOperation("Chi tiết sản phẩm.", "")]
     public Task<Result<ProductDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetProductRequest(id));
@@ -41,7 +41,7 @@ public class ProductsController : VersionedApiController
 
     [HttpPost]
     [MustHavePermission(FSHAction.Create, FSHResource.Products)]
-    [OpenApiOperation("Create a new product.", "")]
+    [OpenApiOperation("Tạo mới sản phẩm.", "")]
     public Task<Guid> CreateAsync(CreateProductRequest request)
     {
         return Mediator.Send(request);
@@ -49,7 +49,7 @@ public class ProductsController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     [MustHavePermission(FSHAction.Update, FSHResource.Products)]
-    [OpenApiOperation("Update a product.", "")]
+    [OpenApiOperation("Cập nhật sản phẩm.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateProductRequest request, Guid id)
     {
         return id != request.Id
@@ -59,7 +59,7 @@ public class ProductsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     [MustHavePermission(FSHAction.Delete, FSHResource.Products)]
-    [OpenApiOperation("Delete a product.", "")]
+    [OpenApiOperation("Xóa sản phẩm.", "")]
     public Task<Guid> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteProductRequest(id));
@@ -76,7 +76,7 @@ public class ProductsController : VersionedApiController
 
     [HttpPost("fetchdata")]
     //[MustHavePermission(FSHAction.Generate, FSHResource.Brands)]
-    [OpenApiOperation("Generate a number of random brands.", "")]
+    [OpenApiOperation("Fetch sản phẩm Tiki.", "")]
     public Task<string> FetchCategoriesAsync(GenerateProductsRequest request)
     {
         return Mediator.Send(request);

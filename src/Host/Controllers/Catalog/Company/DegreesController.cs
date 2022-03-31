@@ -1,5 +1,4 @@
-﻿using TD.CitizenAPI.Application.Catalog.Benefits;
-using TD.CitizenAPI.Application.Catalog.Degrees;
+﻿using TD.CitizenAPI.Application.Catalog.Degrees;
 
 namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
@@ -9,7 +8,7 @@ public class DegreesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách loại bằng cấp.", "")]
     public Task<PaginationResponse<DegreeDto>> SearchAsync(SearchDegreesRequest request)
     {
         return Mediator.Send(request);
@@ -20,7 +19,7 @@ public class DegreesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết loại bằng cấp.", "")]
     public Task<Result<DegreeDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetDegreeRequest(id));
@@ -28,7 +27,7 @@ public class DegreesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới loại bằng cấp.", "")]
     public Task<Result<Guid>> CreateAsync(CreateDegreeRequest request)
     {
         return Mediator.Send(request);
@@ -36,7 +35,7 @@ public class DegreesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật loại bằng cấp.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateDegreeRequest request, Guid id)
     {
         return id != request.Id
@@ -46,7 +45,7 @@ public class DegreesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa loại bằng cấp.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteDegreeRequest(id));

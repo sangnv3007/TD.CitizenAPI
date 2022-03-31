@@ -6,7 +6,7 @@ public class FeedbacksController : VersionedApiController
 {
     [HttpPost("search")]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách feedback của người dùng.", "")]
     public Task<PaginationResponse<FeedbackDto>> SearchAsync(SearchFeedbacksRequest request)
     {
         return Mediator.Send(request);
@@ -15,7 +15,7 @@ public class FeedbacksController : VersionedApiController
 
     [HttpGet("{id:guid}")]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết feedback của người dùng.", "")]
     public Task<Result<FeedbackDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetFeedbackRequest(id));
@@ -23,7 +23,7 @@ public class FeedbacksController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới feedback của người dùng.", "")]
     public Task<Result<Guid>> CreateAsync(CreateFeedbackRequest request)
     {
         return Mediator.Send(request);

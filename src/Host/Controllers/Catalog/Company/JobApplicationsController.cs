@@ -8,7 +8,7 @@ public class JobApplicationsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách CV của người dùng.", "")]
     public Task<PaginationResponse<JobApplicationDto>> SearchAsync(SearchJobApplicationsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class JobApplicationsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết CV.", "")]
     public Task<Result<JobApplicationDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetJobApplicationRequest(id));
@@ -27,7 +27,7 @@ public class JobApplicationsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới CV.", "")]
     public Task<Result<Guid>> CreateAsync(CreateJobApplicationRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class JobApplicationsController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật CV.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateJobApplicationRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class JobApplicationsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa CV.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteJobApplicationRequest(id));

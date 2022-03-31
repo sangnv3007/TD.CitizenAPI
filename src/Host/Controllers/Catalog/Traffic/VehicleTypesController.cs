@@ -10,7 +10,7 @@ public class VehicleTypesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách loại phương tiện.", "")]
     public Task<PaginationResponse<VehicleTypeDto>> SearchAsync(SearchVehicleTypesRequest request)
     {
         return Mediator.Send(request);
@@ -21,7 +21,7 @@ public class VehicleTypesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết loại phương tiện.", "")]
     public Task<Result<VehicleTypeDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetVehicleTypeRequest(id));
@@ -29,7 +29,7 @@ public class VehicleTypesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới loại phương tiện.", "")]
     public Task<Result<Guid>> CreateAsync(CreateVehicleTypeRequest request)
     {
         return Mediator.Send(request);
@@ -37,7 +37,7 @@ public class VehicleTypesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật loại phương tiện.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateVehicleTypeRequest request, Guid id)
     {
         return id != request.Id
@@ -47,7 +47,7 @@ public class VehicleTypesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa loại phương tiện.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteVehicleTypeRequest(id));

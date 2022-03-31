@@ -7,7 +7,7 @@ public class HotlineCategoriesController : VersionedApiController
     [HttpPost("search")]
     [AllowAnonymous]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách danh mục tổng đài thông minh.", "")]
     public Task<PaginationResponse<HotlineCategoryDto>> SearchAsync(SearchHotlineCategoriesRequest request)
     {
         return Mediator.Send(request);
@@ -17,7 +17,7 @@ public class HotlineCategoriesController : VersionedApiController
     [HttpGet("{id:guid}")]
     [AllowAnonymous]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết danh mục tổng đài thông minh.", "")]
     public Task<Result<HotlineCategoryDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetHotlineCategoryRequest(id));
@@ -25,7 +25,7 @@ public class HotlineCategoriesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới danh mục tổng đài thông minh.", "")]
     public Task<Result<Guid>> CreateAsync(CreateHotlineCategoryRequest request)
     {
         return Mediator.Send(request);
@@ -33,7 +33,7 @@ public class HotlineCategoriesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật danh mục tổng đài thông minh.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateHotlineCategoryRequest request, Guid id)
     {
         return id != request.Id
@@ -43,7 +43,7 @@ public class HotlineCategoriesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa danh mục tổng đài thông minh.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteHotlineCategoryRequest(id));

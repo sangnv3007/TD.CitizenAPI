@@ -8,7 +8,7 @@ public class JobPositionsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách vị trí làm việc.", "")]
     public Task<PaginationResponse<JobPositionDto>> SearchAsync(SearchJobPositionsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class JobPositionsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết vị trí làm việc.", "")]
     public Task<Result<JobPositionDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetJobPositionRequest(id));
@@ -27,7 +27,7 @@ public class JobPositionsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới vị trí làm việc.", "")]
     public Task<Result<Guid>> CreateAsync(CreateJobPositionRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class JobPositionsController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật vị trí làm việc.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateJobPositionRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class JobPositionsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa vị trí làm việc.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteJobPositionRequest(id));

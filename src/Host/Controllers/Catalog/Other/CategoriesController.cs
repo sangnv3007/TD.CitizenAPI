@@ -8,7 +8,7 @@ public class CategoriesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách danh mục chung.", "")]
     public Task<PaginationResponse<CategoryDto>> SearchAsync(SearchCategoriesRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class CategoriesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết danh mục chung.", "")]
     public Task<Result<CategoryDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetCategoryRequest(id));
@@ -27,7 +27,7 @@ public class CategoriesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới danh mục chung.", "")]
     public Task<Result<Guid>> CreateAsync(CreateCategoryRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class CategoriesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật danh mục chung.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateCategoryRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class CategoriesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa danh mục chung.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteCategoryRequest(id));

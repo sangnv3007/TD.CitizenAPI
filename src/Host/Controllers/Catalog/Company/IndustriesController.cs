@@ -8,7 +8,7 @@ public class IndustriesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách ngành nghề kinh doanh.", "")]
     public Task<PaginationResponse<IndustryDto>> SearchAsync(SearchIndustriesRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class IndustriesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết ngành nghề kinh doanh.", "")]
     public Task<Result<IndustryDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetIndustryRequest(id));
@@ -27,7 +27,7 @@ public class IndustriesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới ngành nghề kinh doanh.", "")]
     public Task<Result<Guid>> CreateAsync(CreateIndustryRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class IndustriesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật ngành nghề kinh doanh.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateIndustryRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class IndustriesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa ngành nghề kinh doanh.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteIndustryRequest(id));

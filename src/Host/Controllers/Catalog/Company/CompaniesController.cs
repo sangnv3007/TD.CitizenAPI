@@ -8,14 +8,14 @@ public class CompaniesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách công ty, doanh nghiệp.", "")]
     public Task<PaginationResponse<CompanyDto>> SearchAsync(SearchCompaniesRequest request)
     {
         return Mediator.Send(request);
     }
 
     [HttpGet("current-company")]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Thông tin công ty, doanh nghiệp hiện tại của người dùng.", "")]
     public Task<Result<CompanyDetailsDto>> CurrentCompany()
     {
         return Mediator.Send(new CurrentCompaniesRequest());
@@ -26,7 +26,7 @@ public class CompaniesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Thông tin chi tiết của công ty, doanh nghiệp.", "")]
     public Task<Result<CompanyDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetCompanyRequest(id));
@@ -34,7 +34,7 @@ public class CompaniesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới công ty, doanh nghiệp.", "")]
     public Task<Result<Guid>> CreateAsync(CreateCompanyRequest request)
     {
         return Mediator.Send(request);
@@ -42,7 +42,7 @@ public class CompaniesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật công ty, doanh nghiệp.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateCompanyRequest request, Guid id)
     {
         return id != request.Id
@@ -52,7 +52,7 @@ public class CompaniesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa công ty, doanh nghiệp.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteCompanyRequest(id));

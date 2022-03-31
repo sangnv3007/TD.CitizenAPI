@@ -9,7 +9,7 @@ public class CarPoliciesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách chính sách đi xe.", "")]
     public Task<PaginationResponse<CarPolicyDto>> SearchAsync(SearchCarPoliciesRequest request)
     {
         return Mediator.Send(request);
@@ -20,7 +20,7 @@ public class CarPoliciesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết chính sách đi xe.", "")]
     public Task<Result<CarPolicyDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetCarPolicyRequest(id));
@@ -28,7 +28,7 @@ public class CarPoliciesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới chính sách đi xe.", "")]
     public Task<Result<Guid>> CreateAsync(CreateCarPolicyRequest request)
     {
         return Mediator.Send(request);
@@ -36,7 +36,7 @@ public class CarPoliciesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật chính sách đi xe.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateCarPolicyRequest request, Guid id)
     {
         return id != request.Id
@@ -46,7 +46,7 @@ public class CarPoliciesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa chính sách đi xe.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteCarPolicyRequest(id));

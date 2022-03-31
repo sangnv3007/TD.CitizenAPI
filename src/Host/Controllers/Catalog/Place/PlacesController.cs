@@ -8,7 +8,7 @@ public class PlacesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách địa điểm.", "")]
     public Task<PaginationResponse<PlaceDto>> SearchAsync(SearchPlacesRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class PlacesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết  địa điểm.", "")]
     public Task<Result<PlaceDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetPlaceRequest(id));
@@ -27,7 +27,7 @@ public class PlacesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới địa điểm.", "")]
     public Task<Result<Guid>> CreateAsync(CreatePlaceRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class PlacesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhât  địa điểm.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdatePlaceRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class PlacesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa  địa điểm.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeletePlaceRequest(id));

@@ -8,7 +8,7 @@ public class BenefitsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách phúc lợi của công ty.", "")]
     public Task<PaginationResponse<BenefitDto>> SearchAsync(SearchBenefitsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class BenefitsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết phúc lợi của công ty.", "")]
     public Task<Result<BenefitDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetBenefitRequest(id));
@@ -27,7 +27,7 @@ public class BenefitsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới phúc lợi của công ty.", "")]
     public Task<Result<Guid>> CreateAsync(CreateBenefitRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class BenefitsController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật phúc lợi của công ty.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateBenefitRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class BenefitsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa phúc lợi của công ty.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteBenefitRequest(id));

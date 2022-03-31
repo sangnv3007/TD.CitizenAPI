@@ -9,7 +9,7 @@ public class PlaceTypesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách loại địa điểm.", "")]
     public Task<PaginationResponse<PlaceTypeDto>> SearchAsync(SearchPlaceTypesRequest request)
     {
         return Mediator.Send(request);
@@ -20,7 +20,7 @@ public class PlaceTypesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết loại địa điểm.", "")]
     public Task<Result<PlaceTypeDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetPlaceTypeRequest(id));
@@ -28,7 +28,7 @@ public class PlaceTypesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới loại địa điểm.", "")]
     public Task<Result<Guid>> CreateAsync(CreatePlaceTypeRequest request)
     {
         return Mediator.Send(request);
@@ -36,7 +36,7 @@ public class PlaceTypesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật loại địa điểm.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdatePlaceTypeRequest request, Guid id)
     {
         return id != request.Id
@@ -46,7 +46,7 @@ public class PlaceTypesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa loại địa điểm.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeletePlaceTypeRequest(id));

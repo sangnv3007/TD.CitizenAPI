@@ -1,4 +1,4 @@
-using TD.CitizenAPI.Application.Identity.Users;
+﻿using TD.CitizenAPI.Application.Identity.Users;
 using TD.CitizenAPI.Application.Identity.Users.Password;
 
 namespace TD.CitizenAPI.Host.Controllers.Identity;
@@ -11,7 +11,7 @@ public class UsersController : VersionNeutralApiController
 
 
     [HttpPost("search")]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách người dùng.", "")]
     public Task<PaginationResponse<UserDto>> SearchAsync(UserListFilter request, CancellationToken cancellationToken)
     {
         return _userService.SearchAsync(request, cancellationToken);
@@ -19,7 +19,7 @@ public class UsersController : VersionNeutralApiController
 
     [HttpGet]
     [MustHavePermission(FSHAction.View, FSHResource.Users)]
-    [OpenApiOperation("Get list of all users.", "")]
+    [OpenApiOperation("Danh sách toàn bộ người dùng.", "")]
     public Task<List<UserDetailsDto>> GetListAsync(CancellationToken cancellationToken)
     {
         return _userService.GetListAsync(cancellationToken);
@@ -27,7 +27,7 @@ public class UsersController : VersionNeutralApiController
 
     [HttpGet("{username}")]
     [MustHavePermission(FSHAction.View, FSHResource.Users)]
-    [OpenApiOperation("Get a user's details.", "")]
+    [OpenApiOperation("Chi tiết người dùng theo username.", "")]
     public Task<UserDetailsDto> GetByIdAsync(string username, CancellationToken cancellationToken)
     {
         return _userService.GetAsyncByUserName(username, cancellationToken);
@@ -35,7 +35,7 @@ public class UsersController : VersionNeutralApiController
 
     [HttpPut("{username}")]
     [MustHavePermission(FSHAction.View, FSHResource.Users)]
-    [OpenApiOperation("Get a user's details.", "")]
+    [OpenApiOperation("Chỉnh sửa thông tin người dùng.", "")]
     public  Task<bool> UpdateUserByUserNameAsync(string username, UpdateUserRequest request, CancellationToken cancellationToken)
     {
         //return _userService.UpdateAsyncByUserName(request, username);
@@ -45,7 +45,7 @@ public class UsersController : VersionNeutralApiController
 
     [HttpGet("{username}/roles")]
     [MustHavePermission(FSHAction.View, FSHResource.UserRoles)]
-    [OpenApiOperation("Get a user's roles.", "")]
+    [OpenApiOperation("Danh sách vai trò của người dùng.", "")]
     public Task<List<UserRoleDto>> GetRolesAsync(string username, CancellationToken cancellationToken)
     {
         return _userService.GetRolesAsyncByUserName(username, cancellationToken);
@@ -54,7 +54,7 @@ public class UsersController : VersionNeutralApiController
     [HttpPost("{username}/roles")]
     [ApiConventionMethod(typeof(FSHApiConventions), nameof(FSHApiConventions.Register))]
     [MustHavePermission(FSHAction.Update, FSHResource.UserRoles)]
-    [OpenApiOperation("Update a user's assigned roles.", "")]
+    [OpenApiOperation("Cập nhật vai trò của người dùng.", "")]
     public Task<string> AssignRolesAsync(string username, UserRolesRequest request, CancellationToken cancellationToken)
     {
         return _userService.AssignRolesAsyncByUserName(username, request, cancellationToken);
@@ -62,7 +62,7 @@ public class UsersController : VersionNeutralApiController
 
     [HttpPost]
     [MustHavePermission(FSHAction.Create, FSHResource.Users)]
-    [OpenApiOperation("Create a new user.", "")]
+    [OpenApiOperation("Tạo mới người dùng.", "")]
     public Task<string> CreateAsync(CreateUserRequest request)
     {
         // TODO: check if registering anonymous users is actually allowed (should probably be an appsetting)
@@ -120,7 +120,7 @@ public class UsersController : VersionNeutralApiController
     [HttpPost("forgot-password")]
     [AllowAnonymous]
     [TenantIdHeader]
-    [OpenApiOperation("Request a pasword reset email for a user.", "")]
+    [OpenApiOperation("Quên mật khẩu.", "")]
     [ApiConventionMethod(typeof(FSHApiConventions), nameof(FSHApiConventions.Register))]
     public Task<string> ForgotPasswordAsync(ForgotPasswordRequest request)
     {
@@ -130,7 +130,7 @@ public class UsersController : VersionNeutralApiController
     [HttpPost("reset-password")]
     [AllowAnonymous]
     [TenantIdHeader]
-    [OpenApiOperation("Reset a user's password.", "")]
+    [OpenApiOperation("Reset mật khẩu.", "")]
     [ApiConventionMethod(typeof(FSHApiConventions), nameof(FSHApiConventions.Register))]
     public Task<string> ResetPasswordAsync(ResetPasswordRequest request)
     {

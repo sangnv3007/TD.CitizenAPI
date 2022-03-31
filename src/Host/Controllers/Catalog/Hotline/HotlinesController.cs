@@ -9,7 +9,7 @@ public class HotlinesController : VersionedApiController
     [HttpPost("search")]
     [AllowAnonymous]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách tổng đài thông minh.", "")]
     public Task<PaginationResponse<HotlineDto>> SearchAsync(SearchHotlinesRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class HotlinesController : VersionedApiController
     [HttpGet("{id:guid}")]
     [AllowAnonymous]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết tổng đài thông minh.", "")]
     public Task<Result<HotlineDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetHotlineRequest(id));
@@ -27,7 +27,7 @@ public class HotlinesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới tổng đài thông minh.", "")]
     public Task<Result<Guid>> CreateAsync(CreateHotlineRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class HotlinesController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật tổng đài thông minh.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateHotlineRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class HotlinesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa tổng đài thông minh.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteHotlineRequest(id));

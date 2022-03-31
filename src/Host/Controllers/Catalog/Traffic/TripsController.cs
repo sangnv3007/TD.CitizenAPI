@@ -8,7 +8,7 @@ public class TripsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách chuyến xe.", "")]
     public Task<PaginationResponse<TripDto>> SearchAsync(SearchTripsRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class TripsController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết chuyến xe.", "")]
     public Task<Result<TripDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetTripRequest(id));
@@ -27,7 +27,7 @@ public class TripsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới chuyến xe.", "")]
     public Task<Result<Guid>> CreateAsync(CreateTripRequest request)
     {
         return Mediator.Send(request);
@@ -35,7 +35,7 @@ public class TripsController : VersionedApiController
 
     [HttpPut("{id:guid}")]
     //[MustHavePermission(FSHAction.Update, FSHResource.Brands)]
-    [OpenApiOperation("Update a category.", "")]
+    [OpenApiOperation("Cập nhật chuyến xe.", "")]
     public async Task<ActionResult<Guid>> UpdateAsync(UpdateTripRequest request, Guid id)
     {
         return id != request.Id
@@ -45,7 +45,7 @@ public class TripsController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa chuyến xe.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteTripRequest(id));

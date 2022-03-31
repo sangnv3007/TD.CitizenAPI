@@ -9,7 +9,7 @@ public class AreaInforsController : VersionedApiController
     [HttpGet("{code}")]
     [AllowAnonymous]
     [TenantIdHeader]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Thông tin địa bàn.", "")]
     public Task<Result<AreaInforDetailsDto>> GetAsync(string code)
     {
         return Mediator.Send(new GetAreaInforRequest(code));
@@ -17,7 +17,7 @@ public class AreaInforsController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới thông tin địa bàn.", "")]
     public Task<Result<Guid>> CreateAsync(CreateAreaInforRequest request)
     {
         return Mediator.Send(request);

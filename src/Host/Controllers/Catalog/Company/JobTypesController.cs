@@ -8,7 +8,7 @@ public class JobTypesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]
-    [OpenApiOperation("Search categories using available filters.", "")]
+    [OpenApiOperation("Danh sách loại hình công việc.", "")]
     public Task<PaginationResponse<JobTypeDto>> SearchAsync(SearchJobTypesRequest request)
     {
         return Mediator.Send(request);
@@ -19,7 +19,7 @@ public class JobTypesController : VersionedApiController
     [AllowAnonymous]
     [TenantIdHeader]
     //[MustHavePermission(FSHAction.View, FSHResource.Brands)]
-    [OpenApiOperation("Get category details.", "")]
+    [OpenApiOperation("Chi tiết loại hình công việc.", "")]
     public Task<Result<JobTypeDetailsDto>> GetAsync(Guid id)
     {
         return Mediator.Send(new GetJobTypeRequest(id));
@@ -27,7 +27,7 @@ public class JobTypesController : VersionedApiController
 
     [HttpPost]
     //[MustHavePermission(FSHAction.Create, FSHResource.Brands)]
-    [OpenApiOperation("Create a new category.", "")]
+    [OpenApiOperation("Tạo mới loại hình công việc.", "")]
     public Task<Result<Guid>> CreateAsync(CreateJobTypeRequest request)
     {
         return Mediator.Send(request);
@@ -45,7 +45,7 @@ public class JobTypesController : VersionedApiController
 
     [HttpDelete("{id:guid}")]
     //[MustHavePermission(FSHAction.Delete, FSHResource.Brands)]
-    [OpenApiOperation("Delete a category.", "")]
+    [OpenApiOperation("Xóa loại hình công việc.", "")]
     public Task<Result<Guid>> DeleteAsync(Guid id)
     {
         return Mediator.Send(new DeleteJobTypeRequest(id));
