@@ -633,3 +633,42 @@ public class EcommerceCategoryProductConfig : IEntityTypeConfiguration<Ecommerce
 }
 
 #endregion Ecommerce
+
+
+#region Alert
+public class AlertCategoryConfig : IEntityTypeConfiguration<AlertCategory>
+{
+    public void Configure(EntityTypeBuilder<AlertCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Description).HasMaxLength(2048);
+    }
+}
+
+public class AlertOrganizationConfig : IEntityTypeConfiguration<AlertOrganization>
+{
+    public void Configure(EntityTypeBuilder<AlertOrganization> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Description).HasMaxLength(2048);
+    }
+}
+
+public class AlertInformationConfig : IEntityTypeConfiguration<AlertInformation>
+{
+    public void Configure(EntityTypeBuilder<AlertInformation> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Title).HasMaxLength(512);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.File).HasMaxLength(1024);
+    }
+}
+
+#endregion Alert

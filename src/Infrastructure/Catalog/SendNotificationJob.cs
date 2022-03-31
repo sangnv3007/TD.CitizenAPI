@@ -13,6 +13,10 @@ using RestSharp;
 using Newtonsoft.Json.Linq;
 using TD.CitizenAPI.Application.Catalog.Notifications;
 using FirebaseAdmin.Messaging;
+using TD.CitizenAPI.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using GeoCoordinatePortable;
 
 namespace TD.CitizenAPI.Infrastructure.Catalog;
 
@@ -21,6 +25,8 @@ public class SendNotificationJob : ISendNotificationJob
     private readonly ILogger<SendNotificationJob> _logger;
     private readonly ISender _mediator;
     private readonly IReadRepository<Domain.Catalog.Notification> _repository;
+    private readonly UserManager<ApplicationUser> _userManager;
+
     private readonly IProgressBarFactory _progressBar;
     private readonly PerformingContext _performingContext;
     private readonly INotificationSender _notifications;
@@ -34,8 +40,10 @@ public class SendNotificationJob : ISendNotificationJob
         IProgressBarFactory progressBar,
         PerformingContext performingContext,
         INotificationSender notifications,
+         UserManager<ApplicationUser> userManager,
         ICurrentUser currentUser)
     {
+        _userManager = userManager;
         _logger = logger;
         _mediator = mediator;
         _repository = repository;
@@ -65,9 +73,45 @@ public class SendNotificationJob : ISendNotificationJob
     {
         await NotifyAsync("FetchProductAsync processing has started", 0, cancellationToken);
 
-        int count = 0;
+        if (request.Latitude.HasValue && request.Latitude != 0 && request.Longitude.HasValue && request.Longitude != 0 && request.Distance.HasValue && request.Distance > 0)
+        {
+            var listUser = await _userManager.Users.ToListAsync(cancellationToken);
+            foreach (var user in listUser)
+            {
+                if (user.Latitude.HasValue && user.Latitude != 0 && user.Longitude.HasValue && user.Longitude != 0)
+                {
+                    try
+                    {
 
-        foreach (string topic in request.Topics)
+                        GeoCoordinate pin1 = new GeoCoordinate((double)user.Latitude, (double)user.Longitude);
+                        GeoCoordinate pin2 = new GeoCoordinate((double)request.Latitude, (double)request.Longitude);
+
+                        double distanceBetween = pin1.GetDistanceTo(pin2);
+                        if (distanceBetween <= (request.Distance * 1000))
+                        {
+                            await Handle(user.UserName, request, cancellationToken);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (string topic in request.Topics)
+            {
+                await Handle(topic, request, cancellationToken);
+            }
+        }
+        await NotifyAsync("FetchProductAsync successfully completed", 0, cancellationToken);
+    }
+
+    public async Task Handle(string topic, SendNotificationRequest request,  CancellationToken cancellationToken)
+    {
+        try
         {
             int badgeCount = await _repository.CountAsync(new NotificationByUserNameSpec(topic, false), cancellationToken);
 
@@ -113,8 +157,6 @@ public class SendNotificationJob : ISendNotificationJob
                         ContentAvailable = true
                     }
                 }
-
-
             };
             var messaging = FirebaseMessaging.DefaultInstance;
             string? result = await messaging.SendAsync(message, false, cancellationToken);
@@ -132,9 +174,12 @@ public class SendNotificationJob : ISendNotificationJob
                                IsRead = false,
                            },
                            cancellationToken);
-            count++;
-        }
 
-        await NotifyAsync("FetchProductAsync successfully completed", 0, cancellationToken);
+        }
+        catch
+        {
+
+        }
+       
     }
 }

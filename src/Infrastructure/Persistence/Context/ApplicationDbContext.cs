@@ -98,6 +98,14 @@ public class ApplicationDbContext : BaseDbContext
 
 
     #endregion Ecommerce
+
+    #region Alert
+    public DbSet<AlertCategory> AlertCategories => Set<AlertCategory>();
+    public DbSet<AlertOrganization> AlertOrganizations => Set<AlertOrganization>();
+    public DbSet<AlertInformation> AlertInformations => Set<AlertInformation>();
+
+    #endregion Alert
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

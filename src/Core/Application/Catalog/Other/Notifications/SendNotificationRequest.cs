@@ -10,6 +10,9 @@ public class SendNotificationRequest : IRequest<string>
     public string? AreaCode { get; set; }
     public string? ImageUrl { get; set; }
     public string? CollapseKey { get; set; }
+    public double? Latitude { get; set; }
+    public double? Longitude { get; set; }
+    public double? Distance { get; set; }
 }
 
 public class SendNotificationHandler : IRequestHandler<SendNotificationRequest, string>
