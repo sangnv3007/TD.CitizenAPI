@@ -7,6 +7,7 @@ using TD.CitizenAPI.Infrastructure.Common;
 using Serilog;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.Extensions.FileProviders;
 
 [assembly: ApiConventionType(typeof(FSHApiConventions))]
 
@@ -27,6 +28,11 @@ try
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddApplication();
 
+    builder.Services.AddSpaStaticFiles(c =>
+    {
+        c.RootPath = "ClientApp";
+    });
+
     //Firebase
     FirebaseApp.Create(new AppOptions()
     {
@@ -40,7 +46,30 @@ try
 
     app.UseInfrastructure(builder.Configuration);
 
+
+
+
     app.UseStaticFiles();
+    app.UseSpaStaticFiles();
+    app.UseRouting();
+
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action=Index}/{id?}");
+
+
+    app.UseSpa(spa =>
+    {
+        // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
+
+        spa.Options.SourcePath = "ClientApp";
+
+       
+    });
+
+
 
 
     app.MapEndpoints();
