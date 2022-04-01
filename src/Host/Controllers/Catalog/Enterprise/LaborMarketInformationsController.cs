@@ -1,4 +1,5 @@
 ﻿using TD.CitizenAPI.Application.Catalog.AlertCategories;
+using TD.CitizenAPI.Application.Catalog.LaborMarketInformations;
 
 namespace TD.CitizenAPI.Host.Controllers.Catalog;
 

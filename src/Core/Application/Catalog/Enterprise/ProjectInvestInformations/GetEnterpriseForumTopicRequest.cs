@@ -11,7 +11,8 @@ public class ProjectInvestInformationByIdSpec : Specification<ProjectInvestInfor
 {
     public ProjectInvestInformationByIdSpec(Guid id) =>
         Query.Where(p => p.Id == id)
-        .Include(p => p.EnterpriseForumCategory)
+       .Include(p => p.ProjectInvestCategory)
+        .Include(p => p.ProjectInvestForm)
         ;
 }
 
