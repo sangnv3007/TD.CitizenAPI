@@ -31,7 +31,7 @@ public class ProjectInvestInformation : AuditableEntity, IAggregateRoot
     public ProjectInvestCategory? ProjectInvestCategory { get; set; }
     public ProjectInvestForm? ProjectInvestForm { get; set; }
 
-    public ProjectInvestInformation(string title, string? content, string? scale, string? location, string? target, string? state, string? image, string? source, string? investmentForm, string? investor, string? function, string? plan, int? viewQuantity, Guid? projectInvestCategoryId, Guid? projectInvestFormId)
+    public ProjectInvestInformation(string title, string? content, string? scale, string? location, string? target, string? state, string? image, string? source, string? investmentForm, string? investor, string? functionContent, string? plan, int? viewQuantity, Guid? projectInvestCategoryId, Guid? projectInvestFormId)
     {
         Title = title;
         Content = content;
@@ -43,14 +43,14 @@ public class ProjectInvestInformation : AuditableEntity, IAggregateRoot
         Source = source;
         InvestmentForm = investmentForm;
         Investor = investor;
-        FunctionContent = function;
+        FunctionContent = functionContent;
         Plan = plan;
         ViewQuantity = viewQuantity;
         ProjectInvestCategoryId = projectInvestCategoryId;
         ProjectInvestFormId = projectInvestFormId;
     }
 
-    public ProjectInvestInformation Update(string? title, string? content, string? scale, string? location, string? target, string? state, string? image, string? source, string? investmentForm, string? investor, string? function, string? plan, int? viewQuantity, Guid? projectInvestCategoryId, Guid? projectInvestFormId)
+    public ProjectInvestInformation Update(string? title, string? content, string? scale, string? location, string? target, string? state, string? image, string? source, string? investmentForm, string? investor, string? functionContent, string? plan, int? viewQuantity, Guid? projectInvestCategoryId, Guid? projectInvestFormId)
     {
         if (title is not null && Title?.Equals(title) is not true) Title = title;
         if (content is not null && Content?.Equals(content) is not true) Content = content;
@@ -63,7 +63,7 @@ public class ProjectInvestInformation : AuditableEntity, IAggregateRoot
         if (source is not null && Source?.Equals(source) is not true) Source = source;
         if (investmentForm is not null && InvestmentForm?.Equals(investmentForm) is not true) InvestmentForm = investmentForm;
         if (investor is not null && Investor?.Equals(investor) is not true) Investor = investor;
-        if (function is not null && FunctionContent?.Equals(function) is not true) FunctionContent = function;
+        if (functionContent is not null && FunctionContent?.Equals(functionContent) is not true) FunctionContent = functionContent;
         if (plan is not null && Location?.Equals(plan) is not true) Location = plan;
 
         if (projectInvestFormId.HasValue && projectInvestFormId.Value != Guid.Empty && !ProjectInvestFormId.Equals(projectInvestFormId.Value)) ProjectInvestFormId = projectInvestFormId.Value;
