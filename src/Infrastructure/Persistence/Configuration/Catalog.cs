@@ -634,7 +634,6 @@ public class EcommerceCategoryProductConfig : IEntityTypeConfiguration<Ecommerce
 
 #endregion Ecommerce
 
-
 #region Alert
 public class AlertCategoryConfig : IEntityTypeConfiguration<AlertCategory>
 {
@@ -672,3 +671,88 @@ public class AlertInformationConfig : IEntityTypeConfiguration<AlertInformation>
 }
 
 #endregion Alert
+
+#region Enterprise
+public class LawDataConfig : IEntityTypeConfiguration<LawData>
+{
+    public void Configure(EntityTypeBuilder<LawData> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Title).HasMaxLength(500);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+    }
+}
+
+public class EnterpriseForumCategoryConfig : IEntityTypeConfiguration<EnterpriseForumCategory>
+{
+    public void Configure(EntityTypeBuilder<EnterpriseForumCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(500);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+    }
+}
+
+public class ProjectInvestCategoryConfig : IEntityTypeConfiguration<ProjectInvestCategory>
+{
+    public void Configure(EntityTypeBuilder<ProjectInvestCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(500);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+    }
+}
+
+public class ProjectInvestFormConfig : IEntityTypeConfiguration<ProjectInvestForm>
+{
+    public void Configure(EntityTypeBuilder<ProjectInvestForm> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(500);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+    }
+}
+
+public class ProjectInvestInformationConfig : IEntityTypeConfiguration<ProjectInvestInformation>
+{
+    public void Configure(EntityTypeBuilder<ProjectInvestInformation> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Title).HasMaxLength(500);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+    }
+}
+
+public class LaborMarketInformationConfig : IEntityTypeConfiguration<LaborMarketInformation>
+{
+    public void Configure(EntityTypeBuilder<LaborMarketInformation> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Title).HasMaxLength(500);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+    }
+}
+
+public class EnterpriseForumCommentConfig : IEntityTypeConfiguration<EnterpriseForumComment>
+{
+    public void Configure(EntityTypeBuilder<EnterpriseForumComment> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(500);
+    }
+}
+
+public class EnterpriseForumTopicConfig : IEntityTypeConfiguration<EnterpriseForumTopic>
+{
+    public void Configure(EntityTypeBuilder<EnterpriseForumTopic> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.UserName).HasMaxLength(500);
+    }
+}
+
+#endregion Enterprise

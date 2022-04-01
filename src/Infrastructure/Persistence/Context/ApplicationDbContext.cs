@@ -106,6 +106,18 @@ public class ApplicationDbContext : BaseDbContext
 
     #endregion Alert
 
+    #region Enterprise
+    public DbSet<LawData> LawDatas => Set<LawData>();
+    public DbSet<EnterpriseForumCategory> EnterpriseForumCategories => Set<EnterpriseForumCategory>();
+    public DbSet<EnterpriseForumComment> EnterpriseForumComments => Set<EnterpriseForumComment>();
+    public DbSet<EnterpriseForumTopic> EnterpriseForumTopics => Set<EnterpriseForumTopic>();
+    public DbSet<LaborMarketInformation> LaborMarketInformations => Set<LaborMarketInformation>();
+    public DbSet<ProjectInvestCategory> ProjectInvestCategories => Set<ProjectInvestCategory>();
+    public DbSet<ProjectInvestForm> ProjectInvestForms => Set<ProjectInvestForm>();
+    public DbSet<ProjectInvestInformation> ProjectInvestInformations => Set<ProjectInvestInformation>();
+
+    #endregion Enterprise
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
