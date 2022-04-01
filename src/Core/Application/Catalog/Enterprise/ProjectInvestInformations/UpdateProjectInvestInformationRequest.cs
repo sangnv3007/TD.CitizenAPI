@@ -46,7 +46,7 @@ public class UpdateProjectInvestInformationRequestHandler : IRequestHandler<Upda
 
         _ = item ?? throw new NotFoundException(string.Format(_localizer["ProjectInvestInformation.notfound"], request.Id));
 
-        item.Update(request.Title, request.Content, request.Source, request.Location, request.Target, request.State, request.Investor, request.Source, request.InvestmentForm, request.Investor, request.FunctionContent, request.Plan, request.ViewQuantity, request.ProjectInvestCategoryId, request.ProjectInvestFormId);
+        item.Update(request.Title, request.Content, request.Source, request.Location, request.Target, request.State, request.Image, request.Source, request.InvestmentForm, request.Investor, request.FunctionContent, request.Plan, request.ViewQuantity, request.ProjectInvestCategoryId, request.ProjectInvestFormId);
 
         await _repository.UpdateAsync(item, cancellationToken);
 

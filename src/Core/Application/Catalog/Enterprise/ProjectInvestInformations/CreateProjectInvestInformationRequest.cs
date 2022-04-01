@@ -27,7 +27,7 @@ public partial class CreateProjectInvestInformationRequest : IRequest<Result<Gui
     public Guid? ProjectInvestCategoryId { get; set; }
     public Guid? ProjectInvestFormId { get; set; }
 
-   
+
 }
 public class CreateProjectInvestInformationRequestHandler : IRequestHandler<CreateProjectInvestInformationRequest, Result<Guid>>
 {
@@ -38,7 +38,7 @@ public class CreateProjectInvestInformationRequestHandler : IRequestHandler<Crea
 
     public async Task<Result<Guid>> Handle(CreateProjectInvestInformationRequest request, CancellationToken cancellationToken)
     {
-        var item = new ProjectInvestInformation(request.Title,request.Content,request.Source,request.Location,request.Target,request.State,request.Investor,request.Source,request.InvestmentForm,request.Investor,request.FunctionContent,request.Plan,request.ViewQuantity,request.ProjectInvestCategoryId,request.ProjectInvestFormId);
+        var item = new ProjectInvestInformation(request.Title, request.Content, request.Source, request.Location, request.Target, request.State, request.Image, request.Source, request.InvestmentForm, request.Investor, request.FunctionContent, request.Plan, request.ViewQuantity, request.ProjectInvestCategoryId, request.ProjectInvestFormId);
         await _repository.AddAsync(item, cancellationToken);
         return Result<Guid>.Success(item.Id);
     }
