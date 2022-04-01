@@ -4,6 +4,8 @@ public class SearchAlertInformationsRequest : PaginationFilter, IRequest<Paginat
 {
     public Guid? AlertCategoryId { get; set; }
     public Guid? AlertOrganizationId { get; set; }
+    public DateTime? StartDate { get; set; }
+
 }
 
 public class AlertInformationsBySearchRequestSpec : EntitiesByPaginationFilterSpec<AlertInformation, AlertInformationDto>
@@ -11,10 +13,12 @@ public class AlertInformationsBySearchRequestSpec : EntitiesByPaginationFilterSp
     public AlertInformationsBySearchRequestSpec(SearchAlertInformationsRequest request)
         : base(request) =>
         Query.OrderBy(c => c.CreatedOn, !request.HasOrderBy())
-                .Where(p => p.AlertCategoryId.Equals(request.AlertCategoryId!.Value), request.AlertCategoryId.HasValue)
-
-                .Where(p => p.AlertOrganizationId.Equals(request.AlertOrganizationId!.Value), request.AlertOrganizationId.HasValue)
-
+        .Include(p => p.AlertOrganization)
+        .Include(p => p.AlertCategory)
+        .Where(p => p.AlertCategoryId.Equals(request.AlertCategoryId!.Value), request.AlertCategoryId.HasValue)
+        .Where(p => p.AlertOrganizationId.Equals(request.AlertOrganizationId!.Value), request.AlertOrganizationId.HasValue)
+        .Where(p => p.StartDate <= request.StartDate, request.StartDate.HasValue)
+        .Where(p => p.FinishDate >= request.StartDate, request.StartDate.HasValue)
         ;
 }
 

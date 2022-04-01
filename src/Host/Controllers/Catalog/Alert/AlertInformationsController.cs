@@ -2,7 +2,7 @@
 
 namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
-public class AlertAlertInformationsController : VersionedApiController
+public class AlertInformationsController : VersionedApiController
 {
     [HttpPost("search")]
     [AllowAnonymous]

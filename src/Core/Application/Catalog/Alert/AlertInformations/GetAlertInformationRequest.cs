@@ -10,7 +10,10 @@ public class GetAlertInformationRequest : IRequest<Result<AlertInformationDetail
 public class AlertInformationByIdSpec : Specification<AlertInformation, AlertInformationDetailsDto>, ISingleResultSpecification
 {
     public AlertInformationByIdSpec(Guid id) =>
-        Query.Where(p => p.Id == id);
+        Query.Where(p => p.Id == id)
+        .Include(p => p.AlertOrganization)
+        .Include(p => p.AlertCategory)
+        ;
 }
 
 public class GetAlertInformationRequestHandler : IRequestHandler<GetAlertInformationRequest, Result<AlertInformationDetailsDto>>
