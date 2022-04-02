@@ -53,7 +53,7 @@ public class BrandGeneratorJob : IBrandGeneratorJob
                 Message = message,
                 Progress = progress
             },
-            _currentUser.GetUserId().ToString(),
+            _currentUser.GetUserName(),
             cancellationToken);
     }
 

@@ -12,6 +12,7 @@ public class CurrentUser : ICurrentUser, ICurrentUserInitializer
     private Guid _userId = Guid.Empty;
 
     private string _userName = string.Empty;
+    private string _fullName = string.Empty;
 
     public Guid GetUserId() =>
         IsAuthenticated()
@@ -20,6 +21,9 @@ public class CurrentUser : ICurrentUser, ICurrentUserInitializer
 
     public string GetUserName() =>
         IsAuthenticated() ? (_user?.GetUserName() ?? string.Empty) : _userName;
+
+    public string GetFullName() =>
+        IsAuthenticated() ? (_user?.GetFullName() ?? string.Empty) : _fullName;
 
     public string? GetUserEmail() =>
         IsAuthenticated()
@@ -58,6 +62,19 @@ public class CurrentUser : ICurrentUser, ICurrentUserInitializer
         if (!string.IsNullOrEmpty(userId))
         {
             _userId = Guid.Parse(userId);
+        }
+    }
+
+    public void SetCurrentUserName(string userName)
+    {
+        if (_userName != string.Empty)
+        {
+            throw new Exception("Method reserved for in-scope initialization");
+        }
+
+        if (!string.IsNullOrEmpty(userName))
+        {
+            _userName = userName;
         }
     }
 }

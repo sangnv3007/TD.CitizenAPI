@@ -7,4 +7,5 @@ public interface ICurrentUserInitializer
     void SetCurrentUser(ClaimsPrincipal user);
 
     void SetCurrentUserId(string userId);
+    void SetCurrentUserName(string userName);
 }

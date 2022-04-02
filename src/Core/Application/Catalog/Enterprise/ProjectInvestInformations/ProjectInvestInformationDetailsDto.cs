@@ -24,6 +24,7 @@ public class ProjectInvestInformationDetailsDto : IDto
     //Chi tieu quy hoach
     public string? Plan { get; set; }
     public int? ViewQuantity { get; set; }
+    public DateTime? CreatedOn { get; set; }
 
     public Guid? ProjectInvestCategoryId { get; set; }
     public Guid? ProjectInvestFormId { get; set; }

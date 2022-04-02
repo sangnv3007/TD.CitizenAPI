@@ -4,7 +4,7 @@ public class CompanyDto : IDto
 {
     public Guid Id { get; set; }
     public string? UserName { get; set; }
-    public string Name { get; set; } = default;
+    public string Name { get; set; } = default!;
     public string? InternationalName { get; set; }
     public string? ShortName { get; set; }
 

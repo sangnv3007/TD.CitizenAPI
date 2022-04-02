@@ -33,6 +33,9 @@ public class FSHJobFilter : IClientFilter
 
         string? userId = httpContext.User.GetUserId();
         context.SetJobParameter(QueryStringKeys.UserId, userId);
+
+        string? userName = httpContext.User.GetUserName();
+        context.SetJobParameter(QueryStringKeys.UserName, userName);
     }
 
     public void OnCreated(CreatedContext context) =>

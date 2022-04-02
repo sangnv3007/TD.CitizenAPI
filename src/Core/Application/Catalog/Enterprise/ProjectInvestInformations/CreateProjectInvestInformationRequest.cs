@@ -38,7 +38,7 @@ public class CreateProjectInvestInformationRequestHandler : IRequestHandler<Crea
 
     public async Task<Result<Guid>> Handle(CreateProjectInvestInformationRequest request, CancellationToken cancellationToken)
     {
-        var item = new ProjectInvestInformation(request.Title, request.Content, request.Source, request.Location, request.Target, request.State, request.Image, request.Source, request.InvestmentForm, request.Investor, request.FunctionContent, request.Plan, request.ViewQuantity, request.ProjectInvestCategoryId, request.ProjectInvestFormId);
+        var item = new ProjectInvestInformation(request.Title, request.Content, request.Scale, request.Location, request.Target, request.State, request.Image, request.Source, request.InvestmentForm, request.Investor, request.FunctionContent, request.Plan, request.ViewQuantity, request.ProjectInvestCategoryId, request.ProjectInvestFormId);
         await _repository.AddAsync(item, cancellationToken);
         return Result<Guid>.Success(item.Id);
     }

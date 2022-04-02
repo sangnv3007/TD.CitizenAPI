@@ -6,6 +6,7 @@ public interface ICurrentUser
 {
     string? Name { get; }
     string? GetUserName();
+    string? GetFullName();
     Guid GetUserId();
 
     string? GetUserEmail();

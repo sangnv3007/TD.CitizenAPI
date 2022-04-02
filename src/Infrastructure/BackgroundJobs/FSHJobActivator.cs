@@ -50,6 +50,13 @@ public class FSHJobActivator : JobActivator
                 _scope.ServiceProvider.GetRequiredService<ICurrentUserInitializer>()
                     .SetCurrentUserId(userId);
             }
+
+            string userName = _context.GetJobParameter<string>(QueryStringKeys.UserName);
+            if (!string.IsNullOrEmpty(userName))
+            {
+                _scope.ServiceProvider.GetRequiredService<ICurrentUserInitializer>()
+                    .SetCurrentUserName(userName);
+            }
         }
 
         public override object Resolve(Type type) =>
