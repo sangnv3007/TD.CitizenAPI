@@ -756,3 +756,23 @@ public class EnterpriseForumTopicConfig : IEntityTypeConfiguration<EnterpriseFor
 }
 
 #endregion Enterprise
+
+#region Travel
+
+public class TourGuideConfig : IEntityTypeConfiguration<TourGuide>
+{
+    public void Configure(EntityTypeBuilder<TourGuide> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.FullName).HasMaxLength(256);
+        builder.Property(b => b.CardNumber).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.CardType).HasMaxLength(256);
+        builder.Property(b => b.CardNumber).HasMaxLength(256);
+        builder.Property(b => b.ExpirationDate).HasMaxLength(256);
+        builder.Property(b => b.Experience).HasMaxLength(256);
+        builder.Property(b => b.PlaceOfIssue).HasMaxLength(1024);
+    }
+}
+
+#endregion Travel

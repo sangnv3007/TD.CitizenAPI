@@ -13,10 +13,12 @@ public class NotificationHub : Hub, ITransientService
     private readonly ITenantInfo? _currentTenant;
     private readonly ILogger<NotificationHub> _logger;
 
-    public NotificationHub(ITenantInfo? currentTenant, ILogger<NotificationHub> logger)
+
+    public NotificationHub(ITenantInfo? currentTenant,  ILogger<NotificationHub> logger)
     {
         _currentTenant = currentTenant;
         _logger = logger;
+
     }
 
     public override async Task OnConnectedAsync()
@@ -25,6 +27,8 @@ public class NotificationHub : Hub, ITransientService
         {
             throw new UnauthorizedException("Authentication Failed.");
         }
+
+        var tmp = Context.UserIdentifier;
 
         await Groups.AddToGroupAsync(Context.ConnectionId, $"GroupTenant-{_currentTenant.Id}");
 
@@ -35,10 +39,17 @@ public class NotificationHub : Hub, ITransientService
 
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
+
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"GroupTenant-{_currentTenant!.Id}");
 
         await base.OnDisconnectedAsync(exception);
 
         _logger.LogInformation("A client disconnected from NotificationHub: {connectionId}", Context.ConnectionId);
+    }
+
+    public async Task SendMessage(string user, string message)
+    {
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+        
     }
 }

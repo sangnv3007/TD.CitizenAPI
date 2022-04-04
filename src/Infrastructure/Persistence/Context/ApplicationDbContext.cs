@@ -118,6 +118,11 @@ public class ApplicationDbContext : BaseDbContext
 
     #endregion Enterprise
 
+    #region Travel
+    public DbSet<TourGuide> TourGuides => Set<TourGuide>();
+    
+    #endregion Travel
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

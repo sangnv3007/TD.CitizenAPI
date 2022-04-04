@@ -11,7 +11,6 @@
       <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Catalog\Travel\" />
       <Folder Include="Catalog\User\" />
     </ItemGroup>
 </Project>
