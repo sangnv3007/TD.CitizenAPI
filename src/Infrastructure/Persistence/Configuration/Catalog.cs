@@ -14,9 +14,21 @@ public class AttachmentConfig : IEntityTypeConfiguration<Attachment>
         builder.IsMultiTenant();
         builder.Property(b => b.Name).HasMaxLength(256);
         builder.Property(b => b.Type).HasMaxLength(256);
-        builder.Property(b => b.Url).HasMaxLength(256);
+        builder.Property(b => b.Url).HasMaxLength(512);
     }
 }
+
+public class EKYCAttachmentConfig : IEntityTypeConfiguration<EKYCAttachment>
+{
+    public void Configure(EntityTypeBuilder<EKYCAttachment> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.FileName).HasMaxLength(512);
+        builder.Property(b => b.FileType).HasMaxLength(256);
+        builder.Property(b => b.Url).HasMaxLength(512);
+    }
+}
+
 
 public class CategoryConfig : IEntityTypeConfiguration<Category>
 {

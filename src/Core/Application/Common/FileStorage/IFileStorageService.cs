@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using TD.CitizenAPI.Application.Catalog.Attachments;
+using TD.CitizenAPI.Application.Catalog.EKYCAttachmentss;
 
 namespace TD.CitizenAPI.Application.Common.FileStorage;
 
@@ -10,6 +11,9 @@ public interface IFileStorageService : ITransientService
 
     public Task<List<AttachmentDto>> UploadFilesAsync<T>(List<IFormFile>? files, CancellationToken cancellationToken = default)
     where T : class;
+
+/*    public Task<EKYCAttachmentDto> UploadFilesAsync<T>(IFormFile>? file, CancellationToken cancellationToken = default)
+where T : class;*/
 
     public Task<AttachmentDto> UploadFileAsync<T>(IFormFile? file, CancellationToken cancellationToken = default)
    where T : class;

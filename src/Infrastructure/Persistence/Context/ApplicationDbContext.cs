@@ -16,8 +16,8 @@ public class ApplicationDbContext : BaseDbContext
     }
 
     #region Other
-    
     public DbSet<Attachment> Attachments => Set<Attachment>();
+    public DbSet<EKYCAttachment> EKYCAttachments => Set<EKYCAttachment>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<Feedback> Feedbacks => Set<Feedback>();

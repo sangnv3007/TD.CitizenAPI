@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using TD.CitizenAPI.Application.Auditing;
+using TD.CitizenAPI.Application.Catalog.EKYCAttachmentss;
 using TD.CitizenAPI.Application.Identity.Users;
 using TD.CitizenAPI.Application.Identity.Users.Password;
 
@@ -96,5 +97,14 @@ public class PersonalController : VersionNeutralApiController
     public Task<List<AuditDto>> GetLogsAsync()
     {
         return Mediator.Send(new GetMyAuditLogsRequest());
+    }
+
+    [HttpPost("ekyc")]
+    [DisableRequestSizeLimit]
+    //[MustHavePermission(FSHAction.Create, FSHResource.Products)]
+    [OpenApiOperation("Create a new attachment.", "")]
+    public async Task<IActionResult> Post([FromForm(Name = "file")] IFormFile file, [FromForm(Name = "imageType")] string imageType)
+    {
+        return Ok(await Mediator.Send(new CreateEKYCAttachmentRequest() { File = file, ImageType = imageType }));
     }
 }
