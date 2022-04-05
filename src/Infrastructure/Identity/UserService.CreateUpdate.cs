@@ -214,7 +214,7 @@ internal partial class UserService
             }
         }*/
 
-       
+
         user.Gender = request.Gender;
         user.ImageUrl = request.ImageUrl;
 
@@ -315,6 +315,39 @@ internal partial class UserService
         {
             throw new InternalServerException(_localizer["Update profile failed"], result.GetErrors(_localizer));
         }
+        return true;
+
+    }
+
+    public async Task<bool> VerifyAsyncByUserName(VerifyUserRequest request, string userName)
+    {
+        var user = await _userManager.FindByNameAsync(userName);
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+
+        user.Gender = request.Gender;
+        user.IsVerified = true;
+
+        user.FullName = request.FullName ?? user.FullName;
+        user.DateOfBirth = request.DateOfBirth ?? user.DateOfBirth;
+        user.IdentityNumber = request.IdentityNumber ?? user.IdentityNumber;
+        user.IdentityPlace = request.IdentityPlace ?? user.IdentityPlace;
+        user.IdentityDate = request.IdentityDate ?? user.IdentityDate;
+        user.PlaceOfOrigin = request.PlaceOfOrigin ?? user.PlaceOfOrigin;
+        user.PlaceOfDestination = request.PlaceOfDestination ?? user.PlaceOfDestination;
+        user.Nationality = request.Nationality ?? user.Nationality;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        // await _signInManager.RefreshSignInAsync(user);
+
+        await _events.PublishAsync(new ApplicationUserUpdatedEvent(user.Id));
+
+        if (!result.Succeeded)
+        {
+            throw new InternalServerException(_localizer["Update profile failed"], result.GetErrors(_localizer));
+        }
+
         return true;
 
     }

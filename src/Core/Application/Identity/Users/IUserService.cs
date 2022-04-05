@@ -45,6 +45,8 @@ public interface IUserService : ITransientService
     Task<bool> UpdateAsyncByUserName(UpdateUserRequest request, string userName);
 
 
+    Task<bool> VerifyAsyncByUserName(VerifyUserRequest request, string userName);
+
     Task<string> ConfirmEmailAsync(string userId, string code, string tenant, CancellationToken cancellationToken);
     Task<string> ConfirmPhoneNumberAsync(string userId, string code);
 
@@ -52,5 +54,7 @@ public interface IUserService : ITransientService
     Task<string> ResetPasswordAsync(ResetPasswordRequest request);
     Task ChangePasswordAsync(ChangePasswordRequest request, string userId);
     Task UpdateAvatar(IFormFile? request, string userId);
+
+    
 
 }

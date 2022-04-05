@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Http;
 using TD.CitizenAPI.Application.Catalog.Attachments;
-using TD.CitizenAPI.Application.Catalog.EKYCAttachmentss;
 
 namespace TD.CitizenAPI.Application.Common.FileStorage;
 

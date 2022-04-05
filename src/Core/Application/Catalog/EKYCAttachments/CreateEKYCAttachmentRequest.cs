@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using TD.CitizenAPI.Application.Catalog.Attachments;
 
-namespace TD.CitizenAPI.Application.Catalog.EKYCAttachmentss;
+namespace TD.CitizenAPI.Application.Catalog.EKYCAttachments;
 
 public class CreateEKYCAttachmentRequest : IRequest<Result<AttachmentDto>>
 {

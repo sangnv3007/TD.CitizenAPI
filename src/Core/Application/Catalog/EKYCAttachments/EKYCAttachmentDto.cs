@@ -1,4 +1,4 @@
-namespace TD.CitizenAPI.Application.Catalog.EKYCAttachmentss;
+namespace TD.CitizenAPI.Application.Catalog.EKYCAttachments;
 
 public class EKYCAttachmentDto : IDto
 {

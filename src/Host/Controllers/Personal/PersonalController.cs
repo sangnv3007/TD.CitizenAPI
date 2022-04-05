@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using TD.CitizenAPI.Application.Auditing;
-using TD.CitizenAPI.Application.Catalog.EKYCAttachmentss;
+using TD.CitizenAPI.Application.Catalog.EKYCAttachments;
 using TD.CitizenAPI.Application.Identity.Users;
 using TD.CitizenAPI.Application.Identity.Users.Password;
 
@@ -106,5 +106,21 @@ public class PersonalController : VersionNeutralApiController
     public async Task<IActionResult> Post([FromForm(Name = "file")] IFormFile file, [FromForm(Name = "imageType")] string imageType)
     {
         return Ok(await Mediator.Send(new CreateEKYCAttachmentRequest() { File = file, ImageType = imageType }));
+    }
+
+    [HttpGet("ekyc")]
+    //[MustHavePermission(FSHAction.Create, FSHResource.Products)]
+    [OpenApiOperation("Toàn bộ ảnh eKYC của người dùng.", "")]
+    public Task<Result<List<EKYCAttachmentDto>>> SearchAsyansc()
+    {
+        return Mediator.Send(new AllEKYCAttachmentRequest());
+    }
+
+    [HttpGet("verify-user")]
+    //[MustHavePermission(FSHAction.Create, FSHResource.Products)]
+    [OpenApiOperation("Kiểm tra xác thực người dùng.", "")]
+    public Task<Result<bool>> VerifyUserAsyansc()
+    {
+        return Mediator.Send(new VerifyUserWitheKYCRequest());
     }
 }
