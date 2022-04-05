@@ -24,12 +24,18 @@ public class VerifyUserWitheKYCRequestHandler : IRequestHandler<VerifyUserWitheK
     public async Task<Result<bool>> Handle(VerifyUserWitheKYCRequest request, CancellationToken cancellationToken)
     {
         string? userName = _currentUser.GetUserName();
-        var user = await _userService.GetAsyncByUserName(userName ??"", cancellationToken);
+        var user = await _userService.GetAsyncByUserName(userName ?? string.Empty, cancellationToken);
 
-        if (user == null || user.IsVerified)
+        if (user == null)
         {
-            throw new NotFoundException("Khong tim thay thong tin nguoi dung hoac nguoi dung da duoc xa thuc" );
+            throw new NotFoundException("Không tìm thấy thông tin người dùng" );
         }
+
+        if (user.IsVerified)
+        {
+            throw new NotFoundException("Người dùng đã được xác thực");
+        }
+
 
 
         VerifyUserRequest verifyUserRequest = new VerifyUserRequest();
@@ -60,14 +66,18 @@ public class VerifyUserWitheKYCRequestHandler : IRequestHandler<VerifyUserWitheK
 
                     if (string.IsNullOrWhiteSpace(datamattruoc.id))
                     {
-                        throw new NotFoundException("Khong nhan dang duoc mat truoc: " + att_mattruoc.Url);
+                        throw new NotFoundException("Không nhận dạng được mặt trước của giấy tờ: " + att_mattruoc.Url);
 
                     }
 
-                    DateTime DateOfBirth = DateTime.ParseExact(datamattruoc.dob ?? "", "dd/MM/yyyy",
-                                       System.Globalization.CultureInfo.InvariantCulture);
 
-                   
+                    if (string.IsNullOrWhiteSpace(datamattruoc.id) || (!string.IsNullOrWhiteSpace(verifyUserRequest.IdentityNumber) && datamattruoc.id != verifyUserRequest.IdentityNumber))
+                    {
+                        throw new NotFoundException("Thông tin giấy tờ không trùng khớp với thông tin đã khai báo: " + datamattruoc.id);
+                    }
+
+                    DateTime DateOfBirth = DateTime.ParseExact(datamattruoc.dob ?? "", "dd/MM/yyyy",
+                                      System.Globalization.CultureInfo.InvariantCulture);
 
                     verifyUserRequest.IdentityNumber = datamattruoc.id;
                     verifyUserRequest.FullName = datamattruoc.name;
@@ -78,6 +88,8 @@ public class VerifyUserWitheKYCRequestHandler : IRequestHandler<VerifyUserWitheK
                 }
                 else
                 {
+                    throw new NotFoundException("Không nhận dạng được mặt trước của giấy tờ: " + att_mattruoc.Url);
+
                 }
             }
 
@@ -99,12 +111,10 @@ public class VerifyUserWitheKYCRequestHandler : IRequestHandler<VerifyUserWitheK
                                       System.Globalization.CultureInfo.InvariantCulture);
 
                     verifyUserRequest.IdentityDate = issue_date;
-                   
-
                 }
                 else
                 {
-                    throw new NotFoundException("Khong nhan dang duoc mat sau: " + att_mattruoc.Url);
+                    throw new NotFoundException("Không nhận dạng được mặt sau của giấy tờ: " + att_mattruoc.Url);
                 }
             }
 

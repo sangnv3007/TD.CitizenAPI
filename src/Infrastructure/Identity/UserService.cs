@@ -15,7 +15,6 @@ using TD.CitizenAPI.Application.Common.Interfaces;
 using TD.CitizenAPI.Application.Common.Mailing;
 using TD.CitizenAPI.Application.Common.Models;
 using TD.CitizenAPI.Application.Common.Persistence;
-using TD.CitizenAPI.Application.Common.Specification;
 using TD.CitizenAPI.Application.Identity.Users;
 using TD.CitizenAPI.Domain.Catalog;
 using TD.CitizenAPI.Domain.Identity;
@@ -88,7 +87,7 @@ internal partial class UserService : IUserService
     {
         //var spec = new EntitiesByPaginationFilterSpec<ApplicationUser>(filter);
 
-         var spec = new UserListFilterSpec(filter);
+        var spec = new UserListFilterSpec(filter);
 
         var users = await _userManager.Users
             .WithSpecification(spec)
@@ -169,6 +168,20 @@ internal partial class UserService : IUserService
         {
             tmp.Commune = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.CommuneId), cancellationToken);
         }
+
+        return tmp;
+    }
+
+    public async Task<UserDetailsDto> GetAsyncByIdentityNumberName(string identityNumber, CancellationToken cancellationToken)
+    {
+        var user = await _userManager.Users
+            .AsNoTracking()
+            .Where(u => u.IdentityNumber == identityNumber)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        _ = user ?? throw new NotFoundException(_localizer["User Not Found."]);
+
+        var tmp = user.Adapt<UserDetailsDto>();
 
         return tmp;
     }

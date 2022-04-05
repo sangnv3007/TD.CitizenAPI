@@ -19,6 +19,8 @@ public interface IUserService : ITransientService
     Task<int> GetCountAsync(CancellationToken cancellationToken);
 
     Task<UserDetailsDto> GetAsyncByUserName(string userName, CancellationToken cancellationToken);
+    Task<UserDetailsDto> GetAsyncByIdentityNumberName(string identityNumber, CancellationToken cancellationToken);
+
 
     Task<UserDetailsDto> GetAsync(string userId, CancellationToken cancellationToken);
 
