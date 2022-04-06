@@ -788,3 +788,49 @@ public class TourGuideConfig : IEntityTypeConfiguration<TourGuide>
 }
 
 #endregion Travel
+
+#region Agriculture
+
+public class AgriculturalEngineeringCategoryConfig : IEntityTypeConfiguration<AgriculturalEngineeringCategory>
+{
+    public void Configure(EntityTypeBuilder<AgriculturalEngineeringCategory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Icon).HasMaxLength(256);
+        builder.Property(b => b.CoverImage).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+    }
+}
+
+public class AgriculturalEngineeringConfig : IEntityTypeConfiguration<AgriculturalEngineering>
+{
+    public void Configure(EntityTypeBuilder<AgriculturalEngineering> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.ViewQuantity).HasDefaultValue(0);
+    }
+}
+
+#endregion Agriculture
+
+#region Education
+public class SchoolConfig : IEntityTypeConfiguration<School>
+{
+    public void Configure(EntityTypeBuilder<School> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+        builder.Property(b => b.Image).HasMaxLength(1024);
+        builder.Property(b => b.Code).HasMaxLength(256);
+    }
+}
+
+#endregion Education

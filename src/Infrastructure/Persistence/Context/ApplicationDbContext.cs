@@ -120,8 +120,17 @@ public class ApplicationDbContext : BaseDbContext
 
     #region Travel
     public DbSet<TourGuide> TourGuides => Set<TourGuide>();
-    
+
     #endregion Travel
+
+    #region Agriculture
+    public DbSet<AgriculturalEngineeringCategory> AgriculturalEngineeringCategories => Set<AgriculturalEngineeringCategory>();
+    public DbSet<AgriculturalEngineering> AgriculturalEngineerings => Set<AgriculturalEngineering>();
+    #endregion Agriculture
+
+    #region Education
+    public DbSet<School> Schools => Set<School>();
+    #endregion Education
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
