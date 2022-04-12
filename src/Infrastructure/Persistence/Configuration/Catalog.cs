@@ -842,7 +842,23 @@ public class DiseaseConfig : IEntityTypeConfiguration<Disease>
     {
         builder.IsMultiTenant();
         builder.Property(b => b.Name).HasMaxLength(1024);
-       
+    }
+}
+
+public class MedicalHotlineConfig : IEntityTypeConfiguration<MedicalHotline>
+{
+    public void Configure(EntityTypeBuilder<MedicalHotline> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(256);
+        builder.Property(b => b.Code).HasMaxLength(256);
+        builder.Property(b => b.Address).HasMaxLength(1024);
+        builder.Property(b => b.Detail).HasMaxLength(1024);
+        builder.Property(b => b.OtherDetail).HasMaxLength(1024);
+        builder.Property(b => b.Phone).HasMaxLength(256);
+        builder.Property(b => b.Image).HasMaxLength(256);
+        builder.Property(x => x.Latitude).HasColumnType("Decimal(8,6)");
+        builder.Property(x => x.Longitude).HasColumnType("Decimal(9,6)");
     }
 }
 
