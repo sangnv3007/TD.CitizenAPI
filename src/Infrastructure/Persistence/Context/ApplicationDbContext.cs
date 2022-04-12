@@ -132,6 +132,11 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<School> Schools => Set<School>();
     #endregion Education
 
+    #region Medical
+    public DbSet<Disease> Diseases => Set<Disease>();
+    #endregion Medical
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -834,3 +834,16 @@ public class SchoolConfig : IEntityTypeConfiguration<School>
 }
 
 #endregion Education
+
+#region Medical
+public class DiseaseConfig : IEntityTypeConfiguration<Disease>
+{
+    public void Configure(EntityTypeBuilder<Disease> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(1024);
+       
+    }
+}
+
+#endregion Medical

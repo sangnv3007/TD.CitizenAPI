@@ -156,7 +156,6 @@ internal partial class UserService : IUserService
         if (!string.IsNullOrEmpty(tmp.ProvinceId))
         {
             tmp.Province = await _areaRepository.GetBySpecAsync((ISpecification<Area, AreaDto>)new AreaByIdStringSpec(tmp.ProvinceId), cancellationToken);
-
         }
 
         if (!string.IsNullOrEmpty(tmp.DistrictId))
