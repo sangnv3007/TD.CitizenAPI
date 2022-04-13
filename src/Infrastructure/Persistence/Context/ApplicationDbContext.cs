@@ -138,6 +138,12 @@ public class ApplicationDbContext : BaseDbContext
     #endregion Medical
 
 
+    #region Food
+    public DbSet<FoodWarning> FoodWarnings => Set<FoodWarning>();
+    #endregion Food
+
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

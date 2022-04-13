@@ -863,3 +863,16 @@ public class MedicalHotlineConfig : IEntityTypeConfiguration<MedicalHotline>
 }
 
 #endregion Medical
+
+
+#region Food
+public class FoodWarningConfig : IEntityTypeConfiguration<FoodWarning>
+{
+    public void Configure(EntityTypeBuilder<FoodWarning> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(1024);
+    }
+}
+
+#endregion Food
