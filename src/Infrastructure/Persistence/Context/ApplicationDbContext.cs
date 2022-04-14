@@ -140,6 +140,7 @@ public class ApplicationDbContext : BaseDbContext
 
     #region Food
     public DbSet<FoodWarning> FoodWarnings => Set<FoodWarning>();
+    public DbSet<FoodFactory> FoodFactories => Set<FoodFactory>();
     #endregion Food
 
 

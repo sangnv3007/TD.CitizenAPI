@@ -875,4 +875,14 @@ public class FoodWarningConfig : IEntityTypeConfiguration<FoodWarning>
     }
 }
 
+public class FoodFactoryConfig : IEntityTypeConfiguration<FoodFactory>
+{
+    public void Configure(EntityTypeBuilder<FoodFactory> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(1024);
+    }
+}
+
+
 #endregion Food
