@@ -7,7 +7,8 @@ public class AgriculturalEngineeringDto : IDto
     public Guid? AgriculturalEngineeringCategoryId { get; set; }
     public string? Code { get; set; }
     public string? Image { get; set; }
-    public string? Content { get; set; }
     public string? Description { get; set; }
     public int ViewQuantity { get; set; } = 0;
+    public AgriculturalEngineeringCategory? AgriculturalEngineeringCategory;
+
 }

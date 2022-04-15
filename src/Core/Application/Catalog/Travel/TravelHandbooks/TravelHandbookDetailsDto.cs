@@ -10,4 +10,6 @@ public class TravelHandbookDetailsDto : IDto
     public string? Image { get; set; }
     public string? Source { get; set; }
     public string? Tags { get; set; }
+
+    public DateTime? CreatedOn { get; set; }
 }

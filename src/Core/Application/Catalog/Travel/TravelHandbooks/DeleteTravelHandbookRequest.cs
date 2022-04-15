@@ -1,5 +1,4 @@
-﻿
-namespace TD.CitizenAPI.Application.Catalog.TravelHandbooks;
+﻿namespace TD.CitizenAPI.Application.Catalog.TravelHandbooks;
 
 public class DeleteTravelHandbookRequest : IRequest<Result<Guid>>
 {
