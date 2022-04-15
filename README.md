@@ -141,5 +141,6 @@ Here are a few ways by which you can support.
 
 dotnet ef migrations add Update_20_Alert --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application
 
-dotnet ef migrations add ModifiedTenantTable --project .././Migrators/Migrators.MSSQL/ --context TenantDbContext -o Migrations/Tenant
+dotnet ef migrations add InitialMigrations --project .././Migrators/Migrators.MSSQL/ --context TenantDbContext -o Migrations/Tenant
 
+dotnet ef migrations add InitialMigrations --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application

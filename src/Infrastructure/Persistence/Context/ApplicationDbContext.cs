@@ -120,6 +120,7 @@ public class ApplicationDbContext : BaseDbContext
 
     #region Travel
     public DbSet<TourGuide> TourGuides => Set<TourGuide>();
+    public DbSet<TravelHandbook> TravelHandbooks => Set<TravelHandbook>();
 
     #endregion Travel
 

@@ -787,6 +787,16 @@ public class TourGuideConfig : IEntityTypeConfiguration<TourGuide>
     }
 }
 
+public class TravelHandbookConfig : IEntityTypeConfiguration<TravelHandbook>
+{
+    public void Configure(EntityTypeBuilder<TravelHandbook> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(1024);
+    }
+}
+
+
 #endregion Travel
 
 #region Agriculture
