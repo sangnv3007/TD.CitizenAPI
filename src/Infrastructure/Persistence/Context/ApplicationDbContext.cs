@@ -136,6 +136,9 @@ public class ApplicationDbContext : BaseDbContext
     #region Medical
     public DbSet<Disease> Diseases => Set<Disease>();
     public DbSet<MedicalHotline> MedicalHotlines => Set<MedicalHotline>();
+
+    public DbSet<Drug> Drugs => Set<Drug>();
+    
     #endregion Medical
 
 

@@ -144,3 +144,10 @@ dotnet ef migrations add Update_20_Alert --project .././Migrators/Migrators.MSSQ
 dotnet ef migrations add InitialMigrations --project .././Migrators/Migrators.MSSQL/ --context TenantDbContext -o Migrations/Tenant
 
 dotnet ef migrations add InitialMigrations --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application
+
+
+dotnet ef migrations script {FROM_MIGRATION} {TO_MiGRATION} --context ApplicationDbContext -o ./script.sql
+
+dotnet ef migrations script Update_30_Travel Update_31_Medical --context ApplicationDbContext -o ./script.sql
+
+

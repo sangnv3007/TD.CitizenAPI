@@ -871,6 +871,16 @@ public class MedicalHotlineConfig : IEntityTypeConfiguration<MedicalHotline>
         builder.Property(x => x.Longitude).HasColumnType("Decimal(9,6)");
     }
 }
+public class DrugConfig : IEntityTypeConfiguration<Drug>
+{
+    public void Configure(EntityTypeBuilder<Drug> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.TenThuoc).HasMaxLength(512);
+    }
+}
+
+
 
 #endregion Medical
 

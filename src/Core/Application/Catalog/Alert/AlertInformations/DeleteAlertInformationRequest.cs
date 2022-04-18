@@ -8,24 +8,24 @@ public class DeleteAlertInformationRequest : IRequest<Result<Guid>>
     public DeleteAlertInformationRequest(Guid id) => Id = id;
 }
 
-public class DeleteAlertOrganizationRequestHandler : IRequestHandler<DeleteAlertInformationRequest, Result<Guid>>
+public class DeleteAlertInformationRequestHandler : IRequestHandler<DeleteAlertInformationRequest, Result<Guid>>
 {
     // Add Domain Events automatically by using IRepositoryWithEvents
-    private readonly IRepositoryWithEvents<AlertOrganization> _AlertOrganizationRepo;
-    private readonly IStringLocalizer<DeleteAlertOrganizationRequestHandler> _localizer;
+    private readonly IRepositoryWithEvents<AlertInformation> _AlertInformationRepo;
+    private readonly IStringLocalizer<DeleteAlertInformationRequestHandler> _localizer;
 
-    public DeleteAlertOrganizationRequestHandler(IRepositoryWithEvents<AlertOrganization> AlertOrganizationRepo, IStringLocalizer<DeleteAlertOrganizationRequestHandler> localizer) =>
-        (_AlertOrganizationRepo, _localizer) = (AlertOrganizationRepo, localizer);
+    public DeleteAlertInformationRequestHandler(IRepositoryWithEvents<AlertInformation> AlertInformationRepo, IStringLocalizer<DeleteAlertInformationRequestHandler> localizer) =>
+        (_AlertInformationRepo, _localizer) = (AlertInformationRepo, localizer);
 
     public async Task<Result<Guid>> Handle(DeleteAlertInformationRequest request, CancellationToken cancellationToken)
     {
 
 
-        var item = await _AlertOrganizationRepo.GetByIdAsync(request.Id, cancellationToken);
+        var item = await _AlertInformationRepo.GetByIdAsync(request.Id, cancellationToken);
 
-        _ = item ?? throw new NotFoundException(_localizer["AlertOrganization.notfound"]);
+        _ = item ?? throw new NotFoundException(_localizer["AlertInformation.notfound"]);
 
-        await _AlertOrganizationRepo.DeleteAsync(item, cancellationToken);
+        await _AlertInformationRepo.DeleteAsync(item, cancellationToken);
 
         return Result<Guid>.Success(request.Id);
     }
