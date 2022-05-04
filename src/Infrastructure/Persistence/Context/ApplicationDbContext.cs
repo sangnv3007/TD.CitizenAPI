@@ -148,6 +148,9 @@ public class ApplicationDbContext : BaseDbContext
     #endregion Food
 
 
+    public DbSet<SeaGame> SeaGames => Set<SeaGame>();
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

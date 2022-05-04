@@ -148,6 +148,7 @@ dotnet ef migrations add InitialMigrations --project .././Migrators/Migrators.MS
 
 dotnet ef migrations script {FROM_MIGRATION} {TO_MiGRATION} --context ApplicationDbContext -o ./script.sql
 
-dotnet ef migrations script Update_30_Travel Update_31_Medical --context ApplicationDbContext -o ./script.sql
+dotnet ef migrations script Update_25_Education Update_32_SeaGame --context ApplicationDbContext -o ./script.sql
 
 
+dotnet ef migrations add Update_32_SeaGame --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application

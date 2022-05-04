@@ -906,3 +906,16 @@ public class FoodFactoryConfig : IEntityTypeConfiguration<FoodFactory>
 
 
 #endregion Food
+
+
+#region SeaGame
+public class SeaGameConfig : IEntityTypeConfiguration<SeaGame>
+{
+    public void Configure(EntityTypeBuilder<SeaGame> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Title).HasMaxLength(512);
+        builder.Property(b => b.Source).HasMaxLength(512);
+    }
+}
+#endregion SeaGame
