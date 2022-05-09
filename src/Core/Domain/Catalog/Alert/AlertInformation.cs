@@ -33,20 +33,60 @@ public class AlertInformation : AuditableEntity, IAggregateRoot
 
     public AlertInformation Update(string? title, string? content, string? description, bool? active, DateTime? startDate, DateTime? finishDate, int? level, string? image, string? file, Guid? alertCategoryId, Guid? alertOrganizationId)
     {
-        if (title is not null && Title?.Equals(title) is not true) Title = title;
-        if (content is not null && Content?.Equals(content) is not true) Content = content;
-        if (image is not null && Image?.Equals(image) is not true) Image = image;
-        if (file is not null && File?.Equals(file) is not true) File = file;
-        if (description is not null && Description?.Equals(description) is not true) Description = description;
+        if (title is not null && Title?.Equals(title) is not true)
+        {
+            Title = title;
+        }
 
-        if (active.HasValue  && !Active != active.Value) Active = active.Value;
-        if (startDate.HasValue && !StartDate.Equals(startDate.Value)) StartDate = startDate.Value;
-        if (finishDate.HasValue && !FinishDate.Equals(finishDate.Value)) FinishDate = finishDate.Value;
-        if (level.HasValue && Level != level) Level = level.Value;
+        if (content is not null && Content?.Equals(content) is not true)
+        {
+            Content = content;
+        }
 
+        if (image is not null && Image?.Equals(image) is not true)
+        {
+            Image = image;
+        }
 
-        if (alertCategoryId.HasValue && alertCategoryId.Value != Guid.Empty && !AlertCategoryId.Equals(alertCategoryId.Value)) AlertCategoryId = alertCategoryId.Value;
-        if (alertOrganizationId.HasValue && alertOrganizationId.Value != Guid.Empty && !AlertOrganizationId.Equals(alertOrganizationId.Value)) AlertOrganizationId = alertOrganizationId.Value;
+        if (file is not null && File?.Equals(file) is not true)
+        {
+            File = file;
+        }
+
+        if (description is not null && Description?.Equals(description) is not true)
+        {
+            Description = description;
+        }
+
+        if (active.HasValue && !Active != active.Value)
+        {
+            Active = active.Value;
+        }
+
+        if (startDate.HasValue && !StartDate.Equals(startDate.Value))
+        {
+            StartDate = startDate.Value;
+        }
+
+        if (finishDate.HasValue && !FinishDate.Equals(finishDate.Value))
+        {
+            FinishDate = finishDate.Value;
+        }
+
+        if (level.HasValue && Level != level)
+        {
+            Level = level.Value;
+        }
+
+        if (alertCategoryId.HasValue && alertCategoryId.Value != Guid.Empty && !AlertCategoryId.Equals(alertCategoryId.Value))
+        {
+            AlertCategoryId = alertCategoryId.Value;
+        }
+
+        if (alertOrganizationId.HasValue && alertOrganizationId.Value != Guid.Empty && !AlertOrganizationId.Equals(alertOrganizationId.Value))
+        {
+            AlertOrganizationId = alertOrganizationId.Value;
+        }
 
         return this;
     }

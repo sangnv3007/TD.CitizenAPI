@@ -150,6 +150,14 @@ public class ApplicationDbContext : BaseDbContext
 
     public DbSet<SeaGame> SeaGames => Set<SeaGame>();
 
+    #region ThueNha
+    public DbSet<DienTichNha> DienTichNhas => Set<DienTichNha>();
+    public DbSet<MucGiaThueNha> MucGiaThueNhas => Set<MucGiaThueNha>();
+    public DbSet<ThoiGianThueNha> ThoiGianThueNhas => Set<ThoiGianThueNha>();
+    public DbSet<LoaiNha> LoaiNhas => Set<LoaiNha>();
+    public DbSet<ThueNha> ThueNhas => Set<ThueNha>();
+
+    #endregion ThueNha
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

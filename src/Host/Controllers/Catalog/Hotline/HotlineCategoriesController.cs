@@ -4,6 +4,7 @@ namespace TD.CitizenAPI.Host.Controllers.Catalog;
 
 public class HotlineCategoriesController : VersionedApiController
 {
+    //[ApiVersion("2.0")]
     [HttpPost("search")]
     [AllowAnonymous]
     //[MustHavePermission(FSHAction.Search, FSHResource.Brands)]

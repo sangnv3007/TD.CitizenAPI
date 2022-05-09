@@ -1,5 +1,6 @@
 namespace TD.CitizenAPI.Domain.Catalog;
 
+//Danh muc benh
 public class Disease : AuditableEntity, IAggregateRoot
 {
     public string Name { get; set; }

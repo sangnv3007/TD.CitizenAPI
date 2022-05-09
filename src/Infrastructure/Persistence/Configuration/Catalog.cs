@@ -919,3 +919,63 @@ public class SeaGameConfig : IEntityTypeConfiguration<SeaGame>
     }
 }
 #endregion SeaGame
+
+#region ThueNha
+public class DienTichNhaConfig : IEntityTypeConfiguration<DienTichNha>
+{
+    public void Configure(EntityTypeBuilder<DienTichNha> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Code).HasMaxLength(128);
+        builder.Property(b => b.Description).HasMaxLength(512);
+    }
+}
+
+public class LoaiNhaConfig : IEntityTypeConfiguration<LoaiNha>
+{
+    public void Configure(EntityTypeBuilder<LoaiNha> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Code).HasMaxLength(128);
+        builder.Property(b => b.Description).HasMaxLength(512);
+    }
+}
+
+public class ThoiGianThueNhaConfig : IEntityTypeConfiguration<ThoiGianThueNha>
+{
+    public void Configure(EntityTypeBuilder<ThoiGianThueNha> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Code).HasMaxLength(128);
+        builder.Property(b => b.Description).HasMaxLength(512);
+    }
+}
+
+public class MucGiaThueNhaConfig : IEntityTypeConfiguration<MucGiaThueNha>
+{
+    public void Configure(EntityTypeBuilder<MucGiaThueNha> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Code).HasMaxLength(128);
+        builder.Property(b => b.Description).HasMaxLength(512);
+    }
+}
+
+
+public class ThueNhaConfig : IEntityTypeConfiguration<ThueNha>
+{
+    public void Configure(EntityTypeBuilder<ThueNha> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.ContactName).HasMaxLength(256);
+        builder.Property(b => b.ContactPhone).HasMaxLength(256);
+    }
+}
+
+
+#endregion ThueNha
