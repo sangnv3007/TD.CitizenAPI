@@ -152,7 +152,6 @@ public class AreaInforValueConfig : IEntityTypeConfiguration<AreaInforValue>
     {
         builder.IsMultiTenant();
         builder.Property(b => b.Key).HasMaxLength(1024);
-       
     }
 }
 
@@ -884,7 +883,6 @@ public class DrugConfig : IEntityTypeConfiguration<Drug>
 
 #endregion Medical
 
-
 #region Food
 public class FoodWarningConfig : IEntityTypeConfiguration<FoodWarning>
 {
@@ -906,7 +904,6 @@ public class FoodFactoryConfig : IEntityTypeConfiguration<FoodFactory>
 
 
 #endregion Food
-
 
 #region SeaGame
 public class SeaGameConfig : IEntityTypeConfiguration<SeaGame>
@@ -965,7 +962,6 @@ public class MucGiaThueNhaConfig : IEntityTypeConfiguration<MucGiaThueNha>
     }
 }
 
-
 public class ThueNhaConfig : IEntityTypeConfiguration<ThueNha>
 {
     public void Configure(EntityTypeBuilder<ThueNha> builder)
@@ -976,6 +972,29 @@ public class ThueNhaConfig : IEntityTypeConfiguration<ThueNha>
         builder.Property(b => b.ContactPhone).HasMaxLength(256);
     }
 }
-
-
 #endregion ThueNha
+
+#region Sach
+public class TypeofBookConfig : IEntityTypeConfiguration<TypeOfBook>
+{
+    public void Configure(EntityTypeBuilder<TypeOfBook> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.NameType).HasMaxLength(512);
+        builder.Property(b => b.Description).HasMaxLength(1024);
+    }
+}
+
+public class BookConfig : IEntityTypeConfiguration<Book>
+{
+    public void Configure(EntityTypeBuilder<Book> builder)
+    {
+        builder.IsMultiTenant();
+        builder.Property(b => b.Name).HasMaxLength(512);
+        builder.Property(b => b.Author).HasMaxLength(128);
+        builder.Property(b => b.PubDate).HasMaxLength(128);
+        builder.Property(b => b.PageNumber).HasMaxLength(128);
+        builder.HasOne<TypeOfBook>(b => b.TypeOfBook).WithMany(t => t.Books).HasForeignKey(b => b.TypeID).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+#endregion

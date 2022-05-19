@@ -5,23 +5,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Migrators.MSSQL.Migrations.Application
 {
-    public partial class Update_32_SeaGame : Migration
+    public partial class Update_1book : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "SeaGames",
+                name: "typeOfBooks",
                 schema: "Catalog",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    Actor = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Source = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ViewQuantity = table.Column<int>(type: "int", nullable: true),
+                    NameType = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     TenantId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -32,14 +27,14 @@ namespace Migrators.MSSQL.Migrations.Application
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SeaGames", x => x.Id);
+                    table.PrimaryKey("PK_typeOfBooks", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SeaGames",
+                name: "typeOfBooks",
                 schema: "Catalog");
         }
     }

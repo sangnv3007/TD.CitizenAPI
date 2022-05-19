@@ -1,6 +1,6 @@
 {
   "DatabaseSettings": {
     "DBProvider": "mssql",
-    "ConnectionString": "Server=10.10.10.50,1469; Database=TD_Citizen_Application;User Id=tdcongdan; Password=Tandan@123; Trusted_Connection=False; MultipleActiveResultSets=true;"
+    "ConnectionString": "Server=DESKTOP-6LRFASG\\SQLEXPRESS; Database=TD_Citizen_Application;User Id=sangnv1; Password=123456789; Trusted_Connection=False; MultipleActiveResultSets=true;"
   }
 }

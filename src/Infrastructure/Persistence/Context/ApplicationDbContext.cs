@@ -158,7 +158,11 @@ public class ApplicationDbContext : BaseDbContext
     public DbSet<ThueNha> ThueNhas => Set<ThueNha>();
 
     #endregion ThueNha
+    public DbSet<TypeOfBook> typeOfBooks => Set<TypeOfBook>();
+    public DbSet<Book> Books => Set<Book>();
+    #region Sach
 
+    #endregion Sach
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

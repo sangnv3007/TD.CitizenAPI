@@ -152,3 +152,4 @@ dotnet ef migrations script Update_25_Education Update_32_SeaGame --context Appl
 
 
 dotnet ef migrations add Update_32_SeaGame --project .././Migrators/Migrators.MSSQL/ --context ApplicationDbContext -o Migrations/Application
+
